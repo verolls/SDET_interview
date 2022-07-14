@@ -1,4 +1,4 @@
-- Linux常用命令总结
+- [Linux常用命令总结](https://github.com/verolls/SDET_interview/blob/main/Linux常用命令总结.md)
 - [Git常用命令总结](https://github.com/verolls/SDET_interview/blob/main/Git常用命令总结.md)
 - [测试开发常用知识点](https://github.com/verolls/SDET_interview/blob/main/测试开发常用知识点.md)
 - [Python常用知识点](https://github.com/verolls/SDET_interview/blob/main/Python常用知识点.md)
