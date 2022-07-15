@@ -3,5 +3,5 @@
 - [测试开发常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
 - [Python常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Python常用知识点.md)
 - 操作系统常用知识点
-- 计算机网络常用知识点
+- [计算机网络常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/计算机网络常用知识点.md)
 - 数据库常用知识点
