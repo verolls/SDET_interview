@@ -1,4 +1,4 @@
-## Python 有哪些数据类型
+## Python 有哪些数据类型？
 num, str, list, tuple, set, dict
 (num是数值类型，包括int，float，bool，complex)
 
