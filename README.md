@@ -1,5 +1,5 @@
 # 第一梯队
-- [测试开发笔试题汇总]()
+- [测试开发笔试题汇总](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发笔试题汇总.md)
 - [测试开发常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
 - [计算机网络常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/计算机网络常用知识点.md)
 - [数据库常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/数据库常用知识点.md)
@@ -13,3 +13,7 @@
 # 第三梯队
 - [Linux常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Linux常用命令总结.md)
 - [Git常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Git常用命令总结.md)
+
+
+# 其他
+- [Python_ACM模式_输入输出处理](https://github.com/verolls/SDET_interview/blob/main/docs/Python_ACM模式_输入输出处理.md)
