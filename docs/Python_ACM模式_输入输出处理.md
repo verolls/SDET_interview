@@ -35,7 +35,20 @@ print(n)
 ```
 
 ### 单行多个字符串
+```python
+'''
+输入：
+apple banana pear melon
+'''
 
+line = list(map(str, input().strip().split()))
+print(line)
+
+'''
+输出：
+['apple', 'banana', 'pear', 'melon']
+'''
+```
 
 ### 单行多个数值
 ```python
@@ -109,6 +122,29 @@ print(data)
 ```
 
 ### 多行多个字符串
+```python
+'''
+输入：
+3
+aa bb cc
+dd ee ff
+gg hh ii
+'''
+
+n = int(input())
+line = []
+
+for i in range(n):
+    b = list(map(str, input().strip().split()))
+    line.append(b)
+
+print(line)
+
+'''
+输出：
+[['aa', 'bb', 'cc'], ['dd', 'ee', 'ff'], ['gg', 'hh', 'ii']]
+'''
+```
 
 ### 多行多个数值
 ```python
@@ -124,7 +160,7 @@ n = int(input())
 data = []
 
 for i in range(n):
-    b = list(map(int, input().split()))
+    b = list(map(int, input().strip().split()))
     data.append(b)
 
 print(data)
