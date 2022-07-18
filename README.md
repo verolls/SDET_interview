@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 # 第一梯队
 - [测试开发常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
 - [计算机网络常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/计算机网络常用知识点.md)
