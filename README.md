@@ -13,8 +13,8 @@
 # 第二梯队
 - [操作系统常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/操作系统常用知识点.md)
 - [Python常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Python常用知识点.md)
-- [Java常用知识点]()
-- [shell常用命令总结]()
+- [Java常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Java常用知识点.md)
+- [shell常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/shell常用命令总结.md)
 
 # 第三梯队
 - [Linux常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Linux常用命令总结.md)
