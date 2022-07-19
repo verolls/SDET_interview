@@ -41,7 +41,7 @@ print(n)
 apple banana pear melon
 '''
 
-line = list(map(str, input().strip().split()))
+line = list(input().strip().split())
 print(line)
 
 '''
@@ -78,16 +78,14 @@ ME
 '''
 
 n = int(input())
-data = []
+line = []
 
 for i in range(n):
-    line = input()
-    # if line == r'':  # 等价于 if not line:
-    #     break
-    data.append(line)
+    b = input()
+    line.append(b)
 
-print(data)
-print(" ".join(data))
+print(line)
+print(" ".join(line))
 
 '''
 输出：
@@ -135,7 +133,7 @@ n = int(input())
 line = []
 
 for i in range(n):
-    b = list(map(str, input().strip().split()))
+    b = list(input().strip().split())
     line.append(b)
 
 print(line)
@@ -172,7 +170,110 @@ print(data)
 ```
 
 ## 输入未知行数据
-### 
+### 输入未知行字符串，最后一行的下一行为空格或换行时结束输入
+```python
+'''
+输入：
+you and me
+me and you 
+how are you
+
+'''
+line= []
+
+while True:
+    m = list(input().strip().split())
+    if not m:
+        break
+    line.append(m)
+print(line)
+
+'''
+输出：
+[['you', 'and', 'me'], ['me', 'and', 'you'], ['how', 'are', 'you']]
+'''
+
+```
+
+### 输入未知行数值，最后一行的下一行为空格或换行时结束输入
+```python
+'''
+输入：
+12 34 56
+21 43 65
+12 34 56
+21 43 65
+
+'''
+data = []
+
+while True:
+    m = list(map(int, input().strip().split()))
+    if not m:
+        break
+    data.append(m)
+print(data)
+
+'''
+输出：
+[[12, 34, 56], [21, 43, 65], [12, 34, 56], [21, 43, 65]]
+'''
+```
+
+### 输入未知行两列数值，输入 0 0 时结束输入
+```python
+'''
+输入：
+12 34 
+21 43 
+12 34 
+21 43 
+0 0
+'''
+data = []
+
+while True:
+    m = list(map(int, input().strip().split()))
+    if m[0] == 0 and m[1] == 0:
+        break
+    data.append(m)
+print(data)
+
+'''
+输出：
+[[12, 34], [21, 43], [12, 34], [21, 43]]
+'''
+```
+
+### 输入未知行数值，每行第一个数字代表这一行一共有几个数值
+```python
+'''
+输入：
+3 1 2 3
+4 2 2 2 2
+2 23232 432
+'''
+
+ind = []
+data = []
+
+while True:
+    m = list(map(int, input().strip().split()))
+    if not m:
+        break
+    ind.append(m[0])
+    data.append(m[1:])
+
+print(ind)
+print(data)
+
+
+'''
+输出：
+[3, 4, 2]
+[[1, 2, 3], [2, 2, 2, 2], [23232, 432]]
+'''
+```
 
 
 
@@ -195,10 +296,25 @@ print(','.join(a))
 
 
 # 3. 其他
+
+## input()
+作用：input()函数是输入函数，用于接受一个标准输入数据，且返回string类型。
+
+语法：
+```python
+input([prompt])
+
+prompt: 提示信息
+接收值: python3 里 input() 默认接收到的是 str 类型。
+返回值：返回为字符串类型。
+```
+
+## sys.stdin.readline()
+作用：该函数是输入函数，可以接受一个标准输入数据，且返回值是string类型。
 ## input()和sys.stdin.readline()(需要import sys)的比较
 相同点：
 - 两者均可以实现输入功能。  
-- 两者的返回值均被强制转换为str类型。
+- 两者的返回值均被强制转换为string类型。
 
 不同点：
 - input()可以直接使用。sys.stdin.readline()需要`import sys`。
@@ -220,23 +336,120 @@ print(line)
 hel
 '''
 ```
-
-
-## input()
-“input()”函数是输入函数，用于接受一个标准输入数据，且返回string类型。
-
-## sys.stdin.readline()
-该函数是输入函数，可以接受一个标准输入数据，且返回值是string类型。
-
 ## strip()
-Python strip() 方法用于移除字符串头尾指定的字符（默认为空格或换行符）或字符序列。
+作用：strip()方法用于移除字符串头尾指定的字符（默认为空格或换行符）或字符序列。该方法只能删除开头或是结尾的字符，不能删除中间部分的字符。
 
-注意：该方法只能删除开头或是结尾的字符，不能删除中间部分的字符。
+语法：
+```python
+str.strip([chars])
+
+chars: 移除字符串头尾指定的字符序列。
+
+返回值: 返回移除字符串头尾指定的字符生成的新字符串。
+```
+
+```python
+a = ' 8dajia8hao8 '
+b = a.strip()#移除字符串 开头和结尾  的空格或换行符
+c = b.strip('8')#移除字符串 开头和结尾  的指定的字符'8'
+d = b.strip('o8')#移除字符串 开头和结尾  的指定的字符序列'o8'
+
+print(b)
+print(c)
+print(d)
+
+'''
+输出：
+8dajia8hao8
+dajia8hao
+dajia8ha
+'''
+```
 
 ## split()
+作用：split()方法通过指定分隔符对字符串进行切片，如果参数 num 有指定值，则分隔 num+1 个子字符串
+
+语法：
+```python
+str.split(str="", num=string.count(str))
+
+str: 分隔符，默认为所有的空字符，包括空格、换行(\n)、制表符(\t)等。
+num:分割次数。默认为 -1, 即分隔所有。
+
+返回值: 返回分割后的字符串列表。
+```
+
+例子：
+```python
+s = "you and me and you"
+print(s.split())#以空格为分隔符
+print(s.split('1'))#以1为分隔符
+print(s.split('u'))#以u为分隔符
+print(s.split('u',1))#以u为分隔符,分成2个
+
+'''
+输出：
+['you', 'and', 'me', 'and', 'you']
+['you and me and you']
+['yo', ' and me and yo', '']
+['yo', ' and me and you']
+'''
+```
 
 
 ## map()
+作用：map()函数为 iterable 中的每个项目执行指定的函数。项目作为参数发送到函数。
+
+语法：
+```python
+map(function, iterables)
+
+function: 为每个项目执行的函数。
+iterable: 序列、集合或迭代器对象。
+
+返回值：返回可迭代的映射对象，比如元组，列表等。
+```
+
+例子：
+```python
+'''
+输入：
+2 3 6 4 8 9
+'''
+
+data = list(map(int, input().strip().split()))
+print(data)
+
+'''
+输出：
+[2, 3, 6, 4, 8, 9]
+'''
+```
 
 
 ## join()
+作用：join()方法用于将序列中的元素以指定的字符连接生成一个新的字符串。
+
+语法：
+```python
+str.join(sequence)
+
+sequence: 要连接的元素序列。
+```
+
+例子：
+```python
+seq = ("a", "b", "c") # 字符串序列
+
+print(' '.join(seq)) # 以空格为分隔符
+print(','.join(seq)) # 以,为分隔符
+print('zzz'.join(seq))# 以zzz为分隔符
+
+'''
+输出：
+a b c
+a,b,c
+azzzbzzzc
+'''
+
+```
