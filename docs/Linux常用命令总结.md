@@ -1,7 +1,7 @@
 # 目录操作命令
 ## ls
-作用：显示目录下的内容
-使用格式：`ls [选项] [文件名或目录名]`
+作用：显示目录下的内容  
+使用格式：`ls [选项] [文件名或目录名]`  
 选项：
 
 ```bash
@@ -36,8 +36,8 @@ total 16
 - 第八列：文件名
 
 ## cd
-作用：切换所在目录
-使用格式：`cd [路径]`
+作用：切换所在目录  
+使用格式：`cd [路径]`  
 符号：
 
 ```bash
@@ -60,18 +60,18 @@ total 16
 ```
 
 ## pwd
-作用：查询所在工作目录
-使用格式：`pwd`
-举例：
+作用：查询所在工作目录  
+使用格式：`pwd`  
+举例：  
 
 ```bash
 [veroll@localhost lib]$ pwd
 /lib
 ```
 ## mkdir
-作用：创建空目录
-使用格式：`mkdir [选项] 目录名`
-选项：
+作用：创建空目录  
+使用格式：`mkdir [选项] 目录名`  
+选项：  
 
 ```bash
 -p：递归建立所需目录。即创建多级目录时需要加上-p选项。
@@ -90,9 +90,9 @@ total 16
 ```
 
 ## rmdir
-作用：能且只能删除空目录(一旦目录中有内容，该命令就会报错，无论删除文件还是命令，通常使用`rm`命令)
-使用格式：`rmdir [选项] 目录名`
-选项：
+作用：能且只能删除空目录(一旦目录中有内容，该命令就会报错，无论删除文件还是命令，通常使用`rm`命令)  
+使用格式：`rmdir [选项] 目录名`  
+选项：  
 
 ```bash
 -p：递归建立所需目录。即创建多级目录时需要加上-p选项。
@@ -100,8 +100,8 @@ total 16
 
 # 文件操作命令
 ## touch
-作用：创建空文件或修改文件的时间戳
-使用格式：`touch 文件名`
+作用：创建空文件或修改文件的时间戳  
+使用格式：`touch 文件名`  
 举例：
 
 ```bash
@@ -136,8 +136,8 @@ test017.txt  test034.txt  test051.txt  test068.txt  test085.txt
 
 ```
 ## stat
-作用：显示文件或文件系统的详细信息
-使用格式：`stat 文件名`
+作用：显示文件或文件系统的详细信息  
+使用格式：`stat 文件名`  
 举例：
 
 ```bash
@@ -169,8 +169,8 @@ Change: 状态修改时间
 ```
 
 ## cat
-作用：合并文件并打印输出到标准输出，即查看文件内容。
-使用格式：`cat [选项] 文件名`
+作用：合并文件并打印输出到标准输出，即查看文件内容。  
+使用格式：`cat [选项] 文件名`  
 选项：
 
 ```bash
@@ -192,9 +192,9 @@ Change: 状态修改时间
 ```
 
 ## more
-作用：分屏显示文件内容
-使用格式：`more 文件名`
-举例：
+作用：分屏显示文件内容  
+使用格式：`more 文件名`  
+举例：  
 使用该命令后会打开一个交互界面，可以识别一些交互命令。常用的交互命令有：
 
 ```bash
@@ -206,12 +206,12 @@ q：推出交互界面模式
 ```
 
 ## less
-作用：分行显示命令
+作用：分行显示命令  
 使用格式：`less 文件名`
 
 ## head
-作用：显示文件开头的内容
-使用格式：`head [选项] 文件名`
+作用：显示文件开头的内容  
+使用格式：`head [选项] 文件名`  
 选项：
 
 ```bash
@@ -229,8 +229,8 @@ Hello
 ```
 
 ## tail
-作用：显示文件结尾的内容
-使用格式：`tail [选项] 文件名`
+作用：显示文件结尾的内容  
+使用格式：`tail [选项] 文件名`  
 选项：
 
 ```bash
@@ -248,11 +248,11 @@ W
 ```
 
 ## vim
-基本上 vim 共分为三种模式，分别是**命令模式（Command mode）**，**输入模式（Insert mode）**和**底线命令模式（Last line mode）**。 这三种模式的作用分别是：
+基本上 vim 共分为三种模式，分别是**命令模式（Command mode）**，**输入模式（Insert mode）**和**底线命令模式（Last line mode）**。 这三种模式的作用分别是：  
 ### 命令模式(也称为一般模式)
 用户刚刚启动 vi/vim，便进入了命令模式。
 
-此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，i被当作了一个命令。
+此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，i被当作了一个命令。  
 
 以下是常用的几个命令：
 - i ：切换到输入模式，以输入字符。
@@ -295,9 +295,9 @@ W
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210127135222902.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L21haG9vbjQxMQ==,size_16,color_FFFFFF,t_70)
 
 ## ln
-作用：在文件之间建立链接
-使用格式：`ln [选项] 源文件 目标文件`
-选项：
+作用：在文件之间建立链接  
+使用格式：`ln [选项] 源文件 目标文件`  
+选项：  
 
 ```bash
 -s：建立软链接文件。如果不加`-s`选项，则建立硬链接文件。
@@ -327,9 +327,9 @@ total 8
 
 # 目录和文件都能操作的命令
 ## rm
-作用：删除文件或删除目录
-使用格式：`rm [选项] 文件或目录`
-选项：
+作用：删除文件或删除目录  
+使用格式：`rm [选项] 文件或目录`  
+选项：  
 
 ```bash
 -f：强制删除
@@ -345,9 +345,9 @@ total 8
 
 
 ## cp
-作用：复制文件或目录
-使用格式：`cp [选项] 源文件或目录 目标文件或目录`
-选项：
+作用：复制文件或目录  
+使用格式：`cp [选项] 源文件或目录 目标文件或目录`  
+选项：  
 
 ```bash
 -a：相当于-dpr选项的集合
@@ -365,9 +365,9 @@ total 8
 ```
 
 ## mv
-作用：移动文件或目录，给文件或目录改名
-使用格式：`mv [选项] 源文件或目录 目标文件或目录`
-选项：
+作用：移动文件或目录，给文件或目录改名  
+使用格式：`mv [选项] 源文件或目录 目标文件或目录`  
+选项：   
 
 ```bash
 -f：强制覆盖，如果目标文件已经存在，则不询问，直接强制覆盖
@@ -384,9 +384,9 @@ total 8
 
 # 用户权限管理命令
 ## chmod
-作用：修改文件或目录的权限模式
-使用格式：`chmod [选项] 权限模式 文件或目录`
-选项：
+作用：修改文件或目录的权限模式  
+使用格式：`chmod [选项] 权限模式 文件或目录`  
+选项：  
 ```bash
 -R：递归设置权限，也就是给子目录中的所有文件设定权限
 ```
@@ -409,9 +409,9 @@ drwxrwxrwx. 2 veroll veroll  6 Jul 11 22:29 test
 ```
 
 ## chown
-作用：修改文件或目录的所有者和所属组
-使用格式：`chown [选项] 所有者:所属组 文件或目录`
-选项：
+作用：修改文件或目录的所有者和所属组  
+使用格式：`chown [选项] 所有者:所属组 文件或目录`  
+选项：  
 ```bash
 -R：递归设置权限，也就是给子目录中的所有文件设定权限
 ```
@@ -419,8 +419,8 @@ drwxrwxrwx. 2 veroll veroll  6 Jul 11 22:29 test
 注意：普通用户不能修改文件的所有者，哪怕自己是这个文件的所有者也不行；普通用户可以修改所有者是自己的文件的权限。
 
 ## chgrp
-作用：修改文件或目录的所属组
-使用格式：`chown [选项] 所属组 文件或目录`
+作用：修改文件或目录的所属组  
+使用格式：`chown [选项] 所属组 文件或目录`  
 选项：
 
 ```bash
@@ -432,10 +432,10 @@ drwxrwxrwx. 2 veroll veroll  6 Jul 11 22:29 test
 
 # Bash常用命令
 ## echo
-作用：输出
-使用格式：`echo [选项] [输出内容]`
-选项：
-
+作用：输出  
+使用格式：`echo [选项] [输出内容]`  
+选项：  
+ 
 ```bash
 -e：支持反斜线控制的字符转换
 -n：内容输出后不换行
@@ -456,9 +456,9 @@ Hello   World
 
 
 ## history
-作用：查看历史命令
-使用格式：`history [选项] [历史命令保存文件]`
-选项：
+作用：查看历史命令  
+使用格式：`history [选项] [历史命令保存文件]`  
+选项：  
 
 ```bash
 -c：清空历史命令
@@ -476,9 +476,9 @@ Hello   World
 ```
 
 ## alias
-作用：查看或设置命令的别名
-使用格式：`alias [别名=原命令]`
-举例：
+作用：查看或设置命令的别名  
+使用格式：`alias [别名=原命令]`  
+举例：  
 
 ```bash
 # 查询系统中已经定义好的别名
@@ -498,18 +498,18 @@ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-ti
 
 ```
 
-## >
-作用：已覆盖的方式，把命令的正确输出输出到指定的文件或设备当中
+## 重定向符号: >
+作用：已覆盖的方式，把命令的正确输出输出到指定的文件或设备当中    
 使用格式：`命令 > 文件`
 
-## >>
-作用：已追加的方式，把命令的正确输出输出到指定的文件或设备当中
+## 重定向符号: >>
+作用：已追加的方式，把命令的正确输出输出到指定的文件或设备当中     
 使用格式：`命令 >> 文件`
 
 ## wc
-作用：统计数目
-使用格式：`wc [选项] [文件名]`
-选项：
+作用：统计数目  
+使用格式：`wc [选项] [文件名]`  
+选项：  
 
 ```bash
 -c：统计字节数
@@ -525,9 +525,9 @@ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-ti
 ```
 
 ## 管道符|
-作用：管道符前命令的输出作为管道符后命令的操作对象
-使用格式：`命令1 | 命令2`
-举例：
+作用：管道符前命令的输出作为管道符后命令的操作对象  
+使用格式：`命令1 | 命令2`  
+举例：  
 
 ```bash
 # 在/etc/目录下的文件中搜索文件名中包含yum的文件
@@ -543,8 +543,8 @@ drwxr-xr-x.  2 root root      220 Oct  1  2020 yum.repos.d
 
 # 搜索命令
 ## whereis
-作用：搜索二进制命令、源文件和帮助文档
-使用格式：`whereis [命令]`
+作用：搜索二进制命令、源文件和帮助文档  
+使用格式：`whereis [命令]`  
 举例：
 
 ```bash
@@ -557,8 +557,8 @@ awk: /usr/bin/awk /usr/libexec/awk /usr/share/awk /usr/share/man/man1/awk.1.gz /
 ```
 
 ## which
-作用：搜索二进制命令
-使用格式：`which [命令]`
+作用：搜索二进制命令  
+使用格式：`which [命令]`  
 举例：
 
 ```bash
@@ -574,8 +574,8 @@ alias grep='grep --color=auto'
 注意：which与whereis命令的不同为：whereis可以在查找二进制命令的同时，查找到帮助文档的位置；which命令在查找到二进制命令的同时，如果这个命令有别名，则还可以找到别名命令
 
 ## find
-作用：在目录中搜索文件
-使用格式：`find 搜索路径 [选项] 搜索内容`
+作用：在目录中搜索文件  
+使用格式：`find 搜索路径 [选项] 搜索内容`  
 选项：
 
 ```bash
@@ -624,8 +624,8 @@ alias grep='grep --color=auto'
 ```
 
 ## 三剑客之grep
-作用：在文件中提取和匹配符合条件的字符串行。
-使用格式：`grep [选项] '搜索内容' 文件名`
+作用：在文件中提取和匹配符合条件的字符串行。  
+使用格式：`grep [选项] '搜索内容' 文件名`  
 选项：
 ```bash
 -v：显示未匹配到的行
@@ -685,9 +685,8 @@ leon
 
 ## 三剑客之sed
 
-作用：用来将数据进行选取、替换、删除、新增。sed 是流编辑器，一次处理一行内容。
-使用格式：`sed [选项] '[动作]' 文件名`
-
+作用：用来将数据进行选取、替换、删除、新增。sed 是流编辑器，一次处理一行内容。  
+使用格式：`sed [选项] '[动作]' 文件名`    
 选项：
 
 ```bash
@@ -760,13 +759,14 @@ ID      Name    PHP     Linux   MySQL   Average
 
 ## 三剑客之awk
 
-作用：把文件逐行读入，以空格为默认分割符，将每行切片，切开的部分再进行后续处理
+作用：把文件逐行读入，以空格为默认分割符，将每行切片，切开的部分再进行后续处理  
 
-使用格式：`awk [选项] '/正则表达式/ 动作' [文件]`
+使用格式：`awk [选项] '/正则表达式/ 动作' [文件]`  
 - pattern：正则表达式
 - action：对匹配到的内容执行的命令（默认为输入每行内容）
 
-常用参数：
+常用选项及参数：  
+- -F: 设置输入域分隔符。e.g. `-F :` 即设定冒号为域的分隔符。若不填写，默认空格为域分隔符。
 - FILENAME：awk 浏览的文件名
 - BEGIN：处理文本前要执行的操作
 - END：处理文本后要执行的动作
@@ -777,50 +777,71 @@ ID      Name    PHP     Linux   MySQL   Average
 - ORS：输入记录分割符
 - RS：控制记录分割符
 - $0：整条记录
-- $n：表示当前行的第n个域
+- $n：表示当前行的第n个域(从1开始计数)
 
-应用：
+应用：  
 有一个`passwd`文件如下所示，使用`awk`命令对其进行操作
 
 ```bash
-$ cat passwd
+[veroll@MiWiFi-CR8809-srv ~]$ cat passwd
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/bin:/sbin/nologin
+
 ```
 
-例1. 搜索 passwd 文件中，包含 root 关键字的所有行，并将其整行打印
+搜索 passwd 文件中，包含 root 关键字的所有行，并将其整行打印
 
 ```bash
-$ awk -F : '/root/{print $0}' passwd  
+[veroll@MiWiFi-CR8809-srv ~]$ awk -F : '/root/{print $0}' passwd
 root:x:0:0:root:/root:/bin/bash
 ```
 
-例2. 搜索 passwd 文件中，包含 root 关键字的所有行，并打印第7个域
+搜索 passwd 文件中，包含 root 关键字的所有行，并打印第七个域
 
 ```bash
-$ awk -F : '/root/{print $7}' passwd
+[veroll@MiWiFi-CR8809-srv ~]$ awk -F : '/root/{print $7}' passwd
 /bin/bash
 ```
 
-例3. 打印 passwd 文件第2行的信息
+搜索 passwd 文件中，第三个域的值等于0的所有行，并将其整行打印
+```bash
+[veroll@MiWiFi-CR8809-srv ~]$ awk -F : '$3==0{print $0}' passwd
+root:x:0:0:root:/root:/bin/bash
+```
+
+搜索passwd文件中，第七个域的值以login结尾的所有行，并将其整行打印(请使用正则表达式)
+```bash
+[veroll@MiWiFi-CR8809-srv ~]$ awk -F : '$7~/login$/{print $0}' passwd
+bin:x:1:1:bin:/bin:/sbin/nologin
+
+```
+
+搜索passwd文件中，第五个域的值不是以b开头的所有行，并将其整行打印(请使用正则表达式)
+```bash
+[veroll@MiWiFi-CR8809-srv ~]$ awk -F : '$5!~/^b/{print $0}' passwd
+root:x:0:0:root:/root:/bin/bash
+```
+
+
+打印 passwd 文件第2行的信息
 
 ```bash
-$ awk -F : 'NR==2{print $0}' passwd
+[veroll@MiWiFi-CR8809-srv ~]$ awk -F : 'NR==2{print $0}' passwd
 bin:x:1:1:bin:/bin:/sbin/nologin
 ```
 
-例4. 使用 BEGIN 加入标题
+使用 BEGIN 加入标题
 
 ```bash
-$ awk -F : 'BEGIN {print "开始"} {print $1 $2}' passwd | head -2
+[veroll@MiWiFi-CR8809-srv ~]$ awk -F : 'BEGIN {print "开始"} {print $1 $2}' passwd | head -2
 开始
 rootx
 ```
 
-例5. 自定义行分割符
+自定义行分割符
 
 ```bash
-$ echo "111 222|333 444|555 666" | awk 'BEGIN{RS="|"}{print $0}'
+[veroll@MiWiFi-CR8809-srv ~]$ echo "111 222|333 444|555 666" | awk 'BEGIN{RS="|"}{print $0}'
 111 222
 333 444
 555 666
@@ -831,9 +852,9 @@ $ echo "111 222|333 444|555 666" | awk 'BEGIN{RS="|"}{print $0}'
 
 # 压缩和解压缩命令
 ## zip
-作用：压缩文件或目录
-使用格式：`zip [选项] 压缩包名 源文件或源目录`
-选项：
+作用：压缩文件或目录  
+使用格式：`zip [选项] 压缩包名 源文件或源目录`  
+选项：  
 
 ```bash
 -r：压缩目录
@@ -848,9 +869,9 @@ demo  demo_hard  demo_soft  student  test  test.zip
 ```
 
 ## unzip
-作用：解压.zip文件
-使用格式：`unzip [选项] 压缩包名`
-选项：
+作用：解压.zip文件  
+使用格式：`unzip [选项] 压缩包名`  
+选项：  
 
 ```bash
 -d：指定解压缩位置
@@ -866,9 +887,9 @@ test
 ```
 
 ## tar
-作用：打包与解打包
-使用格式：`tar [选项] [压缩包] [源文件或目录]`
-选项：
+作用：打包与解打包  
+使用格式：`tar [选项] [压缩包] [源文件或目录]`  
+选项：  
 
 ```bash
 -z：压缩和解压缩.tar.gz格式
@@ -927,9 +948,9 @@ test
 
 # 硬盘管理命令
 ## df
-作用：统计空间大小，统计的剩余空间是准确的
-使用格式：`df [选项]`
-选项：
+作用：统计空间大小，统计的剩余空间是准确的  
+使用格式：`df [选项]`  
+选项：  
 
 ```bash
 -a：显示特殊文件系统，这些文件系统几乎都是保存在内存中的。如/proc，因为是挂载在内存中，所以占用量都是0
@@ -976,9 +997,9 @@ tmpfs                   tmpfs       378M     0  378M   0% /run/user/1000
 
 
 ## du
-作用：统计文件大小，统计的文件大小是准确的
-使用格式：`du [选项] [目录或文件名]`
-选项：
+作用：统计文件大小，统计的文件大小是准确的  
+使用格式：`du [选项] [目录或文件名]`  
+选项：  
 
 ```bash
 -a：显示每个子文件的磁盘占用量默认只统计子目录的磁盘占用量
@@ -1004,9 +1025,9 @@ tmpfs                   tmpfs       378M     0  378M   0% /run/user/1000
 
 # 关机和重启命令
 ## shutdown
-作用：关机和重启
-使用格式：`shutdown [选项] 时间 [警告信息]`
-选项：
+作用：关机和重启  
+使用格式：`shutdown [选项] 时间 [警告信息]`  
+选项：  
 
 ```bash
 -c：取消已经执行的shutdown命令
@@ -1028,9 +1049,9 @@ tmpfs                   tmpfs       378M     0  378M   0% /run/user/1000
 
 # 网络命令
 ## ifconfig
-作用：查看IP地址的信息
-使用格式：`ifconfig`
-举例：
+作用：查看IP地址的信息  
+使用格式：`ifconfig`  
+举例：  
 
 ```bash
 [veroll@MiWiFi-CR8809-srv ~]$ ifconfig
@@ -1061,9 +1082,9 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 ```
 
 ## ping
-作用：向主机发送ICMP请求
-使用格式：`ping [选项] IP`
-选项：
+作用：向主机发送ICMP请求  
+使用格式：`ping [选项] IP`  
+选项：  
 
 ```bash
 -b：后面加入广播地址，用于对整个网段进行探测
@@ -1087,9 +1108,9 @@ rtt min/avg/max/mdev = 56.127/72.376/86.855/12.606 ms
 ```
 
 ## netstat
-作用：查看网络状态
-使用格式：`netstat [选项]`
-选项：
+作用：查看网络状态  
+使用格式：`netstat [选项]`  
+选项：  
 
 ```bash
 -a：列出所有网络状态，包括socket程序
@@ -1123,8 +1144,8 @@ udp6       0      0 :::111                  :::*
 udp6       0      0 ::1:323                 :::*
 udp6       0      0 :::899                  :::*
 
-上述参数解释：
-Proto：网络连接的协议，一般是TCP协议或UDP协议
+上述参数解释：  
+Proto：网络连接的协议，一般是TCP协议或UDP协议  
 Recv-Q：表示接收到的数据，已经在本地的缓存中，但是还没有被进程取走
 Send-Q：表示从本机发送，对方还没有收到的数据，依然在本地的缓冲中，一般是不具备ACK标志的数据包
 Local Address：本机的IP地址和端口号
@@ -1206,9 +1227,9 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 
 # 进程操作命令
 ## ps
-作用：静态显示系统中的进程
-使用格式：`ps [选项]`
-选项：
+作用：静态显示系统中的进程  
+使用格式：`ps [选项]`  
+选项：  
 
 ```bash
 a：显示一个终端的所有进程，除了会话引线
@@ -1217,6 +1238,7 @@ x：显示没有控制终端的进程
 -A：显示所有进程
 -l：长格式显示，显示更加详细的信息
 -e：显示所有进程，和-A作用一致
+-f: 显示一个更为完整的输出
 ```
 举例：
 
@@ -1285,20 +1307,49 @@ CMD：产生此进程的命令名
 ```
 
 ```bash
+# 列出所有进程，并显示环境变量，而且显示全格式。推荐使用
+[root@localhost ~]# ps -ef
+UID         PID   PPID  C STIME TTY          TIME CMD
+root          1      0  0 09:40 ?        00:00:04 /usr/lib/systemd/systemd --switched-root --system --deserialize 22
+root          2      0  0 09:40 ?        00:00:00 [kthreadd]
+root          4      2  0 09:40 ?        00:00:00 [kworker/0:0H]
+root          6      2  0 09:40 ?        00:00:00 [ksoftirqd/0]
+
+上述参数解释：
+UID: 用户的ID ，但输出的是用户名
+PID:进程的ID
+PPID: 父进程的ID
+C: 进程占用CPU的百分比
+STIME: 进程启用到现在的时间
+TTY: 该进程在哪个终端上运行，若与终端无关，则显示？，若为pts/0等，则表示由网络连接主机进程
+TIME: 该进程实际使用CPU运行的时间
+CMD: 命令的名称和参数
+```
+
+
+```bash
 # 查看所有的ssh进程
-[veroll@MiWiFi-CR8809-srv ~]$ ps -le | grep 'ssh'
-4 S     0   1151      1  0  80   0 - 28225 poll_s ?        00:00:00 sshd
-4 S     0   6076   1151  0  80   0 - 40244 poll_s ?        00:00:00 sshd
-4 S     0   6080   1151  0  80   0 - 40244 poll_s ?        00:00:00 sshd
-5 S  1000   6083   6076  0  80   0 - 40327 poll_s ?        00:00:00 sshd
-5 S  1000   6111   6080  0  80   0 - 40244 poll_s ?        00:00:00 sshd
+[root@localhost ~]# ps -ef | grep 'ssh'
+root       1154      1  0 09:41 ?        00:00:00 /usr/sbin/sshd -D
+root       4859   1154  0 11:44 ?        00:00:00 sshd: veroll [priv]
+root       4870   1154  0 11:44 ?        00:00:00 sshd: veroll [priv]
+veroll     4872   4859  0 11:44 ?        00:00:00 sshd: veroll@pts/0
+veroll     4922   4870  0 11:45 ?        00:00:00 sshd: veroll@notty
+veroll     4923   4922  0 11:45 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root       6581   1154  0 12:15 ?        00:00:00 sshd: veroll [priv]
+root       6592   1154  0 12:15 ?        00:00:00 sshd: veroll [priv]
+veroll     6594   6581  0 12:15 ?        00:00:00 sshd: veroll@pts/1
+veroll     6639   6592  0 12:15 ?        00:00:00 sshd: veroll@notty
+veroll     6640   6639  0 12:15 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root       7025   6255  0 12:22 pts/0    00:00:00 grep --color=auto ssh
+
 
 ```
 
 ## top
-作用：动态显示系统的资源使用情况以及进程信息
-使用格式：`top [选项]`
-选项：
+作用：动态显示系统的资源使用情况以及进程信息  
+使用格式：`top [选项]`  
+选项：  
 
 ```bash
 -d 秒数：指定top命令每隔几秒更新。默认是3秒
@@ -1420,9 +1471,9 @@ KiB Swap:  2097148 total,  2097148 free,        0 used.  3299060 avail Mem
 ```
 
 ## kill
-作用：向进程发送信号
-使用格式：`kill [信号] PID`
-信号：
+作用：向进程发送信号  
+使用格式：`kill [信号] PID`  
+信号：  
 
 ```bash
 1 SIGHUP 该信号让进程立即关闭，然后重新读取配置文件之后重启
@@ -1451,21 +1502,20 @@ veroll     1877  0.0  0.1 149300  5032 pts/0    T    05:38   0:00 vim test.kkk
 
 # 杀掉一个进程
 # 获取进程PID
-[root@MiWiFi-CR8809-srv veroll]# ps aux | grep 'vim' | grep -v 'grep'
-veroll     1877  0.0  0.1 149300  5032 pts/0    T    05:38   0:00 vim test.kkk
+[root@localhost ~]# ps -ef | grep 'vim' | grep -v 'grep'
+veroll     6665   6595  0 12:15 pts/1    00:00:00 vim kkkk
 # 杀掉进程
-[root@MiWiFi-CR8809-srv veroll]# kill -9 1877
+[root@localhost ~]# kill -9 6665
 # 查看进程状态，进程被杀掉
-[root@MiWiFi-CR8809-srv veroll]# ps aux | grep 'vim' | grep -v 'grep'
-[root@MiWiFi-CR8809-srv veroll]#
-
+[root@localhost ~]# ps -ef | grep 'vim' | grep -v 'grep'
+[root@localhost ~]#
 ```
 
 # 内存操作命令
 ## free
-作用：查看内存使用状态
-使用格式：`free [选项]`
-选项：
+作用：查看内存使用状态  
+使用格式：`free [选项]`  
+选项：  
 
 ```bash
 -b：以字节为单位显示
@@ -1492,23 +1542,23 @@ shared：多个进程共享的内存数
 
 # 其他
 ## Linux相比windows优势
-1. 稳定性高
+1. 稳定性高  
 业界公认：Linux服务器比Windows服务器稳定性高；多年经验了解，Linux稳定性虽然比不上在IBM小型机上运行AIX，但是比Windows服务器确实高很多。
 
-2. 初期投入成本低
+2. 初期投入成本低  
 硬件投入成本低：由于Linux操作系统相比于Windows先天优越性，相同硬件条件下，Linux服务器能承受负荷普遍比Windows高20%以上。
 软件投入成本更低：Windows服务器端产品价格普遍比较高，加上客户端用户授权费用，是一笔不小开支。Linux由于开源操作系统，甚至可以不花费一分钱。
 
-3. 低维护成本
+3. 低维护成本  
 对于入门级系统管理人员，由于Windows入门容易，Windows维护成本比Linux高；对于专业级系统管理人员而言，Linux维护成本反而比Windows维护成本低很多
 
-4. 病毒造成破坏低
+4. 病毒造成破坏低  
 由于Windows先天不足以及Windows在客户端高市场占有率，目前病毒绝大部分是针对Windows操作系统；Linux是开放源代码操作系统，即使出现有针对性病毒，开源社团也会从底层进行修正，从根本上杜绝类似病毒后续造成的危害
 
-5. 无需频繁升级
+5. 无需频繁升级  
 微软为保持企业持续获利，会持续发布行新产品；企业为保持服务器端稳定，只能不停的跟着微软步伐升级，耗时耗力耗财。而Linux在方面情况则好许多。
 
-6. 保密性
+6. 保密性  
 Windows由于是商业产品，源代码封闭，我们无法知道微软在里面做了什么手脚。而Linux由于是源代码开放操作系统，不存在这个问题。
 
 ## 什么是inode节点
@@ -1585,9 +1635,9 @@ $ ls -i
 ```
 
 ## 如何查看命令的帮助
-使用`man`命令。
-作用：获取命令的帮助手册
-使用格式：`man [选项] 命令`
+使用`man`命令。  
+作用：获取命令的帮助手册  
+使用格式：`man [选项] 命令`  
 选项：
 
 ```bash
@@ -1618,7 +1668,7 @@ total 8
 ```
 一共有11位。
 
-第一位代表文件类型。常见文件类型有：
+第一位代表文件类型。常见文件类型有：  
 - `-`：普通文件
 - `b`：块设备文件。这是一种特殊设备文件，存储设备都是这种文件，如分区文件`/dev/sda1`就是这种文件
 - `c`：字符设备文件。这是一种特殊设备文件，输入设备一般都是这种文件，如鼠标、键盘等
@@ -1633,9 +1683,9 @@ total 8
 - `w`：写权限
 - `x`：执行权限
 
-第五到七位代表文件所属组的权限
-第八到十位代表其他人的权限
-第十一位的`.`代表该文件存在“SELinux的安全标签”
+第五到七位代表文件所属组的权限  
+第八到十位代表其他人的权限  
+第十一位的`.`代表该文件存在“SELinux的安全标签”  
 
 ## 能说出几个Linux系统中常用的快捷键吗？
 快捷键 | 作用
@@ -1675,18 +1725,179 @@ ctrl+Q|恢复屏幕输出
 - 775：这是目录的基本权限，代表所有者和所属组拥有目录的完全权限，而其他人拥有基本的目录浏览和进入权限。
 - 777：这是目录的最大权限。在实际的生产服务器中，要尽力避免赋予这样的权限，这会造成一定的安全隐患。
 
+## 你知道Linux命令中单引号和双引号的区别吗？
+- 单引号可保证其内部所有字符不被shell解析。如单引号与grep命令配合使用，则单引号内部字符将直接发送给grep命令进行正则表达式的解析。  
+- 双引号保护特殊元字符和通配符不被shell解析，但是允许变量和命令的解析，以及转义符的解析。
+
+## 你知道哪些常用的正则表达式？
+Linux中用来在文件中搜索字符串的命令，如grep, sed, awk等命令支持正则表达式与扩展正则表达式。
+
+- grep使用扩展正则表达式需加上-E选项
+- sed使用扩展正则表达式需要加上-r选项
+### 基础正则表达式
+符号|	解释|	示例|	
+--|--|--|
+*| 匹配0次或多次 |	b.*t	|  可以匹配bt / bat / bdaf44fdsat / b#$%t等
+.	|匹配任意字符|	b.t	|可以匹配bat / but / b#t / b1t等
+^	|匹配字符串的开始|	^The|	可以匹配The开头的字符串
+$	|匹配字符串的结束|	.exe$|	可以匹配.exe结尾的字符串
+[]|	匹配来自字符集的任意单一字符|	[aeiou]|	可以匹配任一元音字母字符
+
+### 扩展正则表达式
+符号	|解释|	示例|	说明
+--|--|--|--
++|匹配1次或多次|	b.+t	| 可以匹配bat / bdaf23dsat / b4@#32t 等
+?|	匹配0次或1次|	b.?t	| 可以匹配bt / bat等
+{N}|	匹配N次|	H.{3}o	| 可以匹配Hello / H#@$o / H234o等
+{M,}|	匹配至少M次|	H.{3,}o	|可以匹配Hello / Haaaaaaao / H234#@o等
+{M,N}|	匹配至少M次至多N次|	Ha{3,5}o	|可以匹配Haaao / Haaaao / Haaaaao等
+\| |	分支|	foo\|bar|	可以匹配foo或者bar
+(exp)|	匹配exp并捕获到自动命名的组中|(dog)+|匹配dog、dogdog、dogdogdog等
 
 ## 你知道哪些搜索命令，它们有什么区别？
 `find`和`grep`。
 - `find`命令用于在系统中搜索符合条件的**文件名**，如果需要模糊查询，可以使用通配符进行匹配，通配符是完全匹配。也可以加上`-regex`选项，使用正则表达式匹配。
 - `grep`命令用于在文件中搜索符合条件的**字符串**，如果需要模糊查询，可以使用正则表达式进行匹配，正则表达式是包含匹配
 
+## Linux系统中，你知道哪些可以创建文件的命令？
+- 重定向符号: >
+```bash
+[veroll@localhost demo_creat]$ > testFile1
+[veroll@localhost demo_creat]$ ls
+testFile1
+```
+- touch
+```bash
+[veroll@localhost demo_creat]$ touch testFile2
+[veroll@localhost demo_creat]$ ls
+testFile1  testFile2
+```
+- echo
+```bash
+[veroll@localhost demo_creat]$ echo 'Hello World!' > testFile3
+[veroll@localhost demo_creat]$ ls
+testFile1  testFile2  testFile3
+[veroll@localhost demo_creat]$ cat testFile3
+Hello World!
+```
+- printf
+```bash
+[veroll@localhost demo_creat]$ printf 'Hello World!' > testFile4
+[veroll@localhost demo_creat]$ ls
+testFile1  testFile2  testFile3  testFile4
+[veroll@localhost demo_creat]$ cat testFile4
+Hello World![veroll@localhost demo_creat]$
+```
+- vi
+```bash
+[veroll@localhost demo_creat]$ vi testFile5
+[veroll@localhost demo_creat]$ ls
+testFile1  testFile2  testFile3  testFile4  testFile5
+```
+- cat
+```bash
+[veroll@localhost demo_creat]$ cat > testFile6
+Hello
+World
+[veroll@localhost demo_creat]$ ls
+testFile1  testFile2  testFile3  testFile4  testFile5  testFile6
+[veroll@localhost demo_creat]$ cat testFile6
+Hello
+World
 
 
+## 如何在当前用户家目录中查找haha.txt文件？
+```bash
+[veroll@localhost /]$ find ~/haha.txt
+/home/veroll/haha.txt
+```
+## 如何动态查看/var/log/messages这个日志文件?
+```bash
+[root@localhost ~]# tail -f /var/log/messages
+Jul 19 12:09:56 localhost dbus[724]: [system] Activating via systemd: service name='net.reactivated.Fprint' unit='fprintd.service'
+Jul 19 12:09:56 localhost systemd: Starting Fingerprint Authentication Daemon...
+Jul 19 12:09:56 localhost dbus[724]: [system] Successfully activated service 'net.reactivated.Fprint'
+Jul 19 12:09:56 localhost systemd: Started Fingerprint Authentication Daemon.
+Jul 19 12:09:58 localhost su: (to root) veroll on pts/0
+Jul 19 12:09:58 localhost dbus[724]: [system] Activating service name='org.freedesktop.problems' (using servicehelper)
+Jul 19 12:09:58 localhost dbus[724]: [system] Successfully activated service 'org.freedesktop.problems'
+Jul 19 12:10:01 localhost systemd: Created slice User Slice of root.
+Jul 19 12:10:01 localhost systemd: Started Session 25 of user root.
+Jul 19 12:10:01 localhost systemd: Removed slice User Slice of root.
 
+# Ctrl+C退出动态查看
+```
 
+## 如何查询出vim这个进程，并杀掉这个进程？
+```bash
+# 获取进程PID
+[root@localhost ~]# ps -ef | grep 'vim' | grep -v 'grep'
+veroll     6665   6595  0 12:15 pts/1    00:00:00 vim kkkk
+# 杀掉进程
+[root@localhost ~]# kill -9 6665
+# 查看进程状态，进程被杀掉
+[root@localhost ~]# ps -ef | grep 'vim' | grep -v 'grep'
+[root@localhost ~]#
+```
 
+## 如何查看系统硬盘空间？
+```bash
+[veroll@MiWiFi-CR8809-srv ~]$ df -h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                 1.9G     0  1.9G   0% /dev
+tmpfs                    1.9G     0  1.9G   0% /dev/shm
+tmpfs                    1.9G   12M  1.9G   1% /run
+tmpfs                    1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/mapper/centos-root   17G  1.5G   16G   9% /
+/dev/sda1               1014M  154M  861M  16% /boot
+tmpfs                    378M     0  378M   0% /run/user/1000
+```
 
+## 如何查看当前监听(listen)了哪些端口？
+```bash
+[root@MiWiFi-CR8809-srv veroll]# netstat -lnp
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      725/rpcbind
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1154/sshd
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      1377/master
+tcp6       0      0 :::111                  :::*                    LISTEN      725/rpcbind
+tcp6       0      0 :::22                   :::*                    LISTEN      1154/sshd
+tcp6       0      0 ::1:25                  :::*                    LISTEN      1377/master
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           2283/dhclient
+udp        0      0 0.0.0.0:111             0.0.0.0:*                           725/rpcbind
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           759/chronyd
+udp        0      0 0.0.0.0:899             0.0.0.0:*                           725/rpcbind
+udp6       0      0 :::111                  :::*                                725/rpcbind
+udp6       0      0 ::1:323                 :::*                                759/chronyd
+udp6       0      0 :::899                  :::*                                725/rpcbind
+raw6       0      0 :::58                   :::*                    7           828/NetworkManager
+```
 
+## 如何查看某个端口是否被占用？并且查询到占用该端口的PID，比如查询22端口。
+```bash
+[root@MiWiFi-CR8809-srv veroll]# netstat -anp | grep '.*:22'
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1154/sshd
+tcp        0     48 192.168.2.172:22        192.168.2.224:9838      ESTABLISHED 8312/sshd: veroll [
+tcp        0      0 192.168.197.207:22      192.168.197.57:2885     ESTABLISHED 6592/sshd: veroll [
+tcp        0      0 192.168.197.207:22      192.168.197.57:2855     ESTABLISHED 6581/sshd: veroll [
+tcp        0      0 192.168.197.207:22      192.168.197.57:10172    ESTABLISHED 4859/sshd: veroll [
+tcp        0      0 192.168.197.207:22      192.168.197.57:10200    ESTABLISHED 4870/sshd: veroll [
+tcp        0      0 192.168.2.172:22        192.168.2.224:9847      ESTABLISHED 8318/sshd: veroll [
+tcp6       0      0 :::22                   :::*                    LISTEN      1154/sshd
+```
 
+或
 
+```bash
+[root@MiWiFi-CR8809-srv veroll]# netstat -anp | awk '$4~/.*:22/ {print $0}'
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1154/sshd
+tcp        0     48 192.168.2.172:22        192.168.2.224:9838      ESTABLISHED 8312/sshd: veroll [
+tcp        0      0 192.168.197.207:22      192.168.197.57:2885     ESTABLISHED 6592/sshd: veroll [
+tcp        0      0 192.168.197.207:22      192.168.197.57:2855     ESTABLISHED 6581/sshd: veroll [
+tcp        0      0 192.168.197.207:22      192.168.197.57:10172    ESTABLISHED 4859/sshd: veroll [
+tcp        0      0 192.168.197.207:22      192.168.197.57:10200    ESTABLISHED 4870/sshd: veroll [
+tcp        0      0 192.168.2.172:22        192.168.2.224:9847      ESTABLISHED 8318/sshd: veroll [
+tcp6       0      0 :::22                   :::*                    LISTEN      1154/sshd
+
+```
