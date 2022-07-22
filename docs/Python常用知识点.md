@@ -371,14 +371,47 @@ print('result:', a(1))
 - 后置操作：比如每次执行方法后都需要还原数据集，可以将清理操作写在装饰器中
 - 权限校验：执行方法前先进行权限校验，校验通过才会允许执行方法
 
-## 单例模式是什么？怎么创建？
-单例模式（Singleton Pattern）是一种常用的软件设计模式，该模式的主要目的是确保某一个类只有一个实例存在。
+## 单例模式是什么？有什么优缺点？怎么实现？
+单例模式：确保一个类，在整个项目的运行周期内只有一个实例存在。确保这个类无论实例化多少次，每次返回的都是同一个实例。
+
+
+## 怎么实现单例模式？
+可以通过装饰器+闭包来实现单例模式。
+```python
+def singleton(cls, *args, **kw):
+    instance={}
+    def _singleton():
+        if cls not in instance:
+            instance[cls]=cls(*args, **kw)
+        return instance[cls]
+    return _singleton
+ 
+@singleton
+class test_singleton(object):
+    def __init__(self):
+        self.num_sum=0
+    def add(self):
+        self.num_sum=100
+
+'''
+输出：
+
+<__main__.test_singleton object at 0x023F6AD0>
+<__main__.test_singleton object at 0x023F6AD0>
+'''
+```
+可以看出，虽然进行了两次实例化，但仍为同一个实例
 
 # 面向对象编程
-## Python中实例方法、类方法和静态方法你了解吗？
+
+## \_\_init\_\_(self)中的self是做什么用的？
+Python解释器在创建类的实例化对象时，会调用类的__init__方法，在调用__init__方法时，会将实例对象传递给self参数。  
+因此self参数变量指向的是实例对象。
+
+## Python中类方法、静态方法和实例方法你了解吗？
 
 
-## Python中实例属性和类属性了解吗？
+## Python中类属性和实例属性了解吗？
 
 
 
