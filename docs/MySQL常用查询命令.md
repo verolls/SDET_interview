@@ -1,4 +1,4 @@
-## MySqL查询语句书写顺序
+## MySQL查询语句书写顺序
 
 ```sql
 STEP0: select 选择某些列进行数据展示 [distinct] 需要对结果做独一无二的限定
@@ -6,8 +6,8 @@ STEP1: from 考虑选择某数据表 [as] 取别名
 STEP2: where 在选中的数据表后进行一定条件的筛选
 STEP3：group by 筛选完后的数据可能需要进行分组
 STEP4：having 分完组后的数据可能需要进行组内筛选
-STEP5：order by 组也分完了，数据也根据分组筛选完毕，可能需要进行排序准备待展示了
-STEP6：limit 排序过后，就是展示出来了，但是如果一个数据表几万条记录需要展示，难道全部显示吗，此时就需要限制展示条数了
+STEP5：order by 组也分完了，数据也根据分组筛选完毕，需要进行排序准备待展示了
+STEP6：limit 排序过后，限制展示条数
 
 参考：https://blog.csdn.net/weixin_43876778/article/details/113811672
 ```
