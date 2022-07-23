@@ -105,7 +105,7 @@ SELECT name AS student_name, age AS student_age FROM tb_students_info;
 LIMIT 关键字可以指定查询结果从哪条记录开始显示，显示多少条记录。  
 
 格式：
-```
+```sql
 LIMIT 初始位置，记录数
 ```
 含义：
@@ -125,7 +125,7 @@ SELECT * FROM tb_students_info LIMIT 3,5;
 LIMIT 关键字不指定初始位置时，记录从第一条记录开始显示。显示记录的条数由 LIMIT 关键字指定。
 
 格式：
-```
+```sql
 LIMIT 记录数
 ```
 
@@ -147,7 +147,7 @@ SELECT * FROM tb_students_info LIMIT 4;
 
 ### LIMIT和OFFSET组合使用
 格式：
-```
+```sql
 LIMIT 记录数 OFFSET 初始位置
 ```
 
@@ -165,4 +165,52 @@ SELECT * FROM tb_students_info LIMIT 5 OFFSET 3;
 
 ## 对查询结果进行排序
 通过条件查询语句可以查询到符合用户需求的数据，但是查询到的数据一般都是按照数据最初被添加到表中的顺序来显示。为了使查询结果的顺序满足用户的要求，MySQL 提供了 ORDER BY 关键字来对查询结果进行排序。  
+
+格式：  
+
+```sql
+ORDER BY <字段名> [ASC|DESC]
+```
+
+含义：
+
+- 字段名：表示需要排序的字段名称，多个字段时用逗号隔开。
+- ASC|DESC：ASC表示字段按升序排序；DESC表示字段按降序排序。其中ASC为默认值。
+
+注意：
+
+- ORDER BY 关键字后可以跟子查询。
+- 当排序的字段中存在空值时，ORDER BY 会将该空值作为最小值来对待。
+- ORDER BY 指定多个字段进行排序时，MySQL 会按照字段的顺序从左到右依次进行排序。
+- 在对多个字段进行排序时，排序的第一个字段必须有相同的值，才会对第二个字段进行排序。如果第一个字段数据中所有的值都是唯一的，MySQL 将不再对第二个字段进行排序。
+
+### 单字段排序
+
+举例：
+
+查询 tb_students_info 表的所有记录，并对 height 字段进行排序
+
+```sql
+SELECT * FROM tb_students_info ORDER BY height;
+```
+
+### 多字段排序
+
+举例：
+
+查询 tb_students_info 表中的 name 和 height 字段，先按 height 排序，再按 name 排序
+
+```sql
+SELECT name,height FROM tb_students_info ORDER BY height,name;
+```
+
+举例：
+
+查询 tb_students_info 表，先按 height 降序排序，再按 name 升序排序
+
+```sql
+SELECT name,height FROM tb_student_info ORDER BY height DESC,name ASC;
+```
+
+## 条件查询  
 
