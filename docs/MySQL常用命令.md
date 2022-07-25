@@ -1,3 +1,379 @@
+# MySQL数据库基本操作
+
+## CREAT DATABASE：创建数据库
+
+格式：
+
+```sql
+CREATE DATABASE [IF NOT EXISTS] <数据库名>
+[[DEFAULT] CHARACTER SET <字符集名>] 
+[[DEFAULT] COLLATE <校对规则名>];
+```
+
+含义：
+
+- <数据库名>：创建数据库的名称。MySQL 的数据存储区将以目录方式表示 MySQL 数据库，因此数据库名称必须符合操作系统的文件夹命名规则，不能以数字开头，尽量要有实际意义。注意在 MySQL 中不区分大小写。
+- IF NOT EXISTS：在创建数据库之前进行判断，只有该数据库目前尚不存在时才能执行操作。此选项可以用来避免数据库已经存在而重复创建的错误。
+- [DEFAULT] CHARACTER SET：指定数据库的字符集。指定字符集的目的是为了避免在数据库中存储的数据出现乱码的情况。如果在创建数据库时不指定字符集，那么就使用系统的默认字符集。
+- [DEFAULT] COLLATE：指定字符集的默认校对规则。
+
+注意：
+
+- MySQL 不允许在同一系统下创建两个相同名称的数据库。
+
+举例：
+
+创建一个名为 test_db 的数据库
+
+```sql
+CREATE DATABASE test_db;
+```
+
+## SHOW DATABASES：查看数据库
+
+格式：
+
+```sql
+SHOW DATABASES [LIKE '数据库名'];
+```
+
+含义：
+
+- LIKE 从句是可选项，用于匹配指定的数据库名称。LIKE 从句可以部分匹配，也可以完全匹配。
+- 数据库名由单引号' '包围。
+
+举例：
+
+列出当前用户可查看的所有数据库：
+
+```sql
+SHOW DATABASES;
+```
+
+使用 LIKE 从句，查看名字中包含 test 的数据库：
+
+```sql
+SHOW DATABASES LIKE '%test%';
+```
+
+## USE：选择数据库
+
+USE 语句用来完成一个数据库到另一个数据库的跳转。当用 CREATE DATABASE 语句创建数据库之后，该数据库不会自动成为当前数据库，需要用 USE 来指定当前数据库。
+
+格式：
+
+```sql
+USE <数据库名>
+```
+
+注意：
+
+- 该语句可以通知 MySQL 把<数据库名>所指示的数据库作为当前数据库。该数据库保持为默认数据库，直到语段的结尾，或者直到遇见一个不同的 USE 语句。 只有使用 USE 语句来指定某个数据库作为当前数据库之后，才能对该数据库及其存储的数据对象执行操作。
+
+举例：
+
+将数据库 test_db 设置为默认数据库
+
+```sql
+USE test_db;
+```
+
+## ALTER DATABASE：修改数据库
+
+在 MySQL 数据库中只能对数据库使用的字符集和校对规则进行修改，数据库的这些特性都储存在 db.opt 文件中。
+
+格式：
+
+```sql
+ALTER DATABASE [数据库名] { 
+[ DEFAULT ] CHARACTER SET <字符集名> |
+[ DEFAULT ] COLLATE <校对规则名>}
+```
+
+含义：
+
+- ALTER DATABASE 用于更改数据库的全局特性。
+- 使用 ALTER DATABASE 需要获得数据库 ALTER 权限。
+- 数据库名称可以忽略，此时语句对应于默认数据库。
+- CHARACTER SET 子句用于更改默认的数据库字符集。
+
+举例：
+
+将数据库 test_db 的指定字符集修改为 gb2312，默认校对规则修改为 gb2312_unicode_ci
+
+```sql
+ALTER DATABASE test_db
+DEFAULT CHARACTER SET gb2312
+DEFAULT COLLATE gb2312_chinese_ci;
+```
+
+## DROP DATABASE：删除数据库
+
+当数据库不再使用时应该将其删除，以确保数据库存储空间中存放的是有效数据。删除数据库是将已经存在的数据库从磁盘空间上清除，清除之后，数据库中的所有数据也将一同被删除。
+
+格式：
+
+```sql
+DROP DATABASE [ IF EXISTS ] <数据库名>
+```
+
+含义：
+
+- <数据库名>：指定要删除的数据库名。
+- IF EXISTS：用于防止当数据库不存在时发生错误。
+- DROP DATABASE：删除数据库中的所有表格并同时删除数据库。使用此语句时要非常小心，以免错误删除。如果要使用 DROP DATABASE，需要获得数据库 DROP 权限。
+
+注意：
+
+- MySQL 安装后，系统会自动创建名为 information_schema 和 mysql 的两个系统数据库，系统数据库存放一些和数据库相关的信息，如果删除了这两个数据库，MySQL 将不能正常工作。
+- 使用 DROP DATABASE 命令时要非常谨慎，在执行该命令后，MySQL 不会给出任何提示确认信息。DROP DATABASE 删除数据库后，数据库中存储的所有数据表和数据也将一同被删除，而且不能恢复。因此最好在删除数据库之前先将数据库进行备份。
+
+举例：
+
+将数据库 test_db_del 从数据库列表中删除
+
+```sql
+DROP DATABASE test_db_del;
+```
+
+# MySQL数据表基本操作
+
+## CREAT TABLE：创建数据表
+
+创建数据表，指的是在已经创建的数据库中建立新表。
+
+格式：
+
+```sql
+CREATE TABLE <表名> ([表定义选项])[表选项][分区选项];
+```
+
+含义：
+
+- CREATE TABLE：用于创建给定名称的表，必须拥有表CREATE的权限。
+- <表名>：指定要创建表的名称，在 CREATE TABLE 之后给出，必须符合标识符命名规则。表名称被指定为 db_name.tbl_name，以便在特定的数据库中创建表。无论是否有当前数据库，都可以通过这种方式创建。在当前数据库中创建表时，可以省略 db-name。如果使用加引号的识别名，则应对数据库和表名称分别加引号。例如，'mydb'.'mytbl' 是合法的，但 'mydb.mytbl' 不合法。
+- <表定义选项>：表创建定义，由列名（col_name）、列的定义（column_definition）以及可能的空值说明、完整性约束或表索引组成。
+- 默认的情况是，表被创建到当前的数据库中。若表已存在、没有当前数据库或者数据库不存在，则会出现错误。
+
+注意：
+
+- 要创建的表的名称不区分大小写，不能使用SQL语言中的关键字，如DROP、ALTER、INSERT等。
+- 必须指定数据表中每个列（字段）的名称和数据类型，如果创建多个列，要用逗号隔开。
+
+举例：
+
+创建员工表 tb_emp1（数据表属于数据库，在创建数据表之前，应使用语句“USE<数据库>”指定操作在哪个数据库中进行，如果没有选择数据库，就会抛出 No database selected 的错误。）
+
+```sql
+CREATE TABLE tb_emp1
+```
+
+## ALTER TABLE：修改数据表
+
+修改表指的是修改数据库中已经存在的数据表的结构。可以使用 ALTER TABLE 语句来改变原有表的结构，例如增加或删减列、更改原有列类型、重新命名列或表等。
+
+格式：
+
+```sql
+ALTER TABLE <表名> [修改选项]
+```
+
+修改选项：
+
+- ADD COLUMN <列名> <类型>
+- CHANGE COLUMN <旧列名> <新列名> <新列类型>
+- ALTER COLUMN <列名> { SET DEFAULT <默认值> | DROP DEFAULT }
+- MODIFY COLUMN <列名> <类型>
+- DROP COLUMN <列名>
+- RENAME TO <新表名>
+- CHARACTER SET <字符集名>
+- COLLATE <校对规则名> 
+
+### 修改表名
+
+格式：
+
+```sql
+ALTER TABLE <旧表名> RENAME [TO] <新表名>；
+```
+
+含义：
+
+- TO 为可选参数，使用与否均不影响结果。
+
+举例：
+
+使用 ALTER TABLE 将数据表 student 改名为 tb_students_info
+
+```sql
+ALTER TABLE student RENAME TO tb_students_info;
+```
+
+### 修改字段名称
+
+格式：
+
+```sql
+ALTER TABLE <表名> CHANGE <旧字段名> <新字段名> <新数据类型>；
+```
+
+含义：
+
+- 旧字段名：指修改前的字段名；
+- 新字段名：指修改后的字段名；
+- 新数据类型：指修改后的数据类型，如果不需要修改字段的数据类型，可以将新数据类型设置成与原来一样，但数据类型不能为空。
+
+
+举例：
+
+使用 ALTER TABLE 修改表 tb_emp1 的结构，将 col1 字段名称改为 col3，同时将数据类型变为 CHAR(30)
+
+```sql
+ALTER TABLE tb_emp1
+CHANGE col1 col3 CHAR(30);
+```
+
+### 修改字段数据类型
+
+格式：
+
+```sql
+ALTER TABLE <表名> MODIFY <字段名> <数据类型>
+```
+
+含义：
+
+- 表名：指要修改数据类型的字段所在表的名称；
+- 字段名：指需要修改的字段；
+- 数据类型：指修改后字段的新数据类型。
+
+举例：
+
+使用 ALTER TABLE 修改表 tb_emp1 的结构，将 name 字段的数据类型由 VARCHAR(22) 修改成 VARCHAR(30)
+
+```sql
+ALTER TABLE tb_emp1
+MODIFY name VARCHAR(30);
+```
+
+### 删除字段
+
+格式：
+
+```sql
+ALTER TABLE <表名> DROP <字段名>；
+```
+
+含义：
+
+- “字段名”指需要从表中删除的字段的名称。
+
+举例：
+
+使用 ALTER TABLE 修改表 tb_emp1 的结构，删除 col2 字段
+
+```sql
+ALTER TABLE tb_emp1
+DROP col2;
+```
+
+### 数据表末尾添加字段
+
+格式：
+
+```sql
+ALTER TABLE <表名> ADD <新字段名><数据类型>[约束条件];
+```
+
+含义：
+
+- <表名> 为数据表的名字；
+- <新字段名> 为所要添加的字段的名字；
+- <数据类型> 为所要添加的字段能存储数据的数据类型；
+- [约束条件] 是可选的，用来对添加的字段进行约束。
+
+举例：
+
+使用 ALTER TABLE 语句添加一个 INT 类型的字段 age
+
+```sql
+ALTER TABLE student ADD age INT(4);
+```
+
+### 数据表开头添加字段
+
+格式：
+
+```sql
+ALTER TABLE <表名> ADD <新字段名> <数据类型> [约束条件] FIRST;
+```
+
+含义：
+
+- FIRST 关键字一般放在语句的末尾。
+
+举例：
+
+使用 ALTER TABLE 语句在表的第一列添加 INT 类型的字段 stuId
+
+```sql
+ALTER TABLE student ADD stuId INT(4) FIRST;
+```
+
+### 数据表中间位置添加字段
+
+格式：
+
+```sql
+ALTER TABLE <表名> ADD <新字段名> <数据类型> [约束条件] AFTER <已经存在的字段名>;
+```
+
+注意：
+
+- AFTER 的作用是将新字段添加到某个已有字段后面。
+- 只能在某个已有字段的后面添加新字段，不能在它的前面添加新字段。
+
+举例：
+
+使用 ALTER TABLE 语句在 student 表中添加名为 stuno，数据类型为 INT 的字段，stuno 字段位于 name 字段的后面
+
+```sql
+ALTER TABLE student ADD stuno INT(11) AFTER name;
+```
+
+## DROP TABLE：删除数据表
+
+在删除表的同时，表的结构和表中所有的数据都会被删除，因此在删除数据表之前最好先备份，以免造成无法挽回的损失。
+
+格式：
+
+```sql
+DROP TABLE [IF EXISTS] 表名1 [ ,表名2, 表名3 ...]
+```
+
+含义：
+
+- 表名1, 表名2, 表名3 ...表示要被删除的数据表的名称。DROP TABLE 可以同时删除多个表，只要将表名依次写在后面，相互之间用逗号隔开即可。
+- IF EXISTS 用于在删除数据表之前判断该表是否存在。如果不加 IF EXISTS，当数据表不存在时 MySQL 将提示错误，中断 SQL 语句的执行；加上 IF EXISTS 后，当数据表不存在时 SQL 语句可以顺利执行，但是会发出警告（warning）。
+
+注意：
+
+- 用户必须拥有执行 DROP TABLE 命令的权限，否则数据表不会被删除。
+- 表被删除时，用户在该表上的权限不会自动删除。
+
+举例：
+
+删除数据表 tb_emp3
+
+```sql
+ DROP TABLE tb_emp3;
+```
+
+## 数据表中添加字段
+
+
+# MySQL操作表中数据
+
 ## MySQL查询语句书写顺序
 
 ```sql
@@ -16,22 +392,30 @@ STEP6：limit 排序过后，限制展示条数
 在 MySQL 中，可以使用 SELECT 语句来查询数据。查询数据是指从数据库中根据需求，使用不同的查询方式来获取不同的数据，是使用频率最高、最重要的操作。
 
 ### 查询表中所有字段：
+
 格式：
+
 ```sql
 SELECT * FROM 表名;
 ```
+
 举例：  
+
 从 tb_students_info 表中查询所有字段的数据
 ```sql
 SELECT * FROM tb_students_info;
 ```
 
 ### 查询表中指定字段：
+
 格式：
+
 ```sql
 SELECT <字段名1>,<字段名2>,…,<字段名n> FROM <表名>;
 ```
+
 举例：  
+
 从 tb_students_info 表中获取 id、name 和 height 三列
 ```sql
 SELECT id,name,height FROM tb_students_info;
@@ -41,22 +425,28 @@ SELECT id,name,height FROM tb_students_info;
 在 MySQL 中使用 SELECT 语句执行简单的数据查询时，返回的是所有匹配的记录。如果表中的某些字段没有唯一性约束，那么这些字段就可能存在重复值。为了实现查询不重复的数据，MySQL 提供了 DISTINCT 关键字。
 
 ### 对指定字段中重复的数据进行去重：
+
 格式：
+
 ```sql
 SELECT DISTINCT <字段名> FROM <表名>;
 ```
+
 注意：
+
 - DISTINCT 关键字只能在 SELECT 语句中使用。
 - 在对一个或多个字段去重时，DISTINCT 关键字必须在所有字段的最前面。
 - 如果 DISTINCT 关键字后有多个字段，则会对多个字段进行组合去重，也就是说，只有多个字段组合起来完全是一样的情况下才会被去重。
 
-举例：  
+举例：
+
 对 student 表的 name 和 age 字段进行去重  
 ```sql
 SELECT DISTINCT name,age FROM student;
 ```
 
 ## AS：设置别名
+
 为了查询方便，MySQL 提供了 AS 关键字来为表和字段指定别名。
 
 ### 为表指定别名：
@@ -64,11 +454,13 @@ SELECT DISTINCT name,age FROM student;
 当表名很长或者执行一些特殊查询的时候，为了方便操作，可以为表指定一个别名，用这个别名代替表原来的名称。
 
 格式：
+
 ```sql
 <表名> [AS] <别名>  
 ```
 
 含义：
+
 - <表名>：数据库中存储的数据表的名称。
 - <别名>：查询时指定的表的新名称。
 - AS关键字可以省略，省略后需要将表名和别名用空格隔开。
@@ -80,6 +472,7 @@ SELECT DISTINCT name,age FROM student;
 
 
 举例：  
+
 为 tb_students_info 表指定别名 stu
 ```sql
 SELECT stu.name,stu.height FROM tb_students_info AS stu;
@@ -88,6 +481,7 @@ SELECT stu.name,stu.height FROM tb_students_info AS stu;
 
 
 ### 为字段指定别名：
+
 在使用 SELECT 语句查询数据时，MySQL 会显示每个 SELECT 后面指定输出的字段。有时为了显示结果更加直观，我们可以为字段指定一个别名。  
 
 格式：
@@ -620,4 +1014,142 @@ WHERE course_id IN (SELECT id FROM tb_course WHERE course_name = 'Java');
 ```sql
 SELECT name FROM tb_students_info
 WHERE course_id = (SELECT id FROM tb_course WHERE course_name = 'Python');
+```
+
+## INSERT：向表中插入数据
+
+使用 INSERT 语句可以向数据库已有的表中插入一行或者多行元组数据。
+
+格式1：
+
+```sql
+INSERT INTO <表名> [ <列名1> [ , … <列名n>] ]
+VALUES (值1) [… , (值n) ];
+```
+
+含义1：
+
+- <表名>：指定被操作的表名。
+- <列名>：指定需要插入数据的列名。若向表中的所有列插入数据，则全部的列名均可以省略，直接采用 INSERT<表名>VALUES(…) 即可。
+- VALUES 或 VALUE 子句：该子句包含要插入的数据清单。数据清单中数据的顺序要和列的顺序相对应。
+
+格式2：
+
+```sql
+INSERT INTO <表名>
+SET <列名1> = <值1>,
+        <列名2> = <值2>,
+        …
+```
+
+含义2：
+
+- 用于直接给表中的某些列指定对应的列值，即要插入的数据的列名在 SET 子句中指定，col_name 为指定的列名，等号后面为指定的数据，而对于未指定的列，列值会指定为该列的默认值。
+
+注意：
+- 使用 INSERT…VALUES 语句可以向表中插入一行数据，也可以插入多行数据；
+- 使用 INSERT…SET 语句可以指定插入行中每列的值，也可以指定部分列的值；
+- INSERT…SELECT 语句向表中插入其他表的数据。
+- 采用 INSERT…SET 语句可以向表中插入部分列的值，这种方式更为灵活；
+- INSERT…VALUES 语句可以一次插入多条数据。
+- 当使用单条 INSERT 语句插入多行数据的时候，只需要将每行数据用圆括号括起来即可。
+- INSERT 语句后面的列名称顺序可以不是 tb_courses 表定义时的顺序，即插入数据时，不需要按照表定义的顺序插入，只要保证值的顺序与列字段的顺序相同就可以。
+
+
+举例：
+
+在 tb_courses 表中插入一条新记录，course_id 值为 2，course_name 值为“Database”，course_grade 值为 3，info值为“MySQL”。
+
+```sql
+INSERT INTO tb_courses
+(course_name,course_info,course_id,course_grade)
+VALUES('Database','MySQL',2,3);
+```
+
+从 tb_courses 表中查询所有的记录，并将其插入 tb_courses_new 表中。
+
+举例：
+
+```sql
+INSERT INTO tb_courses_new
+(course_id,course_name,course_grade,course_info)
+SELECT course_id,course_name,course_grade,course_info
+FROM tb_courses;
+```
+
+## UPDATE：修改表中数据
+
+使用 UPDATE 语句可以修改、更新一个或多个表的数据。
+
+格式：
+
+```sql
+UPDATE <表名> SET 字段 1=值 1 [,字段 2=值 2… ] [WHERE 子句 ]
+[ORDER BY 子句] [LIMIT 子句]
+```
+
+含义：
+
+- <表名>：用于指定要更新的表名称。
+- SET 子句：用于指定表中要修改的列名及其列值。其中，每个指定的列值可以是表达式，也可以是该列对应的默认值。如果指定的是默认值，可用关键字 DEFAULT 表示列值。
+- WHERE 子句：可选项。用于限定表中要修改的行。若不指定，则修改表中所有的行。
+- ORDER BY 子句：可选项。用于限定表中的行被修改的次序。
+- LIMIT 子句：可选项。用于限定被修改的行数。
+
+注意：
+
+- 修改一行数据的多个列值时，SET 子句的每个值用逗号分开即可。
+- 若只是更新部分行的数据，保证 UPDATE 以 WHERE 子句结束，通过 WHERE 子句指定被更新的记录所需要满足的条件，如果忽略 WHERE 子句，MySQL 将更新表中所有的行。
+
+举例：
+
+在 tb_courses_new 表中，更新所有行的 course_grade 字段值为 4
+
+```sql
+UPDATE tb_courses_new
+SET course_grade=4;
+```
+
+在 tb_courses 表中，更新 course_id 值为 2 的记录，将 course_grade 字段值改为 3.5，将 course_name 字段值改为“DB”
+
+```sql
+UPDATE tb_courses_new
+SET course_name='DB',course_grade=3.5
+WHERE course_id=2;
+```
+
+## DELETE：删除表中数据
+
+使用 DELETE 语句可以删除表的一行或者多行数据。
+
+格式：
+
+```sql
+DELETE FROM <表名> [WHERE 子句] [ORDER BY 子句] [LIMIT 子句]
+```
+
+含义：
+
+- <表名>：指定要删除数据的表名。
+- ORDER BY 子句：可选项。表示删除时，表中各行将按照子句中指定的顺序进行删除。
+- WHERE 子句：可选项。表示为删除操作限定删除条件，若省略该子句，则代表删除该表中的所有行。
+- LIMIT 子句：可选项。用于告知服务器在控制命令被返回到客户端前被删除行的最大值。
+
+注意：
+
+- 在不使用 WHERE 条件的时候，将删除所有数据。
+
+举例：
+
+删除 tb_courses_new 表中的全部数据
+
+```sql
+DELETE FROM tb_courses_new;
+```
+
+在 tb_courses_new 表中，删除 course_id 为 4 的记录
+
+```sql
+DELETE FROM tb_courses
+WHERE course_id=4;
 ```
