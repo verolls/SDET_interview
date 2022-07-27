@@ -377,13 +377,13 @@ DROP TABLE [IF EXISTS] 表名1 [ ,表名2, 表名3 ...]
 ## MySQL查询语句书写顺序
 
 ```sql
-STEP0: select 选择某些列进行数据展示 [distinct] 需要对结果做独一无二的限定
-STEP1: from 考虑选择某数据表 [as] 取别名
-STEP2: where 在选中的数据表后进行一定条件的筛选
-STEP3：group by 筛选完后的数据可能需要进行分组
-STEP4：having 分完组后的数据可能需要进行组内筛选
-STEP5：order by 组也分完了，数据也根据分组筛选完毕，需要进行排序准备待展示了
-STEP6：limit 排序过后，限制展示条数
+STEP0: SELECT 选择某些列进行数据展示 [DISTINCT] 需要对结果做独一无二的限定
+STEP1: FROM 考虑选择某数据表 [AS] 取别名
+STEP2: WHERE 在选中的数据表后进行一定条件的筛选
+STEP3：GROUP BY 筛选完后的数据可能需要进行分组
+STEP4：HAVING 分完组后的数据可能需要进行组内筛选
+STEP5：ORDER BY 组也分完了，数据也根据分组筛选完毕，需要进行排序准备待展示了
+STEP6：LIMIT 排序过后，限制展示条数
 
 参考：https://blog.csdn.net/weixin_43876778/article/details/113811672
 ```
@@ -1182,4 +1182,145 @@ DELETE FROM tb_courses_new;
 ```sql
 DELETE FROM tb_courses
 WHERE course_id=4;
+```
+
+# MySQL常见面试题
+
+## 查找入职员工时间排名倒数第三的员工所有信息
+
+有一个员工employees表简况如下:
+```sql
+
+drop table if exists  `employees` ; 
+CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));
+INSERT INTO employees VALUES(10001,'1953-09-02','Georgi','Facello','M','1986-06-26');
+INSERT INTO employees VALUES(10002,'1964-06-02','Bezalel','Simmel','F','1985-11-21');
+INSERT INTO employees VALUES(10003,'1959-12-03','Parto','Bamford','M','1986-08-28');
+INSERT INTO employees VALUES(10004,'1954-05-01','Chirstian','Koblick','M','1986-12-01');
+INSERT INTO employees VALUES(10005,'1955-01-21','Kyoichi','Maliniak','M','1989-09-12');
+INSERT INTO employees VALUES(10006,'1953-04-20','Anneke','Preusig','F','1989-06-02');
+INSERT INTO employees VALUES(10007,'1957-05-23','Tzvetan','Zielinski','F','1989-02-10');
+INSERT INTO employees VALUES(10008,'1958-02-19','Saniya','Kalloufi','M','1994-09-15');
+INSERT INTO employees VALUES(10009,'1952-04-19','Sumant','Peac','F','1985-02-18');
+INSERT INTO employees VALUES(10010,'1963-06-01','Duangkaew','Piveteau','F','1989-08-24');
+INSERT INTO employees VALUES(10011,'1953-11-07','Mary','Sluis','F','1990-01-22');
+```
+
+
+
+请你查找employees里入职员工时间排名倒数第三的员工所有信息
+
+(注意：可能会存在同一个日期入职的员工，所以入职员工时间排名倒数第三的员工可能不止一个。)
+
+解答：
+
+```sql
+SELECT * FROM employees
+WHERE hire_date = (
+    SELECT DISTINCT hire_date FROM employees
+    ORDER BY hire_date DESC
+    LIMIT 1 OFFSET 2
+)
+```
+
+## 查找当前薪水详情以及部门编号dept_no
+
+有一个全部员工的薪水表salaries和一个各个部门的领导表dept_manager简况如下:
+
+```sql
+
+drop table if exists  `salaries` ; 
+drop table if exists  `dept_manager` ; 
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));
+CREATE TABLE `dept_manager` (
+`dept_no` char(4) NOT NULL,
+`emp_no` int(11) NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+INSERT INTO dept_manager VALUES('d001',10002,'9999-01-01');
+INSERT INTO dept_manager VALUES('d002',10006,'9999-01-01');
+INSERT INTO dept_manager VALUES('d003',10005,'9999-01-01');
+INSERT INTO dept_manager VALUES('d004',10004,'9999-01-01');
+INSERT INTO salaries VALUES(10001,88958,'2002-06-22','9999-01-01');
+INSERT INTO salaries VALUES(10002,72527,'2001-08-02','9999-01-01');
+INSERT INTO salaries VALUES(10003,43311,'2001-12-01','9999-01-01');
+INSERT INTO salaries VALUES(10004,74057,'2001-11-27','9999-01-01');
+INSERT INTO salaries VALUES(10005,94692,'2001-09-09','9999-01-01');
+INSERT INTO salaries VALUES(10006,43311,'2001-08-02','9999-01-01');
+INSERT INTO salaries VALUES(10007,88070,'2002-02-07','9999-01-01');
+```
+
+请你查找各个部门当前领导的薪水详情以及其对应部门编号dept_no，输出结果以salaries.emp_no升序排序，并且请注意输出结果里面dept_no列是最后一列
+
+解答：
+
+```sql
+SELECT s.emp_no, s.salary, s.from_date, s.to_date, d.dept_no 
+FROM salaries AS s RIGHT JOIN dept_manager AS d 
+ON s.emp_no=d.emp_no  
+ORDER BY s.emp_no
+```
+
+## 获取每个部门中当前员工薪水最高的相关信息
+
+有一个员工表dept_emp,有一个薪水表salaries简况如下:
+
+```sql
+drop table if exists  `dept_emp` ; 
+drop table if exists  `salaries` ; 
+CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));
+INSERT INTO dept_emp VALUES(10001,'d001','1986-06-26','9999-01-01');
+INSERT INTO dept_emp VALUES(10002,'d001','1996-08-03','9999-01-01');
+INSERT INTO dept_emp VALUES(10003,'d002','1996-08-03','9999-01-01');
+
+INSERT INTO salaries VALUES(10001,88958,'2002-06-22','9999-01-01');
+INSERT INTO salaries VALUES(10002,72527,'2001-08-02','9999-01-01');
+INSERT INTO salaries VALUES(10003,92527,'2001-08-02','9999-01-01');
+```
+
+获取每个部门中当前员工薪水最高的相关信息，给出dept_no, emp_no以及其对应的salary，按照部门编号dept_no升序排列
+
+解答：
+
+```sql
+# 先找出各个部门最高的薪资，再找到各个员工的部门、薪资，联结查询后的两个表，这里筛选时需要两个条件，一个是部门，一个是最高薪资
+
+SELECT a.dept_no,b.emp_no,a.salary
+FROM
+    (SELECT dept_no,MAX(salary) AS salary
+    FROM dept_emp
+    INNER JOIN salaries
+    ON dept_emp.emp_no=salaries.emp_no
+    GROUP BY dept_no) AS a
+INNER JOIN
+    (SELECT dept_no,dept_emp.emp_no,salary
+    FROM dept_emp
+    INNER JOIN salaries
+    ON dept_emp.emp_no=salaries.emp_no)AS b
+ON a.salary=b.salary
+AND a.dept_no=b.dept_no
+ORDER BY dept_no
 ```
