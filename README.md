@@ -23,7 +23,7 @@
 
 ## 笔试知识点
 - [Python_ACM模式_输入输出处理](https://github.com/verolls/SDET_interview/blob/main/docs/Python_ACM模式_输入输出处理.md)
-- [MySQL常用查询命令](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用查询命令.md)
+- [MySQL常用命令](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用命令.md)
 
 
 <hr/>
