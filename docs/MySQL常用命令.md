@@ -979,6 +979,36 @@ SELECT s.name,c.course_name FROM tb_students_info s RIGHT OUTER JOIN tb_course c
 ON s.course_id=c.id;
 ```
 
+## FULL JOIN：全连接
+
+只要其中某个表存在匹配，FULL JOIN 关键字就会返回行。(返回JOIN 两端表的所有数据，无论其与另一张表有没有匹配。显示左连接、右连接和内连接的并集)
+
+格式：
+
+```sql
+SELECT <字段名> FROM <表1> FULL OUTER JOIN <表2> <ON子句>
+```
+
+含义：
+
+- 字段名：需要查询的字段名称。
+- <表1><表2>：需要右连接的表名。
+- FULL OUTER JOIN：全连接中可以省略 OUTER 关键字，只使用关键字 FULL JOIN。
+- ON 子句：用来设置全连接的连接条件，不能省略。
+
+举例：
+
+在 tb_students_info 表和 tb_course 表中查询所有课程和所有学生，包括没有学生的课程以及没有课程的学生
+
+```sql
+SELECT s.name,c.course_name FROM tb_students_info s FULL OUTER JOIN tb_course c 
+ON s.course_id=c.id;
+```
+
+## MySQL各种连接总结
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/4f3f037175d443a1ba09f67b98cae9a4.png)
+
 ## 子查询
 
 通过子查询可以实现多表查询。子查询指将一个查询语句嵌套在另一个查询语句中。子查询可以在 SELECT、UPDATE 和 DELETE 语句中使用，而且可以进行多层嵌套。在实际开发时，子查询经常出现在 WHERE 子句中。
