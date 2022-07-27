@@ -4,26 +4,26 @@
 
 # 面试笔试知识点
 ## 面试知识点1
-- [测试开发笔试题汇总](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发笔试题汇总.md)
-- [测试开发常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
-- [计算机网络常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/计算机网络常用知识点.md)
-- [MySQL常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用知识点.md)
+- [] [测试开发笔试题汇总](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发笔试题汇总.md)
+- [x] [测试开发常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
+- [x] [计算机网络常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/计算机网络常用知识点.md)
+- [] [MySQL常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用知识点.md)
 
 ## 面试知识点2
-- [操作系统常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/操作系统常用知识点.md)
-- [Python常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Python常用知识点.md)
-- [Java常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Java常用知识点.md)
-- [shell常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/shell常用命令总结.md)
-- [Redis常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Redis常用知识点.md)
+- [] [操作系统常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/操作系统常用知识点.md)
+- [x] [Python常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Python常用知识点.md)
+- [x] [Java常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Java常用知识点.md)
+- [] [shell常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/shell常用命令总结.md)
+- [] [Redis常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Redis常用知识点.md)
 
 ## 面试知识点3
-- [Linux常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Linux常用命令总结.md)
-- [Git常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Git常用命令总结.md)
+- [x] [Linux常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Linux常用命令总结.md)
+- [x] [Git常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Git常用命令总结.md)
 
 
 ## 笔试知识点
-- [Python_ACM模式_输入输出处理](https://github.com/verolls/SDET_interview/blob/main/docs/Python_ACM模式_输入输出处理.md)
-- [MySQL常用命令](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用命令.md)
+- [x] [Python_ACM模式_输入输出处理](https://github.com/verolls/SDET_interview/blob/main/docs/Python_ACM模式_输入输出处理.md)
+- [x] [MySQL常用命令](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用命令.md)
 
 
 <hr/>
