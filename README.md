@@ -2,7 +2,7 @@
 - [测试开发笔试题汇总](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发笔试题汇总.md)
 - [测试开发常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
 - [计算机网络常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/计算机网络常用知识点.md)
-- [数据库常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/数据库常用知识点.md)
+- [MySQL常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用知识点.md)
 
 # 第二梯队
 - [操作系统常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/操作系统常用知识点.md)
