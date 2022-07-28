@@ -1657,6 +1657,15 @@ shared：多个进程共享的内存数
 
 作用：以root权限运行程序
 
+使用格式：`sudo 命令`
+
+举例：
+
+```bash
+# 申请以root权限运行`adduser sally`命令
+
+sudo adduser sally
+```
 
 # 其他
 ## Linux相比windows优势
