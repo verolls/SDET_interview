@@ -299,6 +299,21 @@ ALTER TABLE <表名> ADD <新字段名><数据类型>[约束条件];
 ```sql
 ALTER TABLE student ADD age INT(4);
 ```
+### 数据表添加多个字段
+
+格式：
+
+```sql
+ALTER TABLE <表名> ADD <新字段名><数据类型>[约束条件], ADD <新字段名><数据类型>[约束条件];
+```
+
+
+举例:
+
+```sql
+ALTER TABLE user ADD `description` varchar(850) NOT NULL, ADD `qq` varchar(20) NOT NULL;
+```
+
 
 ### 数据表开头添加字段
 
