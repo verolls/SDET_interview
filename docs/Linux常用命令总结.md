@@ -1732,6 +1732,8 @@ apt list package1
 apt remove package1
 ```
 
+## systemctl
+
 # 其他
 ## Linux相比windows优势
 1. 稳定性高  
