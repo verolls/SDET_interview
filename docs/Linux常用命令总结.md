@@ -1794,7 +1794,17 @@ systemctl restart ssh
 systemctl stop ssh
 ```
 
+## wget
 
+作用：wget是一个下载文件的命令行工具，可以让Linux系统从网络下载文件
+
+使用格式：`wget 链接`
+
+举例：
+
+```bash
+wget https://mirrors.aliyun.com/centos/timestamp.txt
+```
 
 # 其他
 ## Linux相比windows优势
