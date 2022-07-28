@@ -1212,8 +1212,11 @@ tmpfs                   tmpfs       378M     0  378M   0% /run/user/1000
 
 # 网络命令
 ## ifconfig
-作用：查看IP地址的信息  
+
+作用：查看网络接口IP地址的信息  
+
 使用格式：`ifconfig`  
+
 举例：  
 
 ```bash
@@ -1244,6 +1247,29 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
+## ip addr
+
+作用：查看网络接口IP地址的信息  
+
+使用格式：`ip addr`  
+
+举例：
+
+```bash
+veroll@veroll-server:~$ ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:e4:8b:df brd ff:ff:ff:ff:ff:ff
+    inet 192.168.2.121/24 brd 192.168.2.255 scope global dynamic enp0s3
+       valid_lft 29730sec preferred_lft 29730sec
+    inet6 fe80::a00:27ff:fee4:8bdf/64 scope link
+       valid_lft forever preferred_lft forever
+```
 ## ping
 作用：向主机发送ICMP请求  
 使用格式：`ping [选项] IP`  
