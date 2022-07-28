@@ -1355,6 +1355,26 @@ x：显示没有控制终端的进程
 举例：
 
 ```bash
+# 列出所有进程，并显示环境变量，而且显示全格式。推荐使用。通常和grep联合使用
+[root@localhost ~]# ps -ef
+UID         PID   PPID  C STIME TTY          TIME CMD
+root          1      0  0 09:40 ?        00:00:04 /usr/lib/systemd/systemd --switched-root --system --deserialize 22
+root          2      0  0 09:40 ?        00:00:00 [kthreadd]
+root          4      2  0 09:40 ?        00:00:00 [kworker/0:0H]
+root          6      2  0 09:40 ?        00:00:00 [ksoftirqd/0]
+
+上述参数解释：
+UID: 用户的ID ，但输出的是用户名
+PID:进程的ID
+PPID: 父进程的ID
+C: 进程占用CPU的百分比
+STIME: 进程启用到现在的时间
+TTY: 该进程在哪个终端上运行，若与终端无关，则显示？，若为pts/0等，则表示由网络连接主机进程
+TIME: 该进程实际使用CPU运行的时间
+CMD: 命令的名称和参数
+```
+
+```bash
 # 查看系统中所有的进程，使用BSD操作系统格式
 [veroll@MiWiFi-CR8809-srv ~]$ ps aux
 USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
@@ -1417,27 +1437,6 @@ TTY：该进程由哪个终端产生
 TIME：该进程占用CPU的运算时间，注意不是系统时间
 CMD：产生此进程的命令名
 ```
-
-```bash
-# 列出所有进程，并显示环境变量，而且显示全格式。推荐使用
-[root@localhost ~]# ps -ef
-UID         PID   PPID  C STIME TTY          TIME CMD
-root          1      0  0 09:40 ?        00:00:04 /usr/lib/systemd/systemd --switched-root --system --deserialize 22
-root          2      0  0 09:40 ?        00:00:00 [kthreadd]
-root          4      2  0 09:40 ?        00:00:00 [kworker/0:0H]
-root          6      2  0 09:40 ?        00:00:00 [ksoftirqd/0]
-
-上述参数解释：
-UID: 用户的ID ，但输出的是用户名
-PID:进程的ID
-PPID: 父进程的ID
-C: 进程占用CPU的百分比
-STIME: 进程启用到现在的时间
-TTY: 该进程在哪个终端上运行，若与终端无关，则显示？，若为pts/0等，则表示由网络连接主机进程
-TIME: 该进程实际使用CPU运行的时间
-CMD: 命令的名称和参数
-```
-
 
 ```bash
 # 查看所有的ssh进程
@@ -1955,18 +1954,23 @@ veroll@veroll-server:~$ ip addr
 
 ## Linux系统中，你知道哪些可以创建文件的命令？
 - 重定向符号: >
+
 ```bash
 [veroll@localhost demo_creat]$ > testFile1
 [veroll@localhost demo_creat]$ ls
 testFile1
 ```
+
 - touch
+
 ```bash
 [veroll@localhost demo_creat]$ touch testFile2
 [veroll@localhost demo_creat]$ ls
 testFile1  testFile2
 ```
+
 - echo
+
 ```bash
 [veroll@localhost demo_creat]$ echo 'Hello World!' > testFile3
 [veroll@localhost demo_creat]$ ls
@@ -1974,7 +1978,9 @@ testFile1  testFile2  testFile3
 [veroll@localhost demo_creat]$ cat testFile3
 Hello World!
 ```
+
 - printf
+
 ```bash
 [veroll@localhost demo_creat]$ printf 'Hello World!' > testFile4
 [veroll@localhost demo_creat]$ ls
@@ -1982,13 +1988,17 @@ testFile1  testFile2  testFile3  testFile4
 [veroll@localhost demo_creat]$ cat testFile4
 Hello World![veroll@localhost demo_creat]$
 ```
+
 - vi
+
 ```bash
 [veroll@localhost demo_creat]$ vi testFile5
 [veroll@localhost demo_creat]$ ls
 testFile1  testFile2  testFile3  testFile4  testFile5
 ```
+
 - cat
+
 ```bash
 [veroll@localhost demo_creat]$ cat > testFile6
 Hello
@@ -1998,15 +2008,14 @@ testFile1  testFile2  testFile3  testFile4  testFile5  testFile6
 [veroll@localhost demo_creat]$ cat testFile6
 Hello
 World
-
-
 # 如何在当前用户家目录中查找haha.txt文件？
 ```bash
 [veroll@localhost /]$ find ~/haha.txt
 /home/veroll/haha.txt
-```
+ ```
 
 ## 如何动态查看/var/log/messages这个日志文件?
+
 ```bash
 [root@localhost ~]# tail -f /var/log/messages
 Jul 19 12:09:56 localhost dbus[724]: [system] Activating via systemd: service name='net.reactivated.Fprint' unit='fprintd.service'
@@ -2097,3 +2106,37 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 
 ```
 
+## 如何启动一个后台运行的进程？
+
+启动命令时，在命令行的最后加上`&`符号即可。
+
+demo.py文件内容如下：
+```python
+import time
+
+time.sleep(10)
+print('execute a task ...')
+time.sleep(5)
+print('done, wait to proceed...')
+```
+
+后台运行demo.py的结果如下，可以看出，后台运行demo.py文件后，可以使用ps命令查看到python3的进程，当demo.py文件运行完毕后，使用ps命令，就看不到python3的进程了
+
+```bash
+veroll@veroll-server:~$ python3 demo.py &
+[1] 2372
+veroll@veroll-server:~$ ps
+    PID TTY          TIME CMD
+   1403 pts/0    00:00:00 bash
+   2372 pts/0    00:00:00 python3
+   2373 pts/0    00:00:00 ps
+veroll@veroll-server:~$ execute a task ...
+done, wait to proceed...
+
+[1]+  Done                    python3 demo.py
+veroll@veroll-server:~$ ps
+    PID TTY          TIME CMD
+   1403 pts/0    00:00:00 bash
+   2374 pts/0    00:00:00 ps
+
+```
