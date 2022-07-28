@@ -1047,12 +1047,16 @@ test
 
 ## tar
 作用：打包与解打包  
+
+> 注意：tar命令只是把文件、目录打包到一个文件中，并不会压缩文件
+
 使用格式：`tar [选项] [压缩包] [源文件或目录]`  
+
 选项：  
 
 ```bash
--z：压缩和解压缩.tar.gz格式
--j：压缩和解压缩.tar.bz2格式
+-z：打包并压缩和解压缩并解打包.tar.gz格式
+-j：打包并压缩和解压缩并解打包.tar.bz2格式
 -c：打包
 -t：测试，就是不解打包，只是查看包中有哪些文件
 -x：解打包
@@ -1069,11 +1073,11 @@ test
 [veroll@localhost ~]$ tar -cvf test.tar test
 test
 
-# 打包文件为.tar.gz文件
+# 打包并压缩文件为.tar.gz文件
 [veroll@localhost ~]$ tar -zcvf test.tar.gz test
 test
 
-# 打包文件为.tar.bz2文件
+# 打包并压缩文件为.tar.bz2文件
 [veroll@localhost ~]$ tar -jcvf test.tar.bz2 test
 test
 
@@ -1093,15 +1097,15 @@ test
 [veroll@localhost ~]$ tar -xvf test.tar -C ./tmp
 test
 
-# 解打包.tar.gz文件到指定位置
+# 解压缩并解打包.tar.gz文件到指定位置
 [veroll@localhost ~]$ tar -zxvf test.tar.gz -C ./tmp
 test
 
-# 解打包.tar.bz2文件到指定位置
+# 解压缩并解打包.tar.bz2文件到指定位置
 [veroll@localhost ~]$ tar -jxvf test.tar.bz2 -C ./tmp/
 test
 
-# 将多个文件压缩到一个 tar.gz 文件
+# 将多个文件打包并压缩到一个 tar.gz 文件
 [veroll@localhost test_100]$ tar -zcvf test.tar.gz test{001..100}.txt
 ```
 
@@ -1716,7 +1720,12 @@ sudo adduser sally
 
 作用：Ubuntu安装软件包。在Ubuntu上，安装软件通常使用 apt(Advanced Packaging Tool) 软件包管理工具安装。apt能够从指定的apt源服务器自动下载安装包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无需繁琐的一次次下载、安装。
 
-使用格式：(root权限才可以下载，如果当前不是root用户，需要在命令前加上`sudo`再执行，如`sudo apt install package1`)
+使用格式：`apt [选项]`
+
+
+>(root权限才可以下载，如果当前不是root用户，需要在命令前加上`sudo`再执行，如`sudo apt install package1`)
+
+举例：
 
 ```bash
 # 安装指定安装包package1
@@ -1733,6 +1742,28 @@ apt remove package1
 ```
 
 ## systemctl
+
+作用：Linux上有些软件程序是以服务的形式安装的，比如 SSH 服务、 MySQL服务、 nginx服务等。使用命令 systemctl 来 启动、重启、关闭 这些服务。
+
+使用格式：`systemctl [选项] [服务]`
+
+举例：
+
+```bash
+#查看 服务 ssh 状态
+systemctl status ssh
+
+#启动 服务 ssh
+systemctl start ssh
+
+#重启 服务 ssh
+systemctl restart ssh
+
+#关闭 服务 ssh
+systemctl stop ssh
+```
+
+
 
 # 其他
 ## Linux相比windows优势
