@@ -399,6 +399,23 @@ STEP6：LIMIT 排序过后，限制展示条数
 参考：https://blog.csdn.net/weixin_43876778/article/details/113811672
 ```
 
+## MySQL常用函数
+
+函数名称	|作用
+--|--
+MAX	|查询指定列的最大值
+MIN	|查询指定列的最小值
+COUNT|	统计查询结果的行数
+SUM	|求和，返回指定列的总和
+AVG	|求平均值，返回指定列数据的平均值
+ABS	|求绝对值
+SQRT|	求二次方根
+MOD	|求余数
+CEIL |两个函数功能相同，都是返回不小于参数的最小整数，即向上取整
+FLOOR|	向下取整，返回值转化为一个BIGINT
+ROUND	|对所传参数进行四舍五入
+
+
 ## SELECT：查询数据表
 在 MySQL 中，可以使用 SELECT 语句来查询数据。查询数据是指从数据库中根据需求，使用不同的查询方式来获取不同的数据，是使用频率最高、最重要的操作。
 
@@ -795,7 +812,7 @@ WHERE login_date IS NOT NULL;
 
 ## GROUP BY：分组查询
 
-GROUP BY 关键字可以根据一个或多个字段对查询结果进行分组。
+GROUP BY 关键字可以根据一个或多个字段对查询结果进行分组。经常和 SUM 、 COUNT 一起使用。
 
 格式：
 
@@ -808,6 +825,22 @@ GROUP BY  <字段名>
 - “字段名”表示需要分组的字段名称，多个字段时用逗号隔开。
 
 举例：
+
+统计各个学生参加了几门考试
+
+```sql
+SELECT name, COUNT(course)
+FROM grade_table
+GROUP BY name
+```
+
+得到各个学生的考试总分
+
+```sql
+SELECT name, SUM(score)
+FROM grade_table
+GROUP BY name
+```
 
 根据 tb_students_info 表中的 sex 字段进行分组查询
 
