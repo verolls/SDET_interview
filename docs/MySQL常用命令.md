@@ -1186,9 +1186,103 @@ WHERE course_id=4;
 
 # MySQL常见面试题
 
+## 分组计算每个学校每种性别的用户数、30天内平均活跃天数和平均发帖数量。
+
+用户信息表：user_profile，简况如下：
+```sql
+drop table if exists user_profile;
+CREATE TABLE `user_profile` (
+`id` int NOT NULL,
+`device_id` int NOT NULL,
+`gender` varchar(14) NOT NULL,
+`age` int ,
+`university` varchar(32) NOT NULL,
+`gpa` float,
+`active_days_within_30` float,
+`question_cnt` float,
+`answer_cnt` float
+);
+INSERT INTO user_profile VALUES(1,2138,'male',21,'北京大学',3.4,7,2,12);
+INSERT INTO user_profile VALUES(2,3214,'male',null,'复旦大学',4.0,15,5,25);
+INSERT INTO user_profile VALUES(3,6543,'female',20,'北京大学',3.2,12,3,30);
+INSERT INTO user_profile VALUES(4,2315,'female',23,'浙江大学',3.6,5,1,2);
+INSERT INTO user_profile VALUES(5,5432,'male',25,'山东大学',3.8,20,15,70);
+INSERT INTO user_profile VALUES(6,2131,'male',28,'山东大学',3.3,15,7,13);
+INSERT INTO user_profile VALUES(7,4321,'male',28,'复旦大学',3.6,9,6,52);
+```
+
+现在运营想要对每个学校不同性别的用户活跃情况和发帖数量进行分析，请分别计算出每个学校每种性别的用户数、30天内平均活跃天数和平均发帖数量。
+
+解答：
+
+```sql
+SELECT
+    gender,
+    university,
+    count(gender) AS user_num,
+    round(avg(active_days_within_30), 1) AS avg_active_day,
+    round(avg(question_cnt), 1) AS avg_question_cnt
+FROM user_profile
+GROUP BY gender, university
+```
+
+## 统计每个学校的答过题的用户的平均答题数
+
+有一个用户信息表 user_profile 和答题情况明细表 question_practice_detail 简况如下：
+
+```sql
+drop table if exists `user_profile`;
+drop table if  exists `question_practice_detail`;
+CREATE TABLE `user_profile` (
+`device_id` int NOT NULL,
+`gender` varchar(14) NOT NULL,
+`age` int ,
+`university` varchar(32) NOT NULL,
+`gpa` float,
+`active_days_within_30` int
+);
+CREATE TABLE `question_practice_detail` (
+`device_id` int NOT NULL,
+`question_id`int NOT NULL,
+`result` varchar(32) NOT NULL
+);
+
+INSERT INTO user_profile VALUES(2138,'male',21,'北京大学',3.4,7);
+INSERT INTO user_profile VALUES(3214,'male',null,'复旦大学',4.0,15);
+INSERT INTO user_profile VALUES(6543,'female',20,'北京大学',3.2,12);
+INSERT INTO user_profile VALUES(2315,'female',23,'浙江大学',3.6,5);
+INSERT INTO user_profile VALUES(5432,'male',25,'山东大学',3.8,20);
+INSERT INTO user_profile VALUES(2131,'male',28,'山东大学',3.3,15);
+INSERT INTO user_profile VALUES(4321,'male',28,'复旦大学',3.6,9);
+INSERT INTO question_practice_detail VALUES(2138,111,'wrong');
+INSERT INTO question_practice_detail VALUES(3214,112,'wrong');
+INSERT INTO question_practice_detail VALUES(3214,113,'wrong');
+INSERT INTO question_practice_detail VALUES(6543,111,'right');
+INSERT INTO question_practice_detail VALUES(2315,115,'right');
+INSERT INTO question_practice_detail VALUES(2315,116,'right');
+INSERT INTO question_practice_detail VALUES(2315,117,'wrong');
+INSERT INTO question_practice_detail VALUES(5432,118,'wrong');
+INSERT INTO question_practice_detail VALUES(5432,112,'wrong');
+INSERT INTO question_practice_detail VALUES(2131,114,'right');
+INSERT INTO question_practice_detail VALUES(5432,113,'wrong');
+```
+
+运营想要了解每个学校答过题的用户平均答题数量(保留四位小数)情况，请你取出数据。
+
+解答：
+
+```sql
+SELECT
+    u.university,
+    round(count(q.question_id) / count(DISTINCT q.device_id), 4) AS avg_answer_cnt
+FROM user_profile AS u RIGHT JOIN question_practice_detail AS q ON u.device_id = q.device_id
+GROUP BY university
+```
+
 ## 查找入职员工时间排名倒数第三的员工所有信息
 
 有一个员工employees表简况如下:
+
 ```sql
 
 drop table if exists  `employees` ; 
