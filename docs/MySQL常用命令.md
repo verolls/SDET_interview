@@ -368,10 +368,6 @@ DROP TABLE [IF EXISTS] 表名1 [ ,表名2, 表名3 ...]
 ```sql
  DROP TABLE tb_emp3;
 ```
-
-## 数据表中添加字段
-
-
 # MySQL操作表中数据
 
 ## MySQL查询语句书写顺序
