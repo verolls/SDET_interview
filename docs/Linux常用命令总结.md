@@ -2032,6 +2032,12 @@ Jul 19 12:10:01 localhost systemd: Removed slice User Slice of root.
 # Ctrl+C退出动态查看
 ```
 
+## 如何终止进程？
+
+如果是前台进程，可以使用`Ctrl+C`终止。
+
+如果是后台进程，可以使用 `kill -9 PID`命令，详细步骤参考问题[如何查询出vim这个进程，并杀掉这个进程？]()
+
 ## 如何查询出vim这个进程，并杀掉这个进程？
 ```bash
 # 获取进程PID
