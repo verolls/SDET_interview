@@ -1709,8 +1709,27 @@ shared：多个进程共享的内存数
 
 ```bash
 # 申请以root权限运行`adduser sally`命令
-
 sudo adduser sally
+```
+
+## apt
+
+作用：Ubuntu安装软件包。在Ubuntu上，安装软件通常使用 apt(Advanced Packaging Tool) 软件包管理工具安装。apt能够从指定的apt源服务器自动下载安装包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无需繁琐的一次次下载、安装。
+
+使用格式：(root权限才可以下载，如果当前不是root用户，需要在命令前加上`sudo`再执行，如`sudo apt install package1`)
+
+```bash
+# 安装指定安装包package1
+apt install package1
+
+# 显示所有已经安装的程序包
+apt list --installed
+
+# 显示指定程序包package1的安装情况
+apt list package1
+
+# 删除程序包package1
+apt remove package1
 ```
 
 # 其他
