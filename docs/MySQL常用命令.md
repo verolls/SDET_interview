@@ -1,5 +1,32 @@
 # MySQL数据库基本操作
 
+## SHOW DATABASES：查看数据库
+
+格式：
+
+```sql
+SHOW DATABASES [LIKE '数据库名'];
+```
+
+含义：
+
+- LIKE 从句是可选项，用于匹配指定的数据库名称。LIKE 从句可以部分匹配，也可以完全匹配。
+- 数据库名由单引号' '包围。
+
+举例：
+
+列出当前用户可查看的所有数据库：
+
+```sql
+SHOW DATABASES;
+```
+
+使用 LIKE 从句，查看名字中包含 test 的数据库：
+
+```sql
+SHOW DATABASES LIKE '%test%';
+```
+
 ## CREAT DATABASE：创建数据库
 
 格式：
@@ -28,34 +55,6 @@ CREATE DATABASE [IF NOT EXISTS] <数据库名>
 ```sql
 CREATE DATABASE test_db;
 ```
-
-## SHOW DATABASES：查看数据库
-
-格式：
-
-```sql
-SHOW DATABASES [LIKE '数据库名'];
-```
-
-含义：
-
-- LIKE 从句是可选项，用于匹配指定的数据库名称。LIKE 从句可以部分匹配，也可以完全匹配。
-- 数据库名由单引号' '包围。
-
-举例：
-
-列出当前用户可查看的所有数据库：
-
-```sql
-SHOW DATABASES;
-```
-
-使用 LIKE 从句，查看名字中包含 test 的数据库：
-
-```sql
-SHOW DATABASES LIKE '%test%';
-```
-
 ## USE：选择数据库
 
 USE 语句用来完成一个数据库到另一个数据库的跳转。当用 CREATE DATABASE 语句创建数据库之后，该数据库不会自动成为当前数据库，需要用 USE 来指定当前数据库。
@@ -189,7 +188,7 @@ ALTER TABLE <表名> [修改选项]
 - CHARACTER SET <字符集名>
 - COLLATE <校对规则名> 
 
-### 修改表名
+### RENAME TO：修改表名
 
 格式：
 
@@ -209,7 +208,7 @@ ALTER TABLE <旧表名> RENAME [TO] <新表名>；
 ALTER TABLE student RENAME TO tb_students_info;
 ```
 
-### 修改字段名称
+### CHANGE：修改字段名称
 
 格式：
 
@@ -233,7 +232,7 @@ ALTER TABLE tb_emp1
 CHANGE col1 col3 CHAR(30);
 ```
 
-### 修改字段数据类型
+### MODIFY：修改字段数据类型
 
 格式：
 
@@ -256,7 +255,7 @@ ALTER TABLE tb_emp1
 MODIFY name VARCHAR(30);
 ```
 
-### 删除字段
+### DROP：删除字段
 
 格式：
 
@@ -277,7 +276,7 @@ ALTER TABLE tb_emp1
 DROP col2;
 ```
 
-### 数据表末尾添加字段
+### ADD：数据表末尾添加字段
 
 格式：
 
@@ -299,7 +298,7 @@ ALTER TABLE <表名> ADD <新字段名><数据类型>[约束条件];
 ```sql
 ALTER TABLE student ADD age INT(4);
 ```
-### 数据表添加多个字段
+### ADD：数据表添加多个字段
 
 格式：
 
@@ -315,7 +314,7 @@ ALTER TABLE user ADD `description` varchar(850) NOT NULL, ADD `qq` varchar(20) N
 ```
 
 
-### 数据表开头添加字段
+### ADD FIRST：数据表开头添加字段
 
 格式：
 
@@ -335,7 +334,7 @@ ALTER TABLE <表名> ADD <新字段名> <数据类型> [约束条件] FIRST;
 ALTER TABLE student ADD stuId INT(4) FIRST;
 ```
 
-### 数据表中间位置添加字段
+### ADD AFTER：数据表中间位置添加字段
 
 格式：
 
