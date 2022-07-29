@@ -39,6 +39,7 @@
 - [小牛肉『CS-Wiki』](https://www.cswiki.top/)
 - [阿秀的学习笔记](https://interviewguide.cn/)
 - [小林 x 图解计算机基础](https://xiaolincoding.com/)
+- [cyc2018](www.cyc2018.xyz)
 
 ## Python及自动化测试
 - [白月黑羽](https://www.byhy.net/)
