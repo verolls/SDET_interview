@@ -1,5 +1,4 @@
-# MySQL数据库基本操作
-
+# DDL(Data Definition Language)：数据定义语言
 ## SHOW DATABASES：查看数据库
 
 格式：
@@ -135,7 +134,6 @@ DROP DATABASE [ IF EXISTS ] <数据库名>
 DROP DATABASE test_db_del;
 ```
 
-# MySQL数据表基本操作
 
 ## CREAT TABLE：创建数据表
 
@@ -382,7 +380,7 @@ DROP TABLE [IF EXISTS] 表名1 [ ,表名2, 表名3 ...]
 ```sql
  DROP TABLE tb_emp3;
 ```
-# MySQL操作表中数据
+# DQL(Data Query Language)：数据查询语言
 
 ## MySQL查询语句书写顺序
 
@@ -1089,6 +1087,8 @@ SELECT name FROM tb_students_info
 WHERE course_id = (SELECT id FROM tb_course WHERE course_name = 'Python');
 ```
 
+# DML(Data Manipulation Language)：数据操作语言
+
 ## INSERT：向表中插入数据
 
 使用 INSERT 语句可以向数据库已有的表中插入一行或者多行元组数据。
@@ -1226,6 +1226,11 @@ DELETE FROM tb_courses_new;
 DELETE FROM tb_courses
 WHERE course_id=4;
 ```
+
+# DCL(Data Control Language)：数据控制语言
+
+
+# TCL(Transaction Control Language)：事务控制语言
 
 # MySQL常见面试题
 
