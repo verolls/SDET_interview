@@ -7,7 +7,7 @@
 - [ ] [测试开发笔试题汇总(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发笔试题汇总.md)
 - [ ] [测试开发常用知识点(待补充：自动化测试)](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
 - [x] [计算机网络常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/计算机网络常用知识点.md)
-- [ ] [MySQL常用知识点(进行中)](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用知识点.md)
+- [x] [MySQL常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用知识点.md)
 
 ## 面试知识点2
 - [ ] [操作系统常用知识点(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/操作系统常用知识点.md)
