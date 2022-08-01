@@ -1,402 +1,58 @@
-# DDL(Data Definition Language)：数据定义语言
-## SHOW DATABASES：查看数据库
 
-格式：
-
-```sql
-SHOW DATABASES [LIKE '数据库名'];
-```
-
-含义：
-
-- LIKE 从句是可选项，用于匹配指定的数据库名称。LIKE 从句可以部分匹配，也可以完全匹配。
-- 数据库名由单引号' '包围。
-
-举例：
-
-列出当前用户可查看的所有数据库：
-
-```sql
-SHOW DATABASES;
-```
-
-使用 LIKE 从句，查看名字中包含 test 的数据库：
-
-```sql
-SHOW DATABASES LIKE '%test%';
-```
-
-## CREAT DATABASE：创建数据库
-
-格式：
-
-```sql
-CREATE DATABASE [IF NOT EXISTS] <数据库名>
-[[DEFAULT] CHARACTER SET <字符集名>] 
-[[DEFAULT] COLLATE <校对规则名>];
-```
-
-含义：
-
-- <数据库名>：创建数据库的名称。MySQL 的数据存储区将以目录方式表示 MySQL 数据库，因此数据库名称必须符合操作系统的文件夹命名规则，不能以数字开头，尽量要有实际意义。注意在 MySQL 中不区分大小写。
-- IF NOT EXISTS：在创建数据库之前进行判断，只有该数据库目前尚不存在时才能执行操作。此选项可以用来避免数据库已经存在而重复创建的错误。
-- [DEFAULT] CHARACTER SET：指定数据库的字符集。指定字符集的目的是为了避免在数据库中存储的数据出现乱码的情况。如果在创建数据库时不指定字符集，那么就使用系统的默认字符集。
-- [DEFAULT] COLLATE：指定字符集的默认校对规则。
-
-注意：
-
-- MySQL 不允许在同一系统下创建两个相同名称的数据库。
-
-举例：
-
-创建一个名为 test_db 的数据库
-
-```sql
-CREATE DATABASE test_db;
-```
-## USE：选择数据库
-
-USE 语句用来完成一个数据库到另一个数据库的跳转。当用 CREATE DATABASE 语句创建数据库之后，该数据库不会自动成为当前数据库，需要用 USE 来指定当前数据库。
-
-格式：
-
-```sql
-USE <数据库名>
-```
-
-注意：
-
-- 该语句可以通知 MySQL 把<数据库名>所指示的数据库作为当前数据库。该数据库保持为默认数据库，直到语段的结尾，或者直到遇见一个不同的 USE 语句。 只有使用 USE 语句来指定某个数据库作为当前数据库之后，才能对该数据库及其存储的数据对象执行操作。
-
-举例：
-
-将数据库 test_db 设置为默认数据库
-
-```sql
-USE test_db;
-```
-
-## ALTER DATABASE：修改数据库
-
-在 MySQL 数据库中只能对数据库使用的字符集和校对规则进行修改，数据库的这些特性都储存在 db.opt 文件中。
-
-格式：
-
-```sql
-ALTER DATABASE [数据库名] { 
-[ DEFAULT ] CHARACTER SET <字符集名> |
-[ DEFAULT ] COLLATE <校对规则名>}
-```
-
-含义：
-
-- ALTER DATABASE 用于更改数据库的全局特性。
-- 使用 ALTER DATABASE 需要获得数据库 ALTER 权限。
-- 数据库名称可以忽略，此时语句对应于默认数据库。
-- CHARACTER SET 子句用于更改默认的数据库字符集。
-
-举例：
-
-将数据库 test_db 的指定字符集修改为 gb2312，默认校对规则修改为 gb2312_unicode_ci
-
-```sql
-ALTER DATABASE test_db
-DEFAULT CHARACTER SET gb2312
-DEFAULT COLLATE gb2312_chinese_ci;
-```
-
-## DROP DATABASE：删除数据库
-
-当数据库不再使用时应该将其删除，以确保数据库存储空间中存放的是有效数据。删除数据库是将已经存在的数据库从磁盘空间上清除，清除之后，数据库中的所有数据也将一同被删除。
-
-格式：
-
-```sql
-DROP DATABASE [ IF EXISTS ] <数据库名>
-```
-
-含义：
-
-- <数据库名>：指定要删除的数据库名。
-- IF EXISTS：用于防止当数据库不存在时发生错误。
-- DROP DATABASE：删除数据库中的所有表格并同时删除数据库。使用此语句时要非常小心，以免错误删除。如果要使用 DROP DATABASE，需要获得数据库 DROP 权限。
-
-注意：
-
-- MySQL 安装后，系统会自动创建名为 information_schema 和 mysql 的两个系统数据库，系统数据库存放一些和数据库相关的信息，如果删除了这两个数据库，MySQL 将不能正常工作。
-- 使用 DROP DATABASE 命令时要非常谨慎，在执行该命令后，MySQL 不会给出任何提示确认信息。DROP DATABASE 删除数据库后，数据库中存储的所有数据表和数据也将一同被删除，而且不能恢复。因此最好在删除数据库之前先将数据库进行备份。
-
-举例：
-
-将数据库 test_db_del 从数据库列表中删除
-
-```sql
-DROP DATABASE test_db_del;
-```
-
-
-## CREAT TABLE：创建数据表
-
-创建数据表，指的是在已经创建的数据库中建立新表。
-
-格式：
-
-```sql
-CREATE TABLE <表名> ([表定义选项])[表选项][分区选项];
-```
-
-含义：
-
-- CREATE TABLE：用于创建给定名称的表，必须拥有表CREATE的权限。
-- <表名>：指定要创建表的名称，在 CREATE TABLE 之后给出，必须符合标识符命名规则。表名称被指定为 db_name.tbl_name，以便在特定的数据库中创建表。无论是否有当前数据库，都可以通过这种方式创建。在当前数据库中创建表时，可以省略 db-name。如果使用加引号的识别名，则应对数据库和表名称分别加引号。例如，'mydb'.'mytbl' 是合法的，但 'mydb.mytbl' 不合法。
-- <表定义选项>：表创建定义，由列名（col_name）、列的定义（column_definition）以及可能的空值说明、完整性约束或表索引组成。
-- 默认的情况是，表被创建到当前的数据库中。若表已存在、没有当前数据库或者数据库不存在，则会出现错误。
-
-注意：
-
-- 要创建的表的名称不区分大小写，不能使用SQL语言中的关键字，如DROP、ALTER、INSERT等。
-- 必须指定数据表中每个列（字段）的名称和数据类型，如果创建多个列，要用逗号隔开。
-
-举例：
-
-创建员工表 tb_emp1（数据表属于数据库，在创建数据表之前，应使用语句“USE<数据库>”指定操作在哪个数据库中进行，如果没有选择数据库，就会抛出 No database selected 的错误。）
-
-```sql
-CREATE TABLE tb_emp1
-```
-
-## ALTER TABLE：修改数据表
-
-修改表指的是修改数据库中已经存在的数据表的结构。可以使用 ALTER TABLE 语句来改变原有表的结构，例如增加或删减列、更改原有列类型、重新命名列或表等。
-
-格式：
-
-```sql
-ALTER TABLE <表名> [修改选项]
-```
-
-修改选项：
-
-- ADD COLUMN <列名> <类型>
-- CHANGE COLUMN <旧列名> <新列名> <新列类型>
-- ALTER COLUMN <列名> { SET DEFAULT <默认值> | DROP DEFAULT }
-- MODIFY COLUMN <列名> <类型>
-- DROP COLUMN <列名>
-- RENAME TO <新表名>
-- CHARACTER SET <字符集名>
-- COLLATE <校对规则名> 
-
-### RENAME TO：修改表名
-
-格式：
-
-```sql
-ALTER TABLE <旧表名> RENAME [TO] <新表名>；
-```
-
-含义：
-
-- TO 为可选参数，使用与否均不影响结果。
-
-举例：
-
-使用 ALTER TABLE 将数据表 student 改名为 tb_students_info
-
-```sql
-ALTER TABLE student RENAME TO tb_students_info;
-```
-
-### CHANGE：修改字段名称
-
-格式：
-
-```sql
-ALTER TABLE <表名> CHANGE <旧字段名> <新字段名> <新数据类型>；
-```
-
-含义：
-
-- 旧字段名：指修改前的字段名；
-- 新字段名：指修改后的字段名；
-- 新数据类型：指修改后的数据类型，如果不需要修改字段的数据类型，可以将新数据类型设置成与原来一样，但数据类型不能为空。
-
-
-举例：
-
-使用 ALTER TABLE 修改表 tb_emp1 的结构，将 col1 字段名称改为 col3，同时将数据类型变为 CHAR(30)
-
-```sql
-ALTER TABLE tb_emp1
-CHANGE col1 col3 CHAR(30);
-```
-
-### MODIFY：修改字段数据类型
-
-格式：
-
-```sql
-ALTER TABLE <表名> MODIFY <字段名> <数据类型>
-```
-
-含义：
-
-- 表名：指要修改数据类型的字段所在表的名称；
-- 字段名：指需要修改的字段；
-- 数据类型：指修改后字段的新数据类型。
-
-举例：
-
-使用 ALTER TABLE 修改表 tb_emp1 的结构，将 name 字段的数据类型由 VARCHAR(22) 修改成 VARCHAR(30)
-
-```sql
-ALTER TABLE tb_emp1
-MODIFY name VARCHAR(30);
-```
-
-### DROP：删除字段
-
-格式：
-
-```sql
-ALTER TABLE <表名> DROP <字段名>；
-```
-
-含义：
-
-- “字段名”指需要从表中删除的字段的名称。
-
-举例：
-
-使用 ALTER TABLE 修改表 tb_emp1 的结构，删除 col2 字段
-
-```sql
-ALTER TABLE tb_emp1
-DROP col2;
-```
-
-### ADD：数据表末尾添加字段
-
-格式：
-
-```sql
-ALTER TABLE <表名> ADD <新字段名><数据类型>[约束条件];
-```
-
-含义：
-
-- <表名> 为数据表的名字；
-- <新字段名> 为所要添加的字段的名字；
-- <数据类型> 为所要添加的字段能存储数据的数据类型；
-- [约束条件] 是可选的，用来对添加的字段进行约束。
-
-举例：
-
-使用 ALTER TABLE 语句添加一个 INT 类型的字段 age
-
-```sql
-ALTER TABLE student ADD age INT(4);
-```
-### ADD：数据表添加多个字段
-
-格式：
-
-```sql
-ALTER TABLE <表名> ADD <新字段名><数据类型>[约束条件], ADD <新字段名><数据类型>[约束条件];
-```
-
-
-举例:
-
-```sql
-ALTER TABLE user ADD `description` varchar(850) NOT NULL, ADD `qq` varchar(20) NOT NULL;
-```
-
-
-### ADD FIRST：数据表开头添加字段
-
-格式：
-
-```sql
-ALTER TABLE <表名> ADD <新字段名> <数据类型> [约束条件] FIRST;
-```
-
-含义：
-
-- FIRST 关键字一般放在语句的末尾。
-
-举例：
-
-使用 ALTER TABLE 语句在表的第一列添加 INT 类型的字段 stuId
-
-```sql
-ALTER TABLE student ADD stuId INT(4) FIRST;
-```
-
-### ADD AFTER：数据表中间位置添加字段
-
-格式：
-
-```sql
-ALTER TABLE <表名> ADD <新字段名> <数据类型> [约束条件] AFTER <已经存在的字段名>;
-```
-
-注意：
-
-- AFTER 的作用是将新字段添加到某个已有字段后面。
-- 只能在某个已有字段的后面添加新字段，不能在它的前面添加新字段。
-
-举例：
-
-使用 ALTER TABLE 语句在 student 表中添加名为 stuno，数据类型为 INT 的字段，stuno 字段位于 name 字段的后面
-
-```sql
-ALTER TABLE student ADD stuno INT(11) AFTER name;
-```
-
-## DROP TABLE：删除数据表
-
-在删除表的同时，表的结构和表中所有的数据都会被删除，因此在删除数据表之前最好先备份，以免造成无法挽回的损失。
-
-格式：
-
-```sql
-DROP TABLE [IF EXISTS] 表名1 [ ,表名2, 表名3 ...]
-```
-
-含义：
-
-- 表名1, 表名2, 表名3 ...表示要被删除的数据表的名称。DROP TABLE 可以同时删除多个表，只要将表名依次写在后面，相互之间用逗号隔开即可。
-- IF EXISTS 用于在删除数据表之前判断该表是否存在。如果不加 IF EXISTS，当数据表不存在时 MySQL 将提示错误，中断 SQL 语句的执行；加上 IF EXISTS 后，当数据表不存在时 SQL 语句可以顺利执行，但是会发出警告（warning）。
-
-注意：
-
-- 用户必须拥有执行 DROP TABLE 命令的权限，否则数据表不会被删除。
-- 表被删除时，用户在该表上的权限不会自动删除。
-
-举例：
-
-删除数据表 tb_emp3
-
-```sql
- DROP TABLE tb_emp3;
-```
 # DQL(Data Query Language)：数据查询语言
 
-## MySQL查询语句书写顺序
+在SQL语句中每个关键字都会按照顺序往下执行，而每一步操作，会生成一个虚拟表，最后的虚拟表就是最终结果。
+
+## MySQL 查询语句关键字书写顺序
 
 ```sql
-STEP0: SELECT 选择某些列进行数据展示 [DISTINCT] 需要对结果做独一无二的限定
-STEP1: FROM 考虑选择某数据表 [AS] 取别名
-STEP2: WHERE 在选中的数据表后进行一定条件的筛选
-STEP3：GROUP BY 筛选完后的数据可能需要进行分组
-STEP4：HAVING 分完组后的数据可能需要进行组内筛选
-STEP5：ORDER BY 组也分完了，数据也根据分组筛选完毕，需要进行排序准备待展示了
-STEP6：LIMIT 排序过后，限制展示条数
+SELECT DISTINCT <select_list>
+FROM <left_table>
+<join_type> JOIN <right_table> ON <join_condition>
+WHERE <where_condition>
+GROUP BY <group_by_list>
+WITH{CUBE|ROLLUP}
+HAVING <having_condition>
+ORDER BY <order_by_list>
+LIMIT <limit_number>
 
-参考：https://blog.csdn.net/weixin_43876778/article/details/113811672
+参考：https://blog.csdn.net/ai_shuyingzhixia/article/details/80559155
 ```
 
-## MySQL常用函数
+## MySQL 查询语句关键字执行顺序
+
+```sql
+FROM ： 对FROM左边的表和右边的表计算笛卡尔积，产生虚表VT1；
+ON ： 对虚拟表VT1进行ON筛选，只有那些符合条件的行才会被记录在虚拟表VT2中；
+JOIN ：如果是OUT JOIN，那么将保留表中（如左表或者右表）未匹配的行作为外部行添加到虚拟表VT2中，从而产生虚拟表VT3；
+WHERE ：对虚拟表VT3进行WHERE条件过滤，只有符合的记录才会被放入到虚拟表VT4；
+GROUP BY：根据GROUP BY子句中的列，对虚拟表VT4进行分组操作，产生虚拟表VT5；
+WITH{CUBE|ROLLUP}：对虚拟表VT5进行CUBE或者ROLLUP操作，产生虚拟表VT6；
+HAVING ：对虚拟表VT6进行 HAVING 条件过滤，只有符合的记录才会被插入到虚拟表VT7中；
+SELECT ：执行SELECT操作，选择指定的列，插入到虚拟表VT8中；
+DISTINCT ：对虚拟表VT8中的记录进行去重，产生虚拟表VT9；
+ORDER BY ：将虚拟表VT9中的记录按照进行排序操作，产生虚拟表VT10；
+LIMIT ：取出指定行的记录，产生虚拟表VT11，并将结果返回。
+
+```
+
+## MySQL 单行处理函数
+
+函数名称	|作用
+--|--
+ABS	|求绝对值
+SQRT|	求二次方根
+MOD	|求余数
+CEIL |两个函数功能相同，都是返回不小于参数的最小整数，即向上取整
+FLOOR|	向下取整，返回值转化为一个BIGINT
+ROUND	|对所传参数进行四舍五入
+LENGTH|	计算字符串长度函数，返回字符串的字节长度
+CONCAT|	合并字符串函数，返回结果为连接参数产生的字符串，参数可以使一个或多个
+LOWER|	将字符串中的字母转换为小写
+UPPER|	将字符串中的字母转换为大写
+TRIM|	删除字符串左右两侧的空格
+
+## MySQL 聚合函数(使用了GROUP BY之后才能使用聚合函数)
 
 函数名称	|作用
 --|--
@@ -405,12 +61,6 @@ MIN	|查询指定列的最小值
 COUNT|	统计查询结果的行数
 SUM	|求和，返回指定列的总和
 AVG	|求平均值，返回指定列数据的平均值
-ABS	|求绝对值
-SQRT|	求二次方根
-MOD	|求余数
-CEIL |两个函数功能相同，都是返回不小于参数的最小整数，即向上取整
-FLOOR|	向下取整，返回值转化为一个BIGINT
-ROUND	|对所传参数进行四舍五入
 
 
 ## SELECT：查询数据表
@@ -809,7 +459,7 @@ WHERE login_date IS NOT NULL;
 
 ## GROUP BY：分组查询
 
-GROUP BY 关键字可以根据一个或多个字段对查询结果进行分组。经常和 SUM 、 COUNT 一起使用。
+GROUP BY 关键字可以根据一个或多个字段对查询结果进行分组。经常和聚合函数，例如 SUM 、 COUNT 一起使用。
 
 格式：
 
@@ -1226,6 +876,391 @@ DELETE FROM tb_courses_new;
 DELETE FROM tb_courses
 WHERE course_id=4;
 ```
+
+# DDL(Data Definition Language)：数据定义语言
+## SHOW DATABASES：查看数据库
+
+格式：
+
+```sql
+SHOW DATABASES [LIKE '数据库名'];
+```
+
+含义：
+
+- LIKE 从句是可选项，用于匹配指定的数据库名称。LIKE 从句可以部分匹配，也可以完全匹配。
+- 数据库名由单引号' '包围。
+
+举例：
+
+列出当前用户可查看的所有数据库：
+
+```sql
+SHOW DATABASES;
+```
+
+使用 LIKE 从句，查看名字中包含 test 的数据库：
+
+```sql
+SHOW DATABASES LIKE '%test%';
+```
+
+## CREAT DATABASE：创建数据库
+
+格式：
+
+```sql
+CREATE DATABASE [IF NOT EXISTS] <数据库名>
+[[DEFAULT] CHARACTER SET <字符集名>] 
+[[DEFAULT] COLLATE <校对规则名>];
+```
+
+含义：
+
+- <数据库名>：创建数据库的名称。MySQL 的数据存储区将以目录方式表示 MySQL 数据库，因此数据库名称必须符合操作系统的文件夹命名规则，不能以数字开头，尽量要有实际意义。注意在 MySQL 中不区分大小写。
+- IF NOT EXISTS：在创建数据库之前进行判断，只有该数据库目前尚不存在时才能执行操作。此选项可以用来避免数据库已经存在而重复创建的错误。
+- [DEFAULT] CHARACTER SET：指定数据库的字符集。指定字符集的目的是为了避免在数据库中存储的数据出现乱码的情况。如果在创建数据库时不指定字符集，那么就使用系统的默认字符集。
+- [DEFAULT] COLLATE：指定字符集的默认校对规则。
+
+注意：
+
+- MySQL 不允许在同一系统下创建两个相同名称的数据库。
+
+举例：
+
+创建一个名为 test_db 的数据库
+
+```sql
+CREATE DATABASE test_db;
+```
+## USE：选择数据库
+
+USE 语句用来完成一个数据库到另一个数据库的跳转。当用 CREATE DATABASE 语句创建数据库之后，该数据库不会自动成为当前数据库，需要用 USE 来指定当前数据库。
+
+格式：
+
+```sql
+USE <数据库名>
+```
+
+注意：
+
+- 该语句可以通知 MySQL 把<数据库名>所指示的数据库作为当前数据库。该数据库保持为默认数据库，直到语段的结尾，或者直到遇见一个不同的 USE 语句。 只有使用 USE 语句来指定某个数据库作为当前数据库之后，才能对该数据库及其存储的数据对象执行操作。
+
+举例：
+
+将数据库 test_db 设置为默认数据库
+
+```sql
+USE test_db;
+```
+
+## ALTER DATABASE：修改数据库
+
+在 MySQL 数据库中只能对数据库使用的字符集和校对规则进行修改，数据库的这些特性都储存在 db.opt 文件中。
+
+格式：
+
+```sql
+ALTER DATABASE [数据库名] { 
+[ DEFAULT ] CHARACTER SET <字符集名> |
+[ DEFAULT ] COLLATE <校对规则名>}
+```
+
+含义：
+
+- ALTER DATABASE 用于更改数据库的全局特性。
+- 使用 ALTER DATABASE 需要获得数据库 ALTER 权限。
+- 数据库名称可以忽略，此时语句对应于默认数据库。
+- CHARACTER SET 子句用于更改默认的数据库字符集。
+
+举例：
+
+将数据库 test_db 的指定字符集修改为 gb2312，默认校对规则修改为 gb2312_unicode_ci
+
+```sql
+ALTER DATABASE test_db
+DEFAULT CHARACTER SET gb2312
+DEFAULT COLLATE gb2312_chinese_ci;
+```
+
+## DROP DATABASE：删除数据库
+
+当数据库不再使用时应该将其删除，以确保数据库存储空间中存放的是有效数据。删除数据库是将已经存在的数据库从磁盘空间上清除，清除之后，数据库中的所有数据也将一同被删除。
+
+格式：
+
+```sql
+DROP DATABASE [ IF EXISTS ] <数据库名>
+```
+
+含义：
+
+- <数据库名>：指定要删除的数据库名。
+- IF EXISTS：用于防止当数据库不存在时发生错误。
+- DROP DATABASE：删除数据库中的所有表格并同时删除数据库。使用此语句时要非常小心，以免错误删除。如果要使用 DROP DATABASE，需要获得数据库 DROP 权限。
+
+注意：
+
+- MySQL 安装后，系统会自动创建名为 information_schema 和 mysql 的两个系统数据库，系统数据库存放一些和数据库相关的信息，如果删除了这两个数据库，MySQL 将不能正常工作。
+- 使用 DROP DATABASE 命令时要非常谨慎，在执行该命令后，MySQL 不会给出任何提示确认信息。DROP DATABASE 删除数据库后，数据库中存储的所有数据表和数据也将一同被删除，而且不能恢复。因此最好在删除数据库之前先将数据库进行备份。
+
+举例：
+
+将数据库 test_db_del 从数据库列表中删除
+
+```sql
+DROP DATABASE test_db_del;
+```
+
+
+## CREAT TABLE：创建数据表
+
+创建数据表，指的是在已经创建的数据库中建立新表。
+
+格式：
+
+```sql
+CREATE TABLE <表名> ([表定义选项])[表选项][分区选项];
+```
+
+含义：
+
+- CREATE TABLE：用于创建给定名称的表，必须拥有表CREATE的权限。
+- <表名>：指定要创建表的名称，在 CREATE TABLE 之后给出，必须符合标识符命名规则。表名称被指定为 db_name.tbl_name，以便在特定的数据库中创建表。无论是否有当前数据库，都可以通过这种方式创建。在当前数据库中创建表时，可以省略 db-name。如果使用加引号的识别名，则应对数据库和表名称分别加引号。例如，'mydb'.'mytbl' 是合法的，但 'mydb.mytbl' 不合法。
+- <表定义选项>：表创建定义，由列名（col_name）、列的定义（column_definition）以及可能的空值说明、完整性约束或表索引组成。
+- 默认的情况是，表被创建到当前的数据库中。若表已存在、没有当前数据库或者数据库不存在，则会出现错误。
+
+注意：
+
+- 要创建的表的名称不区分大小写，不能使用SQL语言中的关键字，如DROP、ALTER、INSERT等。
+- 必须指定数据表中每个列（字段）的名称和数据类型，如果创建多个列，要用逗号隔开。
+
+举例：
+
+创建员工表 tb_emp1（数据表属于数据库，在创建数据表之前，应使用语句“USE<数据库>”指定操作在哪个数据库中进行，如果没有选择数据库，就会抛出 No database selected 的错误。）
+
+```sql
+CREATE TABLE tb_emp1
+```
+
+## ALTER TABLE：修改数据表
+
+修改表指的是修改数据库中已经存在的数据表的结构。可以使用 ALTER TABLE 语句来改变原有表的结构，例如增加或删减列、更改原有列类型、重新命名列或表等。
+
+格式：
+
+```sql
+ALTER TABLE <表名> [修改选项]
+```
+
+修改选项：
+
+- ADD COLUMN <列名> <类型>
+- CHANGE COLUMN <旧列名> <新列名> <新列类型>
+- ALTER COLUMN <列名> { SET DEFAULT <默认值> | DROP DEFAULT }
+- MODIFY COLUMN <列名> <类型>
+- DROP COLUMN <列名>
+- RENAME TO <新表名>
+- CHARACTER SET <字符集名>
+- COLLATE <校对规则名> 
+
+### RENAME TO：修改表名
+
+格式：
+
+```sql
+ALTER TABLE <旧表名> RENAME [TO] <新表名>；
+```
+
+含义：
+
+- TO 为可选参数，使用与否均不影响结果。
+
+举例：
+
+使用 ALTER TABLE 将数据表 student 改名为 tb_students_info
+
+```sql
+ALTER TABLE student RENAME TO tb_students_info;
+```
+
+### CHANGE：修改字段名称
+
+格式：
+
+```sql
+ALTER TABLE <表名> CHANGE <旧字段名> <新字段名> <新数据类型>；
+```
+
+含义：
+
+- 旧字段名：指修改前的字段名；
+- 新字段名：指修改后的字段名；
+- 新数据类型：指修改后的数据类型，如果不需要修改字段的数据类型，可以将新数据类型设置成与原来一样，但数据类型不能为空。
+
+
+举例：
+
+使用 ALTER TABLE 修改表 tb_emp1 的结构，将 col1 字段名称改为 col3，同时将数据类型变为 CHAR(30)
+
+```sql
+ALTER TABLE tb_emp1
+CHANGE col1 col3 CHAR(30);
+```
+
+### MODIFY：修改字段数据类型
+
+格式：
+
+```sql
+ALTER TABLE <表名> MODIFY <字段名> <数据类型>
+```
+
+含义：
+
+- 表名：指要修改数据类型的字段所在表的名称；
+- 字段名：指需要修改的字段；
+- 数据类型：指修改后字段的新数据类型。
+
+举例：
+
+使用 ALTER TABLE 修改表 tb_emp1 的结构，将 name 字段的数据类型由 VARCHAR(22) 修改成 VARCHAR(30)
+
+```sql
+ALTER TABLE tb_emp1
+MODIFY name VARCHAR(30);
+```
+
+### DROP：删除字段
+
+格式：
+
+```sql
+ALTER TABLE <表名> DROP <字段名>；
+```
+
+含义：
+
+- “字段名”指需要从表中删除的字段的名称。
+
+举例：
+
+使用 ALTER TABLE 修改表 tb_emp1 的结构，删除 col2 字段
+
+```sql
+ALTER TABLE tb_emp1
+DROP col2;
+```
+
+### ADD：数据表末尾添加字段
+
+格式：
+
+```sql
+ALTER TABLE <表名> ADD <新字段名><数据类型>[约束条件];
+```
+
+含义：
+
+- <表名> 为数据表的名字；
+- <新字段名> 为所要添加的字段的名字；
+- <数据类型> 为所要添加的字段能存储数据的数据类型；
+- [约束条件] 是可选的，用来对添加的字段进行约束。
+
+举例：
+
+使用 ALTER TABLE 语句添加一个 INT 类型的字段 age
+
+```sql
+ALTER TABLE student ADD age INT(4);
+```
+### ADD：数据表添加多个字段
+
+格式：
+
+```sql
+ALTER TABLE <表名> ADD <新字段名><数据类型>[约束条件], ADD <新字段名><数据类型>[约束条件];
+```
+
+
+举例:
+
+```sql
+ALTER TABLE user ADD `description` varchar(850) NOT NULL, ADD `qq` varchar(20) NOT NULL;
+```
+
+
+### ADD FIRST：数据表开头添加字段
+
+格式：
+
+```sql
+ALTER TABLE <表名> ADD <新字段名> <数据类型> [约束条件] FIRST;
+```
+
+含义：
+
+- FIRST 关键字一般放在语句的末尾。
+
+举例：
+
+使用 ALTER TABLE 语句在表的第一列添加 INT 类型的字段 stuId
+
+```sql
+ALTER TABLE student ADD stuId INT(4) FIRST;
+```
+
+### ADD AFTER：数据表中间位置添加字段
+
+格式：
+
+```sql
+ALTER TABLE <表名> ADD <新字段名> <数据类型> [约束条件] AFTER <已经存在的字段名>;
+```
+
+注意：
+
+- AFTER 的作用是将新字段添加到某个已有字段后面。
+- 只能在某个已有字段的后面添加新字段，不能在它的前面添加新字段。
+
+举例：
+
+使用 ALTER TABLE 语句在 student 表中添加名为 stuno，数据类型为 INT 的字段，stuno 字段位于 name 字段的后面
+
+```sql
+ALTER TABLE student ADD stuno INT(11) AFTER name;
+```
+
+## DROP TABLE：删除数据表
+
+在删除表的同时，表的结构和表中所有的数据都会被删除，因此在删除数据表之前最好先备份，以免造成无法挽回的损失。
+
+格式：
+
+```sql
+DROP TABLE [IF EXISTS] 表名1 [ ,表名2, 表名3 ...]
+```
+
+含义：
+
+- 表名1, 表名2, 表名3 ...表示要被删除的数据表的名称。DROP TABLE 可以同时删除多个表，只要将表名依次写在后面，相互之间用逗号隔开即可。
+- IF EXISTS 用于在删除数据表之前判断该表是否存在。如果不加 IF EXISTS，当数据表不存在时 MySQL 将提示错误，中断 SQL 语句的执行；加上 IF EXISTS 后，当数据表不存在时 SQL 语句可以顺利执行，但是会发出警告（warning）。
+
+注意：
+
+- 用户必须拥有执行 DROP TABLE 命令的权限，否则数据表不会被删除。
+- 表被删除时，用户在该表上的权限不会自动删除。
+
+举例：
+
+删除数据表 tb_emp3
+
+```sql
+ DROP TABLE tb_emp3;
+```
+
+
 
 # DCL(Data Control Language)：数据控制语言
 
