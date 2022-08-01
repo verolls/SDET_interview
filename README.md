@@ -19,6 +19,7 @@
 ## 面试知识点3
 - [x] [Linux常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Linux常用命令总结.md)
 - [x] [Git常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Git常用命令总结.md)
+- [ ] [Jenkins常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Jenkins常用知识点.md)
 
 
 ## 笔试知识点
