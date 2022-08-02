@@ -7,11 +7,11 @@
 - [ ] [测试开发笔试题汇总(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发笔试题汇总.md)
 - [ ] [测试开发常用知识点(待补充：自动化测试)](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
 - [x] [计算机网络常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/计算机网络常用知识点.md)
-- [x] [MySQL常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用知识点.md)
+- [ ] [MySQL常用知识点(待补充：零散知识点)](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用知识点.md)
 
 ## 面试知识点2
-- [ ] [操作系统常用知识点(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/操作系统常用知识点.md)
-- [ ] [Python常用知识点(待补充：面对对象知识点)](https://github.com/verolls/SDET_interview/blob/main/docs/Python常用知识点.md)
+- [ ] [操作系统常用知识点(进行中)](https://github.com/verolls/SDET_interview/blob/main/docs/操作系统常用知识点.md)
+- [ ] [Python常用知识点(待补充：高级面对对象知识点)](https://github.com/verolls/SDET_interview/blob/main/docs/Python常用知识点.md)
 - [x] [Java常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Java常用知识点.md)
 - [ ] [shell常用命令总结(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/shell常用命令总结.md)
 - [ ] [Redis常用知识点(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/Redis常用知识点.md)
