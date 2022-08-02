@@ -85,13 +85,6 @@ k2:5
 
 ## 讲一下Python的垃圾回收机制？
 - 垃圾回收是 Python 内存管理的一种方式
-- 内存泄露是服务端不愿看到的一种情况，服务端一般是 7*24 小时运行的，如果一直存在内存泄露的情况，就会导致机器真正可用的内存资源很少，最后导致服务端性能下降
-- 内存泄露是服务端代码设计有问题，导致一些不再使用的内存没有及时回收，而服务端又无法控制这块内存，导致整体可用内存减少
-- 引用计数是垃圾回收充分不必要条件，当一个对象被引用的次数为0时，该对象就会被垃圾回收，可以通过 sys.getrefcount() 来查看对象的引用计数
-- 引用计数不能自动处理循环引用、引用环的情况，因为循环引用需要通过不可达判定才能确认是否能回收，但可以手动调用垃圾回收来处理（gc.collect）
-- 垃圾回收还提供了另外两种自动回收方式：标记清除和分代收集，可以有效处理循环引用、引用环的情况
-- 分代回收一般分为三代，新生的对象更容易被垃圾回收，老对象更容易存活，当每一代到达自动垃圾回收的阈值之后，就会启动垃圾回收
-- 调试内存泄露，可以通过 objgraph 包的 show_refs、backrefs 方法查看变量引用调用图
 
 ## 直接赋值、浅拷贝和深拷贝有什么区别？
 在对不可变对象或指向不可变对象的变量进行直接赋值、浅拷贝、深拷贝给新变量的操作时，都是将新变量直接指向不可变对象。
@@ -365,8 +358,6 @@ print(n)
 '''
 ```
 
-## 什么是生成器？
-
 ## Python 的迭代器和生成器的区别
 - 元组、集合、字典、列表都是可迭代对象，如果一个对象实现了 \_\_iter\_\_ 方法就是可迭代对象
 - 可迭代对象可以通过 for 循环进行迭代，也可以通过 Iterable 来判断是否为可迭代对象
@@ -398,6 +389,8 @@ print('result:', a(1))
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/dcac42061d7149a190961845a7e2be48.png)
 
 ## 闭包的用途是什么？
+
+
 ## 什么是装饰器？
 - 通过装饰器函数，来修改原函数的一些功能，使得原函数不需要修改。让原来函数执行之前和执行完后分别运行某些代码
 - 将函数作为参数传递给另一个函数
@@ -447,22 +440,408 @@ class test_singleton(object):
 
 # 面向对象编程
 
+## 类、对象、属性、方法都是什么意思？
+
+- 类：可以理解是一个模板，通过它可以创建出无数个具体实例。
+- 对象：类并不能直接使用，通过类创建出的实例（又称对象）才能使用。
+- 属性：类中的所有变量称为属性。
+- 方法：类中的所有函数通常称为方法。
+
 ## \_\_init\_\_(self)中的self是做什么用的？
 Python解释器在创建类的实例化对象时，会调用类的__init__方法，在调用__init__方法时，会将实例对象传递给self参数。  
+
 因此self参数变量指向的是实例对象。
 
-## Python中类方法、静态方法和实例方法你了解吗？
+## 什么是类对象？什么是实例对象？
+
+**类对象**就是类本身，**实例对象**是由类实例化出来的对象。
+
+```python
+In [1]: class Person():
+   ...:     def __init__(self):
+   ...:         pass
+   ...:
+
+In [2]: print(Person)
+<class '__main__.Person'>
+
+In [3]: p1 = Person()
+
+In [4]: print(p1)
+<__main__.Person object at 0x0000022E52AB0D30>
+```
+
+上面代码中的 Person 就是**类对象**， p1 则是这个类的**实例对象**。
+
+**类对象**支持两种操作：属性方法引用、实例化。
+
+```python
+In [5]: class Person():
+   ...:     name = "xxx"
+   ...:     age = 20
+   ...:
+   ...:     def __init__(self):
+   ...:         pass
+   ...:
+# 类对象访问类属性
+In [6]: Person.name
+Out[6]: 'xxx'
+
+# 类对象访问类属性
+In [7]: Person.age
+Out[7]: 20
+
+# 类对象实例化
+In [8]: p1 = Person()
+```
+
+**实例对象**支持一种操作：属性方法引用。
+
+```python
+# 实例对象访问类属性
+In [9]: print(p1.name, p1.age)
+Out[9]: xxx 20
+```
+
+## 什么是Python的类属性(类变量)、实例属性(实例变量)、局部变量？
+
+类属性(类变量)：
+
+- 定义：类体中、所有函数之外定义的属性，是类对象所拥有的属性。
+- 特点：所有类的实例对象都同时共享类属性，类属性是公有的，类属性在内存中只存在一个副本。
+- 访问性：在类外，可以通过类对象名访问，也可以通过实例对象名访问。但类属性只有通过类对象进行修改，实例对象无法修改类属性，通过实例对象给类属性进行赋值时，实际上是给实例对象添加了一条新的属性。
+
+```python
+In [26]: class Person():	
+    ...:     name = "xxx"	# 类属性
+    ...:     age = 20		# 类属性
+    ...:
+    ...:     def __init__(self):
+    ...:        pass
+
+In [27]: p1 = Person()
+
+# 类对象名访问类属性
+In [28]: print(Person.name, Person.age)
+Out[28]: xxx 20
+
+# 实例对象名访问类属性
+In [29]: print(p1.name, p1.age)
+Out[29]: xxx 20
+
+# 尝试通过实例对象修改类属性
+In [30]: p1.name = 'yyy'
+
+# 实例对象无法修改类对象，实际上是给实例对象添加了一条新的name属性
+In [31]: print(Person.name, p1.name)
+Out[31]: 'xxx' 'yyy'
+```
 
 
-## Python中类属性和实例属性了解吗？
 
-## 什么是继承？
+实例属性(实例变量)：
+
+- 定义：类体中，所有函数内部，以“self.属性名=属性值”的方式定义的属性,是实例对象独有的属性。
+- 特点：通过某个实例对象修改实例属性的值，不会影响类的其它实例对象，更不会影响同名的类属性。
+- 访问性：实例属性只能通过实例对象名访问，无法通过类对象名访问。
+
+```python
+In [26]: class Person(object):	
+    ...:     name = "xxx"	# 类属性
+    ...:     age = 20		# 类属性
+    ...:
+    ...:     def __init__(self):
+    ...:        self.addr = "China"		# 实例属性
+
+In [27]: p1 = Person()
+
+# 实例对象名访问类属性
+In [28]: p1.addr
+Out[28]: 'China'
+
+# 类对象名无法访问类属性
+In [29]: Person.addr
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-29-0ed446385bbc> in <module>
+----> 1 Person.addr
+```
+
+局部变量：
+
+- 定义：类体中，所有函数内部，以“变量名=变量值”的方式定义的变量。
+- 特点：局部变量只能用于所在函数中，函数执行完成后，局部变量也会被销毁。
+- 访问性：局部变量只能在函数内被访问，无法通过函数外部访问。
+
+```python
+In [26]: class Person():	
+    ...:     name = "xxx"	            # 类属性
+    ...:     age = 20		            # 类属性
+    ...:
+    ...:     def __init__(self):
+    ...:        self.addr = "China"		# 实例属性
+    ...:     
+    ...:     def count(self,money):
+    ...:        sale = 0.8*money        # 局部变量
+    ...:        print("优惠后的价格为：",sale)
+```
+
+## 什么是Python的类方法、静态方法和实例方法？
+
+实例方法：
+
+  - 定义：类体中，不用任何修饰的方法。
+  - 特点：至少要包含一个 self 参数，用于接收调用此方法的实例对象。
+  - 访问性：可以使用实例对象名直接调用；也可以使用类对象名调用，但此方式需要手动给 self 参数传递实例对象名。
+
+```python
+In [42]: class Person(object):
+    ...:     name = "xxx"
+    ...:     age = 20
+    ...:
+    ...:     def __init__(self):
+    ...:         self.addr = "China"
+    ...:
+    ...:     def get_addr(self):
+    ...:         return self.addr
+    ...:
+
+In [43]: p = Person()
+# 实例对象名直接调用实例方法
+In [44]: p.get_addr()
+Out[44]: 'China'
+# 类对象名无法直接调用实例方法，需要手动将实例对象名传递给 self 参数
+In [45]: Person.get_addr()		
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-45-c70e23dcb313> in <module>
+----> 1 Person.get_addr()
+
+TypeError: get_addr() missing 1 required positional argument: 'self'
+# 类对象名调用实例方法时，需要手动将实例对象名传递给 self 参数
+In [46]: Person.get_addr(p)
+Out[46]: 'China'
+```
+
+类方法：
+  
+  - 定义：类体中，采用 @classmethod 修饰的方法。
+  - 特点：至少要包含一个 cls 参数，用于接收调用此方法的类本身。调用类方法时，无需显式为 cls 参数传参。类方法可以对类属性进行修改, 这样的话，实例对象通过调用类方法也可以对类属性进行修改。
+  - 访问性：可以使用类对象名直接调用(推荐)；也可以使用实例对象名来调用。
+
+```python
+In [39]: class Person():
+    ...:     name = "xxx"
+    ...:     age = 20
+    ...:
+    ...:     def __init__(self):
+    ...:         self.addr = "China"
+    ...:
+    ...:     @classmethod
+    ...:     def set_name(cls, value):
+    ...:         cls.name = value
+    ...:
+# 类对象名访问类方法(推荐)
+In [40]: Person.set_name("yyy")
+
+In [41]: Person.name
+Out[41]: 'yyy'
+
+In [42]: p1 = Person()
+
+# 实例对象名访问类方法。通过类方法可以实现：实例对象修改类属性
+In [43]: p1.set_name("zzz")
+
+In [44]: Person.name
+Out[44]: 'zzz'
+```
 
 
-## 什么是多态？
+静态方法：
+
+  - 定义：类体中，采用 @staticmethod 修饰的方法。
+  - 特点：静态方法，其实就是我们学过的函数，和函数唯一的区别是，静态方法定义在类这个空间（类命名空间）中，而函数则定义在程序所在的空间（全局命名空间）中。静态方法没有类似 self、cls 这样的特殊参数，因此 Python 解释器不会对它包含的参数做任何类或对象的绑定。也正因为如此，类的静态方法中无法调用任何类属性和类方法。
+  - 访问性：可以使用类对象名调用；也可以使用实例对象名调用。
+  - 使用场景：如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务。
+
+```python
+In [54]: class Person(object):
+    ...:     name = "xxx"
+    ...:     age = 20
+    ...:
+    ...:     def __init__(self):
+    ...:         self.addr = "China"
+    ...:
+    ...:     @staticmethod
+    ...:     def sleep(sec):
+    ...:         """暂停几秒"""
+    ...:         time.sleep(sec)
+    ...: 
+    ...:     def do_somethings(self):
+    ...:         print("do ......")
+    ...:         self.sleep(5)
+    ...:         print("end ....")
+    ...:
+
+In [55]: p = Person()
+#使用类对象名调用静态方法
+In [56]: Person.sleep(2)
+#使用实例对象名调用静态方法
+In [57]: p.sleep(2)
+```
 
 
-## 什么是鸭子类型？
+## 类属性、实例属性、类方法、实例方法、静态方法的访问性总结
+
+ - 	|类对象是否可以调用|	实例对象是否可以调用
+:--:|:--:|:--:|
+类属性	|是	|是(可以调用但是无法直接修改)
+实例属性	|否	|是
+类方法	|是	|是
+实例方法	|是(可以调用，但是要传入一个实例对象)	|是
+静态方法	|是	|是
+
+## Python面对对象的三大特征是什么？
+
+封装、继承、多态。
+
+- 封装：在设计类时，刻意地将一些属性和方法隐藏在类的内部，这样在使用此类时，将无法直接以“实例对象.属性名”（或者“实例对象.方法名(参数)”）的形式调用这些属性（或方法），而只能用未隐藏的类方法间接操作这些隐藏的属性和方法。   
+- 继承：继承机制经常用于创建和现有类功能类似的新类，又或是新类只需要在现有类基础上添加一些成员（属性和方法），但又不想直接将现有类代码复制给新类。通过使用继承这种机制，可以实现类的重复使用。Python 的继承是多继承机制，即一个子类可以同时拥有多个直接父类。
+- 多态：同一个函数，传递不同参数，可以实现不同的功能。
+
+
+## Python 如何实现封装？
+
+Python 类中的属性和方法有两种属性：公有的、私有的：
+公有：公有属性的类属性和类方法，在类的外部、类内部以及子类中，都可以正常访问；
+私有：私有属性的类属性和类方法，只能在本类内部使用，类的外部以及子类都无法使用。
+
+默认情况下，Python 类中的属性和方法都是公有的，如果类中的属性和方法，其名称以双下划线`__`开头，则该属性（方法）为私有属性（私有方法）。
+>除此之外，还可以定义以单下划线“_”开头的类属性或者类方法（例如 _name、_display(self)），这种类属性和类方法通常被视为私有属性和私有方法，虽然它们也能通过类对象正常访问。
+
+代码示例：
+```python
+class Student():
+
+    def __init__(self, name, score):
+        self.__name = name
+        self.__score = score
+
+    def print_score(self):
+        print('%s: %s' % (self.__name, self.__score))
+
+    def get_name(self):
+        return self.__name
+
+    def get_score(self):
+        return self.__score
+
+    def set_score(self, score):
+        self.__score = score
+```
+上述代码中，无法从外部访问`实例变量.__name`和`实例变量.__score`。确保了外部代码不能随意修改对象内部的状态，这样通过访问限制的保护，代码更加健壮。如果外部代码要获取name和score，可以使用`get_name`和`get_score`方法，如果外部代码要修改score，可以使用`set_score`方法。
+
+## Python如何实现继承？
+
+Python 中，实现继承的类称为子类，被继承的类称为父类（也可称为基类、超类）。子类继承父类时，只需在定义子类时，将父类放在子类之后的圆括号里即可。
+
+举例：
+
+Form 类继承 Shape 类。当 Form 类对象调用 draw() 方法时，Python 解释器会先去 Form 中找以 draw 为名的方法，如果找不到，它还会自动去 Shape 类中找。
+
+```python
+class Shape:
+    def draw(self,content):
+        print("画",content)
+class Form(Shape):
+    def area(self):
+        print("此图形的面积为...")
+```
+
+## 重写是什么意思？
+
+重写指的是对类中已有方法的内部实现进行修改。重写发生在继承中，当父类中的某个方法不完全适用于子类时，就需要在子类中重写父类的这个方法。
+
+举例：
+
+```python
+class Bird:
+    #鸟有翅膀
+    def isWing(self):
+        print("鸟有翅膀")
+    #鸟会飞
+    def fly(self):
+        print("鸟会飞")
+
+# 鸵鸟是鸟的子类，但鸵鸟不会飞，即鸟的fly()方法不适用于鸵鸟，因此在鸵鸟类中，需要对fly()方法进行重写
+class Ostrich(Bird):
+    # 重写Bird类的fly()方法
+    def fly(self):
+        print("鸵鸟不会飞")
+
+# 创建Ostrich对象
+ostrich = Ostrich()
+#调用 Ostrich 类中重写的 fly() 类方法
+ostrich.fly()
+
+#调用 Bird 类中的 fly() 方法(调用被重写的父类中的方法)
+Bird.fly(ostrich)
+
+'''
+输出
+鸵鸟不会飞
+鸟会飞
+'''
+```
+
+## Python 如何实现多态？
+
+举例：
+
+```python
+class gradapa(object):
+    def __init__(self,money):
+        self.money = money
+    def p(self):
+        print("this is gradapa")
+ 
+class father(gradapa):
+    def __init__(self,money,job):
+        super().__init__(money)
+        self.job = job
+    def p(self):
+        print("this is father,我重写了父类的方法")
+ 
+class mother(gradapa): 
+    def __init__(self, money, job):
+        super().__init__(money)
+        self.job = job
+ 
+    def p(self):
+         print("this is mother,我重写了父类的方法")
+         
+#定义一个函数，函数调用类中的p()方法
+def fc(obj): 
+    obj.p()
+    return
+
+gradapa1 = gradapa(3000) 
+father1 = father(2000,"工人")
+mother1 = mother(1000,"老师")
+
+fc(gradapa1)            #这里的多态性体现是向同一个函数，传递不同参数后，可以实现不同功能.
+fc(father1)
+fc(mother1)
+
+'''
+输出：
+this is gradapa
+this is father,我重写了父类的方法
+this is mother,我重写了父类的方法
+'''
+```
+
+
 
 # 面向对象高级编程
 
