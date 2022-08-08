@@ -6,7 +6,6 @@
 ## 面试知识点1
 
 - [ ] [测试开发常用知识点(待补充：自动化测试)](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
-- [ ] [Selenium常用知识](https://github.com/verolls/SDET_interview/blob/main/docs/Selenium常用知识.md)
 - [x] [计算机网络常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/计算机网络常用知识点.md)
 - [ ] [MySQL 常用知识点(待补充：零散知识点)](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用知识点.md)
 
@@ -16,7 +15,7 @@
 - [ ] [Python 常用知识点(待补充：高级面对对象知识点)](https://github.com/verolls/SDET_interview/blob/main/docs/Python常用知识点.md)
 - [x] [Java 常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Java常用知识点.md)
 - [ ] [shell 常用命令总结(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/shell常用命令总结.md)
-- [ ] [Redis 常用知识点(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/Redis常用知识点.md)
+- [x] [Selenium常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Selenium常用知识点.md)
 
 ## 面试知识点3
 
