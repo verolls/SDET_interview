@@ -1,3 +1,5 @@
+# Selenium 及 WebDriver 相关问题
+
 ## 什么是 Selenium？
 
 Selenium是一个Web浏览器自动化测试工具集，主要由三种工具组成：Selenium IDE、Selenium WebDriver、Selenium Grid。
@@ -381,6 +383,12 @@ driver.find_element(By.CSS_SELECTOR, '#sideCatalog-catalog > .nav > li[class="h2
 
 ## css_selector 和 xpath 有什么不同？
 
+css_selector 性能更好。 
+
+xpath 更强大，但使用 xpath 定位元素时，会遍历整个页面，性能较差。
+
+# WebElement 相关问题
+
 ## 什么是 WebElement？
 
 WebElement 是网页中的各种元素的接口。
@@ -414,3 +422,22 @@ search_input.clear()
 ```python
 button.text
 ```
+
+# 实际使用场景问题
+
+## 如何处理选择框？
+
+## 如何上传文件？
+
+## 如何下载文件？
+
+## 如何修改默认下载路径？
+
+## 如何实现鼠标事件？
+
+## 如何实现鼠标悬浮操作？
+
+## 如何滑动页面？
+
+## 如何实现键盘事件？
+
