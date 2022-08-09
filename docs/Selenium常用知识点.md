@@ -351,7 +351,7 @@ driver.find_element(By.CSS_SELECTOR, '#sideToolbar > div[class="sideCatalog"] > 
 
 综合示例：
 
-![](../ImageHost/Selenium常用知识点/CSS定位.jpg)
+![../ImageHost/Selenium常用知识点/CSS定位.jpg](../ImageHost/Selenium常用知识点/CSS定位.jpg)
 
 ```python
 driver.find_element(By.CSS_SELECTOR, '#sideCatalog-catalog > .nav > li[class="h2Offset active"] > a')
