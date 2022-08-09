@@ -241,18 +241,59 @@ driver.execute_script('return document.title;')
 
 WebDriver 中有8种不同的定位方式：
 
-- 与name有关的有三种：name、class_name、tag_name
-- 与link相关的有两种：link_text、partitial_link_text
-- 与id有关：id
 - 全能方式：xpath、css_selector
+- 与id有关：id
+- 与name有关的有三种：name、class_name、tag_name
+- 与link相关的有两种：link_text、partial_link_text
 
-一般使用xpath。
+
+其中，name, class_name, id 这三种定位方式，均要求元素有相应的属性才能使用，不够灵活。
+
+link_text, partial_link_text 这两种定位方式，只能用来定位文本链接，不够灵活。其中，link_text 是对文本的精确匹配，而partial_link_text是对文本的模糊匹配。
+
+tag_name 是通过元素的标签名来定位，由于元素的标签名经常重复，很难通过标签名去区分元素，因此很少使用 tag_name。
+
+
 
 ```python
-driver.find_element_by_xpath('//input[@name="wd"]').send_keys('测试开发')
+# xpath
+driver.find_element(By.XPATH, '//input[@id="kw"]').send_keys('xpath')
+
+# css_selector
+driver.find_element(By.CSS_SELECTOR, '#kw').send_keys('css_selector')
+
+# id
+driver.find_element(By.ID, 'kw').send_keys('id')
+
+# name
+driver.find_element(By.NAME, 'wd').send_keys('name')
+
+# class_name
+driver.find_element(By.CLASS_NAME, 's_ipt').send_keys('class_name')
+
+# tag_name
+driver.find_elements(By.TAG_NAME, 'input')[7].send_keys('tag_name')
+
+# link_text
+driver.find_element(By.LINK_TEXT, '新闻').click()
+
+# partial_link_text
+driver.find_element(By.PARTIAL_LINK_TEXT, '换').click()
 ```
 
-## 怎么使用xpath定位元素？
+## 怎么使用 xpath 定位元素？
+
+基本语法：
+
+
+验证方法：
+
+假设使用Chrome浏览器，在需要定位的元素处点击鼠标右键，选择检查，调出浏览器开发者工具，点击 Elements 标签，按Ctrl+F，在调起的搜索框中写上编写好的 xpath 语句，看一下是否可以唯一定位到所需定位的元素上，如果可以唯一定位，则编写的 xpath 验证通过。
+
+综合示例：
+
+
+
 
 假设使用Chrome浏览器，首先在需要定位的元素处点击鼠标右键，选择检查，调出浏览器开发者工具。
 
@@ -264,7 +305,59 @@ driver.find_element_by_xpath('//input[@name="wd"]').send_keys('测试开发')
 
 有时需要模糊定位，即属性名中只需包含关键信息即可，无需全部匹配。模糊定位的xpath格式是`//元素名[contains(@属性名, "关键信息")]`
 
+## 怎么使用 css_selector 定位元素？
 
+基本语法：
+
+- 根据 tag 名选择元素：直接写上tag名即可：`tag名`
+
+```python
+driver.find_element(By.CSS_SELECTOR, 'div')
+```
+
+- 根据 id 属性选择元素：在id号前面加上一个井号：`#id值`
+
+```python
+driver.find_element(By.CSS_SELECTOR, '#searchtext')
+```
+
+- 根据 class 属性选择元素：在 class 值 前面加上一个点：`.class值`
+
+```python
+driver.find_element(By.CSS_SELECTOR, '.nav')
+```
+
+- 根据其他属性选择元素：用一个方括号框起来元素即可，class、id属性也可这样定位：`[属性名="属性值"]`
+
+```python
+driver.find_element(By.CSS_SELECTOR, '[type="hidden"]')
+```
+
+- 根据 tag 及 tag 中多个属性综合定位：`tag名[属性名="属性值"][属性名="属性值"]`
+
+```python
+driver.find_element(By.CSS_SELECTOR, 'li[type="hidden"][class="foo"]')
+```
+
+- 选择子元素：选择元素1里面的子元素元素2里面的子元素元素3里面的子元素元素4，最终选择的元素是元素4：`元素1 > 元素2 > 元素3 > 元素4`
+
+```python
+driver.find_element(By.CSS_SELECTOR, '#sideToolbar > div[class="sideCatalog"] > .h2Offset')
+```
+
+验证方法：
+
+- 同 xpath，可在浏览器开发者工具栏中验证。
+
+综合示例：
+
+![](../ImageHost/Selenium常用知识点/CSS定位.jpg)
+
+```python
+driver.find_element(By.CSS_SELECTOR, '#sideCatalog-catalog > .nav > li[class="h2Offset active"] > a')
+```
+
+## css_selector 和 xpath 有什么不同？
 
 ## 什么是 WebElement？
 
@@ -276,7 +369,7 @@ WebElement 是网页中的各种元素的接口。
 
 使用 `.find_element()` 方法创建 WebElement 实例对象
 ```python
-search_input = driver.find_element_by_xpath('//input[@name="wd"]')
+search_input = driver.find_element(By.XPATH, '//input[@name="wd"]')
 ```
 
 
