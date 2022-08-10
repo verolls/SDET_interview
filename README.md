@@ -5,7 +5,7 @@
 # 面试笔试知识点
 ## 面试知识点1
 
-- [ ] [测试开发常用知识点(待补充：自动化测试)](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
+- [x] [测试开发常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/测试开发常用知识点.md)
 - [x] [计算机网络常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/计算机网络常用知识点.md)
 - [ ] [MySQL 常用知识点(待补充：零散知识点)](https://github.com/verolls/SDET_interview/blob/main/docs/MySQL常用知识点.md)
 - [ ] [操作系统常用知识点(进行中)](https://github.com/verolls/SDET_interview/blob/main/docs/操作系统常用知识点.md)
@@ -14,17 +14,21 @@
 
 - [ ] [Python 常用知识点(待补充：高级面对对象知识点)](https://github.com/verolls/SDET_interview/blob/main/docs/Python常用知识点.md)
 - [x] [Java 常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Java常用知识点.md)
-- [ ] [shell 常用命令总结(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/shell常用命令总结.md)
+- [ ] [shell 常用命令总结(进行中)](https://github.com/verolls/SDET_interview/blob/main/docs/shell常用命令总结.md)
 
 ## 面试知识点3
 
 - [x] [Linux 常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Linux常用命令总结.md)
 - [x] [Git 常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Git常用命令总结.md)
-- [ ] [Jenkins 常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Jenkins常用知识点.md)
+- [ ] [Jenkins 常用知识点(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/Jenkins常用知识点.md)
 
 ## 面试知识点4
 
-- [x] [Selenium常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Selenium常用知识点.md)
+- [ ] [Selenium 常用知识点(待补充：实际场景)](https://github.com/verolls/SDET_interview/blob/main/docs/Selenium常用知识点.md)
+- [ ] [抓包工具常用知识点(进行中)](https://github.com/verolls/SDET_interview/blob/main/docs/抓包工具常用知识点.md)
+- [ ] [Postman 常用知识点(进行中)](https://github.com/verolls/SDET_interview/blob/main/docs/Postman常用知识点.md)
+- [x] [TestNG 常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/TestNG常用知识点.md)
+- [ ] [pytest 常用知识点(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/pytest常用知识点.md)
 
 ## 笔试知识点
 - [x] [Python_ACM 模式_输入输出处理](https://github.com/verolls/SDET_interview/blob/main/docs/Python_ACM模式_输入输出处理.md)
