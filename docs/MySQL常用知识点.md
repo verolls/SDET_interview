@@ -195,7 +195,7 @@ timestamp|	自动存储记录修改时间
 
 ## MySQL中，一条SQL查询语句是怎么执行的？
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/1859b006bc244544ade91353c3bbb09e.png)
+![../ImageHost/MySQL常用知识点/MySQL中SQL查询语句执行图.png](../ImageHost/MySQL常用知识点/MySQL中SQL查询语句执行图.png)
 
 1. 客户端发起查询请求，与连接器建立连接。
 2. 连接器确定用户是否有查询权限，若没有权限，返回错误信息，若有权限，执行下一步。
@@ -258,7 +258,7 @@ where|having
 (FULL JOIN)全连接：返回两个表的所有记录，没匹配的数据填 null
 > MySQL不支持 FUll JOIN 这种写法，可以用UNION实现
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/4f3f037175d443a1ba09f67b98cae9a4.png)
+![../ImageHost/MySQL常用知识点/各种连接.png](../ImageHost/MySQL常用知识点/各种连接.png)
 
 # MySQL 存储引擎
 

@@ -698,7 +698,7 @@ ON s.course_id=c.id;
 
 ## MySQL各种连接总结
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/4f3f037175d443a1ba09f67b98cae9a4.png)
+![../ImageHost/MySQL常用命令/各种连接.png](../ImageHost/MySQL常用命令/各种连接.png)
 
 ## 子查询
 
