@@ -322,7 +322,8 @@ W
 按ESC键可随时退出底线命令模式。
 
 ### 三种模式的转换示意图
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210127135222902.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L21haG9vbjQxMQ==,size_16,color_FFFFFF,t_70)
+
+![../ImageHost/Linux常用命令总结/Vim三种模式转换示意图.png](../ImageHost/Linux常用命令总结/Vim三种模式转换示意图.png)
 
 ## ln
 作用：在文件之间建立链接  
@@ -2058,7 +2059,7 @@ Linux进程从stdin里面读取信息其实就是从终端设备读取信息；
 
 Linux进程写入信息到stdout或者stderr，其实就是打印到终端设备上。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/42c7ffefd7e14373b94d8f2c5d4a2a67.png)
+![../ImageHost/Linux常用命令总结/标准输入输出错误文件.png](../ImageHost/Linux常用命令总结/标准输入输出错误文件.png)
 
 如果我们在Shell中输入命令的时候，使用 `>` 符号， 就可以将输入信息输出到其他文件（包括设备文件）中去。比如
 
@@ -2070,7 +2071,7 @@ ps > out
 
 这个 > 就是 stdout 重定向符号， 它表示 stdout 不是指向 终端设备了，而是 重定向到 out 文件。 所以stdout 指向了 out 文件， 输入的信息就到 out 文件了。 终端屏幕上就没有信息了。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/0c1450a1e3584836814aa4094bb11e67.png)
+![../ImageHost/Linux常用命令总结/标准输入输出错误文件重定向.png](../ImageHost/Linux常用命令总结/标准输入输出错误文件重定向.png)
 
 而stderr的重定向符号 是 `2>` 。 注意 2 和 > 之间不能有空格。
 
@@ -2108,7 +2109,7 @@ command > out 2> err
 
 这个过程可以用如下示意图表示
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/515660b462964384938ca4cc2fdfcdc6.png)
+![../ImageHost/Linux常用命令总结/管道.png](../ImageHost/Linux常用命令总结/管道.png)
 
 ps –ef 命令的结果直接被 命令 grep 6536 过滤出来了。
 
