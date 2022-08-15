@@ -76,4 +76,4 @@
 
 ## Java
 
-[Java零基础教程视频（适合Java 0基础，Java初学入门）_动力节点](https://www.bilibili.com/video/BV1Rx411876f?p=2&spm_id_from=pageDriver&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+[Java零基础教程视频（适合Java 0基础，Java初学入门）_up:动力节点](https://www.bilibili.com/video/BV1Rx411876f?p=2&spm_id_from=pageDriver&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
