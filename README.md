@@ -77,3 +77,15 @@
 ## Java
 
 [Java零基础教程视频（适合Java 0基础，Java初学入门）_up:动力节点](https://www.bilibili.com/video/BV1Rx411876f?p=2&spm_id_from=pageDriver&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+[动力节点最新IDEA视频教程_up:动力节点](https://www.bilibili.com/video/BV1y94y1m7Ew?vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+[动力节点Java零基础项目《图书管理系统》_up:动力节点](https://www.bilibili.com/video/BV1tV411J77q?vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+## Python
+
+[2022 Python全栈开发_up:银角大王-武沛齐](https://www.bilibili.com/video/BV1b3411a7aG?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+[2022 B站最详细django3教程_up:银角大王-武沛齐](https://www.bilibili.com/video/BV1NL41157ph?p=2&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+[2022自学爬虫_up:银角大王-武沛齐](https://www.bilibili.com/video/BV1B44y1n7ap?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
