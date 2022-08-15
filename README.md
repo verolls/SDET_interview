@@ -52,3 +52,28 @@
 
 ## Python及自动化测试
 - [白月黑羽](https://www.byhy.net/)
+
+
+# 推荐学习视频
+
+## 计算机网络
+
+[计算机网络微课堂（有字幕无背景音乐版）_up:湖科大教书匠
+](https://www.bilibili.com/video/BV1c4411d7jb?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+## 操作系统
+
+[操作系统（哈工大李治军老师）32讲（全）超清_up:FCCJK](https://www.bilibili.com/video/BV1d4411v7u7?spm_id_from=333.337.search-card.all.click&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+## MySQL
+
+[老杜带你学_mysql入门基础（mysql基础视频+数据库实战)_up:Java小酱](https://www.bilibili.com/video/BV1Vy4y1z7EX?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+## Redis
+
+[【狂神说Java】Redis最新超详细版教程通俗易懂_up:遇见狂神说](https://www.bilibili.com/video/BV1S54y1R7SB?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+
+## Java
+
+[Java零基础教程视频（适合Java 0基础，Java初学入门）_动力节点](https://www.bilibili.com/video/BV1Rx411876f?p=2&spm_id_from=pageDriver&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
