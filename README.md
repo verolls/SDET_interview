@@ -50,6 +50,10 @@
 - [小林 x 图解计算机基础](https://xiaolincoding.com/)
 - [cyc2018](www.cyc2018.xyz)
 
+## 版本管理
+
+- [猴子都能懂的 Git 入门](https://backlog.com/git-tutorial/cn/)
+
 ## Python及自动化测试
 - [白月黑羽](https://www.byhy.net/)
 
