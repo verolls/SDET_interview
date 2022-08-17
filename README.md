@@ -29,6 +29,7 @@
 - [ ] [Postman 常用知识点(进行中)](https://github.com/verolls/SDET_interview/blob/main/docs/Postman常用知识点.md)
 - [x] [TestNG 常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/TestNG常用知识点.md)
 - [ ] [pytest 常用知识点(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/pytest常用知识点.md)
+- [ ] [Maven 常用知识点(进行中)](https://github.com/verolls/SDET_interview/blob/main/docs/Maven常用知识点.md)
 
 ## 笔试知识点
 - [x] [Python_ACM 模式_输入输出处理](https://github.com/verolls/SDET_interview/blob/main/docs/Python_ACM模式_输入输出处理.md)
