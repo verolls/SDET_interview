@@ -24,7 +24,7 @@
 
 ## 面试知识点4
 
-- [ ] [Selenium 常用知识点(待补充：实际场景)](https://github.com/verolls/SDET_interview/blob/main/docs/Selenium常用知识点.md)
+- [x] [Selenium 常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Selenium常用知识点.md)
 - [ ] [抓包工具常用知识点(进行中)](https://github.com/verolls/SDET_interview/blob/main/docs/抓包工具常用知识点.md)
 - [ ] [Postman 常用知识点(进行中)](https://github.com/verolls/SDET_interview/blob/main/docs/Postman常用知识点.md)
 - [x] [TestNG 常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/TestNG常用知识点.md)
