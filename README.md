@@ -20,7 +20,7 @@
 
 - [x] [Linux 常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Linux常用命令总结.md)
 - [x] [Git 常用命令总结](https://github.com/verolls/SDET_interview/blob/main/docs/Git常用命令总结.md)
-- [ ] [Jenkins 常用知识点(未开始)](https://github.com/verolls/SDET_interview/blob/main/docs/Jenkins常用知识点.md)
+- [x] [Jenkins 常用知识点](https://github.com/verolls/SDET_interview/blob/main/docs/Jenkins常用知识点.md)
 
 ## 面试知识点4
 
