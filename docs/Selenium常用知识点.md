@@ -216,21 +216,23 @@ driver.execute_script('return document.title;')
 
 强制等待：就是无条件等待
 
-- Java中，使用Thread.sleep()可实现强制等待，传入的参数为等待时间，单位是毫秒。
+- Python 中，使用 `time.sleep()` 可实现强制等待，传入的参数为等待时间，单位是毫秒。
 - 优点：使用简单方便；
 - 缺点：
-  - 若脚本中只使用强制等待，则几乎每个findElement()方法之后都需要设置一个强制等待。
+  - 若脚本中只使用强制等待，则几乎每个 `find_element()` 方法之后都需要设置一个强制等待。
   - 不能准确把握等待时间，若等待时间设置过短，上一步操作未完成就进入下一步，导致报错，若等待时间设置过长，会浪费时间，降低效率。
 
-隐式等待：使用findElement定位元素，当发现元素没有找到的时候，激活隐式等待，开始周期性重新寻找该元素，直到该元素找到，然后继续执行后续代码，若超出指定最大等待时长仍没有找到，则抛出异常NoSuchElementException。隐式等待作用于全局元素，设置隐式等待后,页面所有的元素都会被绑定隐式等待机制。
+隐式等待：使用 `find_element()` 定位元素，当发现元素没有找到的时候，激活隐式等待，开始周期性重新寻找该元素，直到该元素找到，然后继续执行后续代码，若超出指定最大等待时长仍没有找到，则抛出异常 `NoSuchElementException`。隐式等待作用于全局元素，设置隐式等待后,页面所有的元素都会被绑定隐式等待机制。
 
-- Java中，使用implicitlyWait()可实现隐式等待，传入两个参数，一个参数是时间单位(可设置为毫秒、秒等)，另一个参数是数值。
+- Python 中，使用 `implicitly_wait()` 可实现隐式等待，传入参数为等待时间，默认为秒。
 - 特点：隐式等待作用于全局元素，因此只要设置一次即可。
+- 用法：`driver.implicitly_wait(10)`
 
 显式等待：原理与隐式等待相同。只针对某个元素进行等待，可针对需要定位的元素设置显性等待。
 
-- Java中，使用WebDriverWait()设置显式等待时间，传入两个参数，一个参数是WebDriver的实例化对象，另一个参数是等待时间，单位为秒。使用until()方法设置ExpectedConditions与需要进行显式等待的元素。常用的ExpectedConditions有visibilityOfElementLocated判断某个元素是否可见、invisibilityOfElementLocated判断某个元素是否不可见。
-- 特点：可以设置ExpectedConditions，对元素进行判断。
+- Python 中，使用 `WebDriverWait()` 设置显式等待时间，传入两个参数，一个参数是 WebDriver 的实例化对象，另一个参数是等待时间，单位为秒。使用 `until()` 方法设置 `expected_conditions` 与需要进行显式等待的元素。常用的 `expected_conditions` 有 `visibility_of_element_located` 判断某个元素是否可见、 `invisibility_of_element_located` 判断某个元素是否不可见。
+- 特点：可以设置 `ExpectedConditions`，对元素进行判断。
+- 用法：`WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located((By.XPATH, '//a[text()="新闻"]')))`
 
 ## WebDriver 中常见的异常有哪些？
 
@@ -325,6 +327,8 @@ driver.find_element(By.XPATH, '//p[@class="capital huge-city"]')
 
 ![../ImageHost/Selenium常用知识点/XPATH定位.jpg](../ImageHost/Selenium常用知识点/XPATH定位.jpg)
 
+
+
 ```python
 driver.find_element(By.XPATH, '//div[@id="sideCatalog-catalog"]/ul/li[@class="h2Offset active"]/a')
 ```
@@ -395,27 +399,13 @@ WebElement 是网页中的各种元素的接口。
 
 需要先通过 WebDriver 的实例对象提供的方法定位到元素，然后借助 WebElement 对网页中的各种元素进行操作，比如点击、输入内容、清除内容、提交内容、获取内容。
 
-## 如何创建 WebElement 实例对象？如何使用 WebElement 点击元素？向元素输入内容？清空元素内容？
+## 如何创建 WebElement 实例对象？WebElement 实例对象有哪些方法？(获取元素内容、清空元素内容、向元素输入内容、点击元素)
 
 使用 `.find_element()` 方法创建 WebElement 实例对象
 ```python
+button = driver.find_element(By.XPATH, '//input[@type="submit"]')
+
 search_input = driver.find_element(By.XPATH, '//input[@name="wd"]')
-```
-
-
-使用 `button.click()` 方法点击元素
-```python
-button.click()
-```
-
-使用 `search_input.send_keys()` 方法向元素输入内容
-```python
-search_input.send_keys("selenium")
-```
-
-使用 `search_input.clear()` 方法清空元素内容
-```python
-search_input.clear()
 ```
 
 使用 `button.text` 属性获取元素内容
@@ -423,21 +413,128 @@ search_input.clear()
 button.text
 ```
 
+
+使用 `search_input.clear()` 方法清空元素内容
+```python
+search_input.clear()
+```
+
+使用 `search_input.send_keys()` 方法向元素输入内容
+```python
+search_input.send_keys("selenium")
+```
+
+使用 `button.click()` 方法点击元素
+```python
+button.click()
+```
+
+
 # 实际使用场景问题
 
-## 如何处理选择框？
+## 如何验证元素是否存在？(如何实现测试用例中的检查点？)
 
+可以通过 `assertEquals` 断言方法，判断实际元素与预期元素是否一致。
+
+还可以通过显式等待方法，使用 `expected_conditions.visibility_of_element_located()` 来判断元素是否存在。
 ## 如何上传文件？
+
+首先定位到上传文件的元素，查看其是否是 input 标签元素。
+
+若是 input 标签元素，可以使用 sendKeys 方法发送文件的路径，这样就实现了文件上传的功能。
+
+如果是非 input 标签的元素，可以借助第三方库 pywin32 库，识别对话框句柄，然后进行上传文件的操作。
 
 ## 如何下载文件？
 
+首先定位到下载文件的元素，然后使用 `click()` 方法点击，即可下载文件。文件下载的路径是浏览器默认路径。
+
 ## 如何修改默认下载路径？
 
-## 如何实现鼠标事件？
+以 Chrome 浏览器为例，通过给 ChromeOptions() 的实例化对象传入指定下载路径，然后将 ChromeOptions() 的实例化对象传递给 WebDriver 的实例化对象，这样就可以将 Chrome 的默认下载路径修改为指定下载路径。
 
-## 如何实现鼠标悬浮操作？
-
-## 如何滑动页面？
+```python
+def set_chrome_pref():
+    chromeOptions = webdriver.ChromeOptions()
+    prefs = {"download.default_directory":"D:\\"}
+    chromeOptions.add_experimental_option("prefs", prefs)
+    driver = webdriver.Chrome(chrome_options=chromeOptions)
+```
 
 ## 如何实现键盘事件？
 
+Selenium 提供了对键盘、鼠标以及滑轮进行操作的 API，借助这些 API，可以实现对键盘、鼠标、滑轮操作的模拟。
+
+具体写代码时，首先需要将 WebDriver() 的实例化对象传递给 ActionChains() 来实例化 ActionChains()。
+
+借助 ActionChains() 的实例化对象提供的 key_down(), key_up(), send_keys() 方法，来实现键盘事件。
+
+其中 key_down(), key_up() 方法需要传入的参数是 Keys 类提供的，Keys 类里面定义了空格键、Shift键、上下左右方向键等特殊按键，send_keys() 方法需要传入的参数是字符串。
+
+输入完键盘操作后，需要使用 perform() 方法才能执行键盘操作。
+
+```python
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys 
+
+driver = webdriver.Chrome()
+ActionChains(driver).key_down(Keys.SHIFT).perform()
+```
+
+## 如何实现鼠标事件？
+
+Selenium 提供了对键盘、鼠标以及滑轮进行操作的 API，借助这些 API，可以实现对键盘、鼠标、滑轮操作的模拟。
+
+具体写代码时，首先需要将 WebDriver() 的实例化对象传递给 ActionChains() 来实例化 ActionChains()。
+
+借助 ActionChains() 的实例化对象提供的 click_and_hold(), click(), context_click(), double_click(), move_to_element() drag_and_drop() 等方法，来实现鼠标事件。
+
+输入完鼠标操作后，需要使用 perform() 方法才能执行鼠标操作。
+
+```python
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+
+driver = webdriver.Chrome()
+search_button = driver.find_element(By.XPATH, '//input[@id="kw"]')
+ActionChains(driver).move_to_element(search_button).click().perform()
+```
+
+## 如何实现鼠标悬浮操作？
+
+Selenium 提供了对键盘、鼠标以及滑轮进行操作的 API，借助这些 API，可以实现对键盘、鼠标、滑轮操作的模拟。
+
+具体写代码时，首先需要将 WebDriver() 的实例化对象传递给 ActionChains() 来实例化 ActionChains()。
+
+借助 ActionChains() 的实例化对象提供的 move_to_element() 方法，来实现鼠标悬浮操作。
+
+输入完鼠标操作后，需要使用 perform() 方法才能执行鼠标操作。
+
+```python
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+
+driver = webdriver.Chrome()
+search_button = driver.find_element(By.XPATH, '//input[@id="button"]')
+ActionChains(driver).move_to_element(search_button).perform()
+```
+
+## 如何滑动页面？
+
+Selenium 提供了对键盘、鼠标以及滑轮进行操作的 API，借助这些 API，可以实现对键盘、鼠标、滑轮操作的模拟。
+
+具体写代码时，首先需要将 WebDriver() 的实例化对象传递给 ActionChains() 来实例化 ActionChains()。
+
+借助 ActionChains() 的实例化对象提供的 scroll_to_element() 方法，并传入 WebElement 的实例化对象，可以实现滑动页面的操作。
+
+输入完滑轮操作后，需要使用 perform() 方法才能执行滑轮操作。
+
+```python
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+
+driver = webdriver.Chrome()
+search_button = driver.find_element(By.XPATH, '//input[@id="button"]')
+ActionChains(driver).scroll_to_element(search_button).perform()
+```
