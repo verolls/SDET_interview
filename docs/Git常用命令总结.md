@@ -165,6 +165,12 @@ $ git checkout [commit] [file]
 # 恢复暂存区的所有文件到工作区
 $ git checkout .
 
+# 撤销指定 commit
+$ git revert [commit]
+
+# 撤销工作区中所有未提交文件的修改内容  
+$ git reset --hard HEAD
+
 ```
 
 
