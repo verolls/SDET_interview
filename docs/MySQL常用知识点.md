@@ -245,6 +245,14 @@ where|having
 用于过滤数据行|用于过滤分组后的结果集 
 根据数据表的字段直接过滤|根据已查询出的字段进行过滤
 
+## DELETE 和 TRUNCATE 有什么区别？
+
+DELETE是可以带WHERE的，所以支持条件删除；而TRUNCATE只能删除整个表。
+
+DELETE是数据操作语言（DML - Data Manipulation Language），操作时原数据会被放到 rollback segment中，可以被回滚；而TRUNCATE是数据定义语言（DDL - Data Definition Language)，操作时不会进行存储，不能进行回滚。
+
+DELETE 语句每次删除一行，并在事务日志中为所删除的每行记录一项，固然会慢，但是相对来说也较安全。TRUNCATE不需要支持回滚，所以使用的系统和事务日志资源少，删除速度快。
+
 ## MySQL 常用的有几种连接？它们有什么区别？
 
 常用的有内连接、左连接、右连接、全连接。
