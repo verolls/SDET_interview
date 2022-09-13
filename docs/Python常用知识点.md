@@ -410,7 +410,9 @@ StopIteration
 4
 ```
 
-- 第二种方法：一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator函数，调用一个generator函数将返回一个generator。generator函数和普通函数的执行流程不一样。普通函数是顺序执行，遇到return语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行。
+- 第二种方法：一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator函数，调用一个generator函数将返回一个generator。
+  - generator函数和普通函数的执行流程不一样。普通函数是顺序执行，遇到return语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行。
+  - 普通函数调用直接返回结果，generator函数的调用实际返回一个generator对象。
 ```python
 # 例1
 def odd():
@@ -473,6 +475,10 @@ g: 5
 g: 8
 Generator return value: done
 ```
+
+## 什么是迭代器？
+
+
 ## Python 的迭代器和生成器的区别
 - 元组、集合、字典、列表都是可迭代对象，如果一个对象实现了 \_\_iter\_\_ 方法就是可迭代对象
 - 可迭代对象可以通过 for 循环进行迭代，也可以通过 Iterable 来判断是否为可迭代对象
