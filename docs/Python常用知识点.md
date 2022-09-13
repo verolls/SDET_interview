@@ -367,6 +367,112 @@ print(n)
 '''
 ```
 
+## 什么是生成器？
+
+在Python中，一边循环一边计算的机制，称为生成器：generator。相较于列表生成式的优点：不必创建完整的list，从而节省大量的空间。
+
+
+
+## 怎么实现一个生成器？
+
+创建 generator 有很多种方法，可以把列表生成式改成 generator，也可以通过函数实现复杂逻辑的 generator。：
+
+- 第一种方法：把一个列表生成式的`[]`改成`()`，就创建了一个 generator。
+```python
+# 列表生成式
+>>> L = [x * x for x in range(3)]
+>>> L
+[0, 1, 4]
+
+# 创建生成器
+>>> g = (x * x for x in range(3))
+>>> g
+<generator object <genexpr> at 0x1022ef630>
+
+# 打印元素方法一：调用next(g)打印出generator的每一个元素，直到计算到最后一个元素，没有更多的元素时，抛出StopIteration的错误。
+>>> next(g)
+0
+>>> next(g)
+1
+>>> next(g)
+4
+>>> next(g)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+
+# 打印元素方法二(常用方法)：使用for循环，因为generator也是可迭代对象
+>>> g = (x * x for x in range(10))
+>>> for n in g:
+...     print(n)
+0
+1
+4
+```
+
+- 第二种方法：一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator函数，调用一个generator函数将返回一个generator。generator函数和普通函数的执行流程不一样。普通函数是顺序执行，遇到return语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行。
+```python
+# 例1
+def odd():
+    print('step 1')
+    yield 1
+    print('step 2')
+    yield 3
+    print('step 3')
+    yield 5
+# 请务必注意：调用generator函数会创建一个generator对象，多次调用generator函数会创建多个相互独立的generator。
+>>> o = odd()
+>>> next(o)
+step 1
+1
+>>> next(o)
+step 2
+3
+>>> next(o)
+step 3
+5
+>>> next(o)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+
+# 例2
+def fib(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        yield b
+        a, b = b, a + b
+        n = n + 1
+    return 'done'
+>>> f = fib(6)
+>>> f
+<generator object fib at 0x104feaaa0>
+>>> for n in fib(6):
+...     print(n)
+...
+1
+1
+2
+3
+5
+8
+>>> g = fib(6)
+>>> while True:
+...     try:
+...         x = next(g)
+...         print('g:', x)
+...     except StopIteration as e:
+...         print('Generator return value:', e.value)
+...         break
+...
+g: 1
+g: 1
+g: 2
+g: 3
+g: 5
+g: 8
+Generator return value: done
+```
 ## Python 的迭代器和生成器的区别
 - 元组、集合、字典、列表都是可迭代对象，如果一个对象实现了 \_\_iter\_\_ 方法就是可迭代对象
 - 可迭代对象可以通过 for 循环进行迭代，也可以通过 Iterable 来判断是否为可迭代对象
