@@ -18,6 +18,21 @@ print(n)
 '''
 ```
 
+```python
+'''
+输入：
+'abdc'
+'''
+
+n = list(input())
+print(n) 
+
+'''
+输出：
+['a', 'b', 'c', 'd']
+'''
+```
+
 ### 单行单个数值
 ```python
 '''
@@ -63,6 +78,21 @@ print(data)
 '''
 输出：
 [2, 3, 6, 4, 8, 9]
+'''
+```
+
+```python
+'''
+输入：
+2 3 6
+'''
+
+a, b, c = map(int, input().strip().split())
+print(a, b, c)
+
+'''
+输出：
+2 3 6
 '''
 ```
 
