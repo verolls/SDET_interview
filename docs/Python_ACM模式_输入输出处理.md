@@ -517,6 +517,52 @@ azzzbzzzc
 
 ## 二叉树
 
+```python
+# 定义树的节点类
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+# 列表转二叉树
+def list_to_binarytree(nums):
+    if not nums:
+        return 
+    root=TreeNode(nums[0])
+    seq=[root]
+    i=1
+    while i<len(nums):
+        node=seq.pop(0)
+        node.left=TreeNode(nums[i])
+        if nums[i]:
+            seq.append(node.left)
+        node.right=TreeNode(nums[i+1])
+        i+=1
+        if i<len(nums):
+            node.right=TreeNode(nums[i])
+            if nums[i]:
+                seq.append(node.right)
+        i+=1
+    return root
+
+# 层序遍历
+def levelorder(root):
+    if not root:
+        return 
+    res=[]
+    seq=[root]
+    while seq:
+        node=seq.pop(0)
+        res.append(node.val)
+        if node.left:
+            seq.append(node.left)
+        if node.right:
+            seq.append(node.right)
+    return res
+
+```
+
 # 附：ACM模式练习资源
 蓝桥杯  
 牛客网
