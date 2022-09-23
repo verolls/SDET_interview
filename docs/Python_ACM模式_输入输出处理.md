@@ -515,6 +515,32 @@ azzzbzzzc
 
 ## 链表
 
+```python
+# 定义链表的节点类
+class ListNode:
+    def __init__(self, val = 0, next = None):
+        self.val = val
+        self.next = next
+
+# 列表转链表
+def list_to_link(list_):
+    head = ListNode(list_[0])
+    p = head
+    for i in range(1, len(list_)):
+        p.next = ListNode(list_[i])
+        p = p.next
+    return head
+
+# 输出链表
+old_list = [1, 2, 3, 4, 5]
+link = list2link(old_list)
+h = ListNode()
+h = link
+while h:
+    print(h.val)
+    h = h.next
+```
+
 ## 二叉树
 
 ```python
