@@ -49,6 +49,21 @@ print(n)
 '''
 ```
 
+```python
+'''
+输入：
+1234
+'''
+
+n = list(map(int, str(input())))
+print(n) 
+
+'''
+输出：
+[1, 2, 3, 4]
+'''
+```
+
 ### 单行多个字符串
 ```python
 '''
@@ -590,6 +605,99 @@ def levelorder(root):
 ```
 
 # 5. 常见算法
+
+## 冒泡排序
+
+```python
+L = [2, 4, 3, 9, 7, 5, 1, 8, 6]
+
+for i in range(len(L)-1): # 需要经过len(L)-1轮，排序结束，i代表每一轮比较
+    for j in range(1, len(L)-i): # 这里的i就是当前所在轮数，j表示每一轮要遍历的元素
+        if L[j-1] > L[j]: # 假设当j=1时，这里是第一个元素和第二个元素比较
+            L[j-1], L[j] = L[j], L[j-1]
+
+print(L)
+```
+
+## 快速排序
+
+### 思想
+快速排序是一种非常高效的排序算法，采用 “分而治之” 的思想，把大的拆分为小的，小的拆分为更小的。其原理是，对于给定的记录，选择一个基准数，通过一趟排序后，将原序列分为两部分，使得前面的比后面的小，然后再依次对前后进行拆分进行快速排序，递归该过程，直到序列中所有记录均有序。
+
+### 步骤
+设当前待排序序列为R[low:high]，其中low ≤ high，如果待排序的序列规模足够小，则直接进行排序，否则分3步处理。
+
+1、分解
+在R[low:high]中选定一个元素R[pivot]，以此为标准将要排序的序列划分为两个序列R[low:pivot-1]与R[pivot+1：high]，并使序列R[low:pivot-1]中所有元素的值小于等于R[pivot]，序列R[pivot+1：high]所有的值大于R[pivot]，此时基准元素以位于正确位置，它无需参加后续排序。
+
+2、递归
+对于子序列R[low:pivot-1]与R[pivot+1：high]，分别调用快速排序算法来进行排序。
+
+3、合并
+由于对序列R[low:pivot-1]与R[pivot+1：high]的排序是原地进行的，所以R[low:pivot-1]与R[pivot+1：high]都已经排好序后，不需要进行任何计算，就已经排好序。
+
+注：基准元素，一般来说选取有几种方法
+
+取第一个元素
+取最后一个元素
+取第中间位置元素
+取第一个、最后一个、中间位置3者的中位数元素
+
+### 图解
+
+假设当前排序为R[low:high]，其中low ≤ high。
+
+1：首先取序列第一个元素为基准元素pivot=R[low]。i=low,j=high。 2：从后向前扫描，找小于等于pivot的数，如果找到，R[i]与R[j]交换，i++。 3：从前往后扫描，找大于pivot的数，如果找到，R[i]与R[j]交换，j--。 4:重复2~3，直到i=j,返回该位置mid=i,该位置正好为pivot元素。 完成一趟排序后，以mid为界，将序列分为两部分，左序列都比pivot小，有序列都比pivot大，然后再分别对这两个子序列进行快速排序。
+
+以序列（30，24，5，58，18，36，12，42，39）为例，进行演示
+
+1、初始化，i=low,j=high,pivot=R[low]=30
+
+2、从后往前找小于等于pivot的数，找到R[j]=12
+
+R[i]与R[j]交换，i++
+
+3、从前往后找大于pivot的数，找到R[i]=58
+
+R[i]与R[j]交换，j--
+
+4、从后往前找小于等于pivot的数，找到R[j]=18
+
+R[i]与R[j]交换，i++
+
+5、从前往后找大于pivot的数，这时i=j,第一轮排序结束，返回i的位置，mid=i
+
+此时已mid为界，将原序列一分为二，左子序列为（12，24，5，18）元素都比pivot小，右子序列为（36，58，42，39）元素都比pivot大。然后在分别对两个子序列进行快速排序，最后即可得到排序后的结果。
+
+```python
+def quick_sort(lists,i,j):
+    if i >= j:
+        return list
+    pivot = lists[i]
+    low = i
+    high = j
+    while i < j:
+        while i < j and lists[j] >= pivot:
+            j -= 1
+        lists[i]=lists[j]
+        while i < j and lists[i] <=pivot:
+            i += 1
+        lists[j]=lists[i]
+    lists[j] = pivot
+    quick_sort(lists,low,i-1)
+    quick_sort(lists,i+1,high)
+    return lists
+
+if __name__=="__main__":
+    lists=[30,24,5,58,18,36,12,42,39]
+    print("排序前的序列为：")
+    for i in lists:
+        print(i,end =" ")
+    print("\n排序后的序列为：")
+    for i in quick_sort(lists,0,len(lists)-1):
+        print(i,end=" ")
+```
+
 
 # 附：ACM模式练习资源
 蓝桥杯  
