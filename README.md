@@ -74,7 +74,9 @@
 
 ## MySQL
 
+[2022新版黑马程序员MySQL知识精讲_up:黑马程序员](https://www.bilibili.com/video/BV1iF411z7Pu/?spm_id_from=333.337.search-card.all.click&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
 [老杜带你学_mysql入门基础（mysql基础视频+数据库实战)_up:Java小酱](https://www.bilibili.com/video/BV1Vy4y1z7EX?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
 
 ## Redis
 
