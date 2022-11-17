@@ -98,3 +98,8 @@
 [2022 B站最详细django3教程_up:银角大王-武沛齐](https://www.bilibili.com/video/BV1NL41157ph?p=2&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
 
 [2022自学爬虫_up:银角大王-武沛齐](https://www.bilibili.com/video/BV1B44y1n7ap?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+## Linux
+
+[黑马程序员新版Linux零基础快速入门到精通_up:黑马程序员](https://www.bilibili.com/video/BV1n84y1i7td/?vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
