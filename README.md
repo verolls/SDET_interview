@@ -103,3 +103,6 @@
 
 [黑马程序员新版Linux零基础快速入门到精通_up:黑马程序员](https://www.bilibili.com/video/BV1n84y1i7td/?vd_source=b2b82953ab425429a1f488f7dd7c9e84)
 
+## Git
+
+[最新Git速学实战教程_up:老陈打码](https://www.bilibili.com/video/BV18t4y1Q7hX?p=11&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
