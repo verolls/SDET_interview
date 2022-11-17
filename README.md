@@ -113,3 +113,4 @@
 
 ## 嵌入式
 
+[STM32入门100步_up:洋桃电子](https://www.bilibili.com/video/BV1MW411q7Jn/?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
