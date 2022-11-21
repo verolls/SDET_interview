@@ -54,6 +54,8 @@
 - [阿秀的学习笔记](https://interviewguide.cn/)
 - [小林 x 图解计算机基础](https://xiaolincoding.com/)
 - [cyc2018](www.cyc2018.xyz)
+- [嵌入式/C++面试题解析大全](https://www.nowcoder.com/issue/tutorial?zhuanlanId=3m2ONj&uuid=704684feeffc4979b9d04b66f13c1555)
+- [嵌入式岗位笔试面试真题讲解](https://www.nowcoder.com/issue/tutorial?zhuanlanId=v0ELPM&uuid=0b7c1b8be4ce49909363c72b67d5d04a)
 
 ## 版本管理
 
@@ -62,6 +64,9 @@
 ## Python及自动化测试
 - [白月黑羽](https://www.byhy.net/)
 
+## 嵌入式开发
+
+- [洋桃电子](http://www.doyoung.net/YT/index.html)
 
 <hr/>
 
