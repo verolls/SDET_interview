@@ -67,6 +67,7 @@
 ## 嵌入式开发
 
 - [洋桃电子](http://www.doyoung.net/YT/index.html)
+- [小蜜蜂](https://www.xmf393.com/)
 
 <hr/>
 
