@@ -119,6 +119,12 @@
 
 [2022最新全网最详细前端从零入门实战教程_up:老陈打码](https://www.bilibili.com/video/BV1ZE411c7yM/?vd_source=b2b82953ab425429a1f488f7dd7c9e84)
 
+## 大数据
+
+[黑马程序员大数据Hadoop入门视频教程，适合零基础自学的大数据Hadoop教程](https://www.bilibili.com/video/BV1CU4y1N7Sh/?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
+[黑马程序员Hive全套教程，大数据Hive3.x数仓开发精讲到企业级实战应用](https://www.bilibili.com/video/BV1L5411u7ae/?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
+
 ## 嵌入式
 
 [STM32入门100步_up:洋桃电子](https://www.bilibili.com/video/BV1MW411q7Jn/?spm_id_from=333.999.0.0&vd_source=b2b82953ab425429a1f488f7dd7c9e84)
